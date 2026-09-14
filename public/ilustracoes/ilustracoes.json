@@ -1,0 +1,57 @@
+{
+ "R2": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "an immense sheer mountain wall crossing the desert, a dust storm breaking against its far side, sheltered valley in its lee. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R2.webp"
+ },
+ "R3": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a fortified desert city of blocky stone on a rock shelf below a great escarpment, aqueduct channels, no vegetation. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R3.webp"
+ },
+ "R4": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "long broken parallel ridges of rock rising from sand, a narrow pass between them, a small shrine of stone on the pass. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R4.webp"
+ },
+ "R5": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "high flat-topped mesas and a deep narrow chasm splitting the rock plateau, sheer walls, scree slopes. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R5.webp"
+ },
+ "R7": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "an utterly featureless sand horizon under an empty sky, nothing but the curve of dunes, desolate and unmapped. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R7.webp"
+ },
+ "R1": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a vast frozen salt sink at a planet's north pole, cracked evaporite crust, low grazing sun casting long shadows, distant ice-rimmed scarp. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R1.webp"
+ },
+ "R6": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "an endless sea of enormous crescent sand dunes, wind-carved crests, a minuscule line of figures crossing for scale. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/R6.webp"
+ },
+ "c_padroes": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a cluster of dwellings cut into a rock outcrop rising abruptly from a dune field, tiny figures on the rock for scale, vast empty sand all around. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/c_padroes.webp"
+ },
+ "c_acessibilidade": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "two tracks crossing a dune field, one a straight machine-cut road, the other a long sinuous furrow left by something enormous moving under the sand. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/c_acessibilidade.webp"
+ },
+ "c_poder": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a solitary stone watchtower standing in an endless sea of dunes, no road and no settlement anywhere near it. large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, deep depth of field, immense scale, fine film grain, no text, no border, no caption, no modern objects",
+  "arquivo": "ilustracoes/c_poder.webp"
+ },
+ "papel": {
+  "modelo": "black-forest-labs/flux-dev",
+  "prompt": "extreme close-up scan of blank aged laid paper, visible linen fibres, chain lines, faint foxing spots, even lighting, no text, no objects, warm ivory tone, flat",
+  "arquivo": "ilustracoes/papel.webp"
+ }
+}

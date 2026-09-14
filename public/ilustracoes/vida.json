@@ -1,0 +1,160 @@
+{
+ "verme_boca": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "seen head-on from the front: the round open mouth of an immense sandworm rising straight up out of a moonlit dune toward the camera, the mouth a perfect circle about eighty meters across that fills most of the frame, a dark cavern inside, its rim ringed with hundreds of long curved crystalline teeth pointing inward like knife blades and spread open like the petals of an enormous flower, sand pouring off the rim, two tiny human silhouettes on a rock ledge at the bottom for scale",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|chapter029|5782]",
+   "[1|chapter042|8634]",
+   "[1|chapter029|5776]"
+  ],
+  "arquivo": "ilustracoes/vida/verme_boca.webp"
+ },
+ "verme_montaria": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a gigantic segmented sandworm ploughing across open desert dunes at dawn, its high curving back above the sand, a small group of people in hooded desert cloaks standing on top of it, two of them holding long staffs with hooks that pry open the forward edge of one ring segment, a long wake of disturbed sand behind",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|chapter040|8411]",
+   "[1|terminology|10997]"
+  ],
+  "arquivo": "ilustracoes/vida/verme_montaria.webp"
+ },
+ "cristal": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a curved double-edged knife about twenty centimeters long whose blade is ground from a single milky translucent crystal tooth, sharp point, a plain wrapped cord grip, lying on coarse woven cloth beside a small ruler for scale, museum specimen photograph from above",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|10743]",
+   "[1|terminology|10744]"
+  ],
+  "arquivo": "ilustracoes/vida/cristal.webp"
+ },
+ "truta": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a flat leathery membranous organism the size of a human hand, like a thick piece of wet brown leather or a flattened slug with no eyes, no face, no tentacles and no legs, its rubbery lobed edges pressed against damp dark sand inside a hollow of porous rock deep underground, a few beads of water trapped beneath it, naturalist specimen photograph",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10409]",
+   "[1|terminology|10989]",
+   "[1|appendixI|10410]"
+  ],
+  "arquivo": "ilustracoes/vida/truta.webp"
+ },
+ "explosao": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a spice blow erupting in the open desert: a broad column of rust-brown sand and dust bursting upward from beneath the dunes, a wide crater of darker disturbed sand spreading around it, a tiny tracked mining machine far away for scale",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|11095]",
+   "[1|chapter030|6009]"
+  ],
+  "arquivo": "ilustracoes/vida/explosao.webp"
+ },
+ "martelo": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a short metal stake driven into the crest of a sand dune, a spring-driven clapper mechanism on its top, a line of footprints running away from it down the dune, endless dunes beyond",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|11292]"
+  ],
+  "arquivo": "ilustracoes/vida/martelo.webp"
+ },
+ "muaddib": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a tiny desert kangaroo mouse, a small rodent the size of a thumb like a jerboa, sitting upright on long hind feet on rippled sand at night, round body, huge dark eyes, big round ears, long thin tail with a tuft at the end, the second of two moons low in the sky behind it with faint darker markings on its face, close-up macro",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|11033]"
+  ],
+  "arquivo": "ilustracoes/vida/muaddib.webp"
+ },
+ "cielago": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a small desert bat with leathery wings hanging from the ceiling of a rock cave, a tiny smooth capsule strapped between its shoulders, naturalist photograph with the bat in sharp focus",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|10729]",
+   "[1|terminology|10768]",
+   "[1|terminology|10770]"
+  ],
+  "arquivo": "ilustracoes/vida/cielago.webp"
+ },
+ "falcao": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a desert hawk chick breaking out of its speckled egg in a nest of dry twigs on a rock ledge, pieces of cracked shell, harsh morning light, the chick's wet down feathers",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|terminology|10966]",
+   "[1|appendixI|10419]"
+  ],
+  "arquivo": "ilustracoes/vida/falcao.webp"
+ },
+ "raiz": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a rare desert root plant on a stony high plateau, a pale two-meter-long tuber half dug out of the rocky soil beside its small leathery leaves, a hand trowel for scale",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10402]"
+  ],
+  "arquivo": "ilustracoes/vida/raiz.webp"
+ },
+ "capim": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "rows of tough desert grass tufts planted along the slipface of a tall barrier dune to hold the sand in place, the windward side packed smooth, a few robed planters working far away, the planted rows running across the dune in long curves",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10414]",
+   "[1|appendixI|10415]",
+   "[1|appendixI|10416]"
+  ],
+  "arquivo": "ilustracoes/vida/capim.webp"
+ },
+ "borboleta": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a glasswing butterfly whose wings are almost entirely transparent like fine lace, only thin dark veins and edges visible, flying through long late-afternoon shadows beside a towering cliff with vertical striations",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[3|Children_of_Dune_split_030|2841]"
+  ],
+  "arquivo": "ilustracoes/vida/borboleta.webp"
+ },
+ "palmeiral": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a hidden grove of date palms and hardy desert shrubs and barrel cactus inside a deep sheltered rock basin in a vast desert, a narrow stone water channel running between the palms",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10420]",
+   "[1|appendixI|10418]"
+  ],
+  "arquivo": "ilustracoes/vida/palmeiral.webp"
+ },
+ "kulon": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "a wild donkey, an onager, wearing a fitted protective coat of dull canvas with small tubes at the collar, led on a rope by a traveler in a hooded desert cloak across stony desert",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10400]",
+   "[1|terminology|10968]"
+  ],
+  "arquivo": "ilustracoes/vida/kulon.webp"
+ },
+ "plancton": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "microscope photograph of countless tiny translucent single-celled creatures crawling between rounded grains of desert sand, feeding on a fine rust-colored powder scattered over the grains, extreme magnification, shallow depth of field",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[1|appendixI|10411]"
+  ],
+  "arquivo": "ilustracoes/vida/plancton.webp"
+ },
+ "peixe": {
+  "modelo": "black-forest-labs/flux-1.1-pro",
+  "prompt": "close view looking down into a narrow man-made stone water channel at night, moonlight on the water, three large predatory fish clearly visible just under the surface with long sleek bodies, sharp dorsal fins and open toothed jaws, ripples around them",
+  "estilo": "large-format monochrome expedition photograph, sepia photogravure plate tipped into a nineteenth-century natural history monograph, raking low sunlight, fine film grain, no text, no border, no caption, no modern objects",
+  "texto": [
+   "[3|Children_of_Dune_split_012|625]"
+  ],
+  "arquivo": "ilustracoes/vida/peixe.webp"
+ }
+}

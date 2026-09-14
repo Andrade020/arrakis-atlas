@@ -1,0 +1,394 @@
+{
+ "AR-02": [
+  {
+   "distrito": "AR-02",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|appendixI|10374]",
+   "trecho": "a sietch that looked down on Wind Pass",
+   "resumo": "Pardot Kynes vai parar num sietch sobre o passo e fala aos fremen de dunas presas por capim, palmeirais e qanats a céu aberto.",
+   "spoiler": false,
+   "local": "Apendice I: A Ecologia de Duna"
+  },
+  {
+   "distrito": "AR-02",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter044|9215]",
+   "trecho": "a key village, home of artisans and technicians",
+   "resumo": "O passo abre para uma vila-chave: artesãos, técnicos e a manutenção de todo um setor de defesa Harkonnen.",
+   "spoiler": true,
+   "local": "capitulo 44"
+  }
+ ],
+ "AR-03": [
+  {
+   "distrito": "AR-03",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|terminology|10729]",
+   "trecho": "any modified",
+   "resumo": "O nome é o do cielago, o morcego modificado de Arrakis que leva mensagens gravadas no próprio grito.",
+   "spoiler": false,
+   "local": "Terminologia do Imperio (glossario)"
+  }
+ ],
+ "AR-04": [
+  {
+   "distrito": "AR-04",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|notes|11412]",
+   "trecho": "Moisture, not cold, is determining factor",
+   "resumo": "Ao norte desta linha nenhum verme foi registrado. O que o detém é a umidade, não o frio.",
+   "spoiler": false,
+   "local": "Notas Cartograficas"
+  }
+ ],
+ "AR-06": [
+  {
+   "distrito": "AR-06",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter033|6482]",
+   "trecho": "There was witch-force at Tuono Basin",
+   "resumo": "Numa luta à noite na Bacia de Tuono, Jessica derruba Stilgar. Jamis jura que foi bruxaria.",
+   "spoiler": true,
+   "local": "capitulo 33"
+  }
+ ],
+ "AR-08": [
+  {
+   "distrito": "AR-08",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter031|6193]",
+   "trecho": "a place called “Sietch Tabr” on the chart",
+   "resumo": "No mapa de rotas de fuga que Kynes mostrou a Jessica havia um lugar chamado Sietch Tabr, com uma nota: Stilgar.",
+   "spoiler": false,
+   "local": "capitulo 31"
+  },
+  {
+   "distrito": "AR-08",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter033|6663]",
+   "trecho": "You shall be known among us as Usul",
+   "resumo": "Paul recebe o nome secreto de tropa, Usul — a base do pilar. Só os de Sietch Tabr podem usá-lo.",
+   "spoiler": true,
+   "local": "capitulo 33"
+  }
+ ],
+ "AR-09": [
+  {
+   "distrito": "AR-09",
+   "livro": 3,
+   "volume": "Os Filhos de Duna",
+   "marcador": "[3|Children_of_Dune_split_030|2841]",
+   "trecho": "A skeleton butterfly flew in and out of the shadows",
+   "resumo": "Anos depois, Leto II espia da saída secreta do sietch o penhasco, e uma borboleta-esqueleto voa entre as sombras.",
+   "spoiler": true,
+   "local": "secao 28 de 68 (cerca de 41% do volume)"
+  }
+ ],
+ "AR-11": [
+  {
+   "distrito": "AR-11",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter024|4466]",
+   "trecho": "Two battle groups at Splintered Rock",
+   "resumo": "Na noite da traição, entre os relatórios que chegam a Hawat: dois grupos de combate na Rocha Lascada.",
+   "spoiler": true,
+   "local": "capitulo 24"
+  }
+ ],
+ "AR-12": [
+  {
+   "distrito": "AR-12",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|appendixI|10438]",
+   "trecho": "killed in the cave-in at Plaster Basin",
+   "resumo": "Pardot Kynes, planetólogo e pai de Liet-Kynes, morre num desabamento na Bacia de Gesso.",
+   "spoiler": false,
+   "local": "Apendice I: A Ecologia de Duna"
+  }
+ ],
+ "AR-13": [
+  {
+   "distrito": "AR-13",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|notes|11386]",
+   "trecho": "meridian through Observatory Mountain",
+   "resumo": "A latitude do mapa inteiro é contada a partir do meridiano que passa por esta montanha.",
+   "spoiler": false,
+   "local": "Notas Cartograficas"
+  }
+ ],
+ "AR-14": [
+  {
+   "distrito": "AR-14",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter007|1064]",
+   "trecho": "two hundred kilometers northeast across the Broken Land",
+   "resumo": "Carthag fica a duzentos quilômetros de Arrakeen, do outro lado da Terra Quebrada.",
+   "spoiler": false,
+   "local": "capitulo 7"
+  }
+ ],
+ "AR-15": [
+  {
+   "distrito": "AR-15",
+   "livro": 3,
+   "volume": "Os Filhos de Duna",
+   "marcador": "[3|Children_of_Dune_split_052|4751]",
+   "trecho": "breached the qanats at Kagga Basin",
+   "resumo": "Saqueadores vindos da Terra Quebrada rompem os qanats da bacia e derramam a água na areia; Arrakeen entra em racionamento.",
+   "spoiler": true,
+   "local": "secao 50 de 68 (cerca de 74% do volume)"
+  }
+ ],
+ "AR-16": [
+  {
+   "distrito": "AR-16",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter024|4460]",
+   "trecho": "a garrison village, buffer outpost for the former capital city, Carthag",
+   "resumo": "Vila-guarnição que protegia Carthag. Hawat estava aqui na pior noite da vida dele.",
+   "spoiler": true,
+   "local": "capitulo 24"
+  }
+ ],
+ "AR-17": [
+  {
+   "distrito": "AR-17",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter024|4465]",
+   "trecho": "A legion at Arsunt",
+   "resumo": "Na noite do ataque, uma legião inteira desce em Arsunt.",
+   "spoiler": true,
+   "local": "capitulo 24"
+  }
+ ],
+ "AR-18": [
+  {
+   "distrito": "AR-18",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter007|1064]",
+   "trecho": "new megalopolis of Carthag—a cheap and brassy place",
+   "resumo": "A cidade que os Harkonnen fizeram capital: \"barata e vistosa\", nas palavras de Jessica.",
+   "spoiler": false,
+   "local": "capitulo 7"
+  },
+  {
+   "distrito": "AR-18",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter022|4104]",
+   "trecho": "no survivors in Carthag and the Guild Bank has been sacked",
+   "resumo": "Chega a notícia: nenhum sobrevivente em Carthag, e o Banco da Guilda saqueado.",
+   "spoiler": true,
+   "local": "capitulo 22"
+  }
+ ],
+ "AR-19": [
+  {
+   "distrito": "AR-19",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter002|457]",
+   "trecho": "the Duke and his family will occupy the Residency",
+   "resumo": "Os Atreides chegam e ocupam a Residência, antiga casa do conde Fenring.",
+   "spoiler": false,
+   "local": "capitulo 2"
+  },
+  {
+   "distrito": "AR-19",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter021|3742]",
+   "trecho": "the flame-lighted night of Arrakeen",
+   "resumo": "O Barão assiste de uma nave pousada à noite de Arrakeen em chamas.",
+   "spoiler": true,
+   "local": "capitulo 21"
+  },
+  {
+   "distrito": "AR-19",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter048|9892]",
+   "trecho": "on the evening of his victory",
+   "resumo": "Paul-Muad'Dib é levado à velha Residência na noite da vitória.",
+   "spoiler": true,
+   "local": "capitulo 48"
+  }
+ ],
+ "AR-20": [
+  {
+   "distrito": "AR-20",
+   "livro": 3,
+   "volume": "Os Filhos de Duna",
+   "marcador": "[3|Children_of_Dune_split_060|5295]",
+   "trecho": "by which the first Fremen had migrated into the desert",
+   "resumo": "A fenda funda e sinuosa na Muralha Escudo por onde os primeiros fremen entraram no deserto.",
+   "spoiler": false,
+   "local": "secao 58 de 68 (cerca de 85% do volume)"
+  },
+  {
+   "distrito": "AR-20",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|notes|11402]",
+   "trecho": "blasted out by Paul-Muad",
+   "resumo": "Paul-Muad'Dib a abre a explosivos.",
+   "spoiler": true,
+   "local": "Notas Cartograficas"
+  }
+ ],
+ "AR-21": [
+  {
+   "distrito": "AR-21",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter046|9638]",
+   "trecho": "like a hawk into a nest of rock partridge",
+   "resumo": "Um carro de superfície vem da Muralha Oeste \"como um falcão num ninho de perdizes\".",
+   "spoiler": true,
+   "local": "capitulo 46"
+  }
+ ],
+ "AR-24": [
+  {
+   "distrito": "AR-24",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter034|6801]",
+   "trecho": "When the hawk plane stooped upon us at Hole-in-the-Rock",
+   "resumo": "Um avião mergulhou sobre a tropa de Stilgar aqui; foi Jamis quem o puxou para longe.",
+   "spoiler": true,
+   "local": "capitulo 34"
+  }
+ ],
+ "AR-27": [
+  {
+   "distrito": "AR-27",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter040|8220]",
+   "trecho": "I enshrined the skull of my father in a Fremen rock mound overlooking Harg Pass",
+   "resumo": "Paul guarda o crânio do pai num túmulo de pedra fremen sobre o passo.",
+   "spoiler": true,
+   "local": "capitulo 40"
+  }
+ ],
+ "AR-28": [
+  {
+   "distrito": "AR-28",
+   "livro": 2,
+   "volume": "O Messias de Duna",
+   "marcador": "[2|herb_9781101157879_oeb_c23_r1|3475]",
+   "trecho": "the shrine atop Chin Rock",
+   "resumo": "Um santuário no alto da rocha, junto ao primeiro sietch de Paul — lugar cheio de memória.",
+   "spoiler": true,
+   "local": "secao 27 de 30 (cerca de 90% do volume)"
+  }
+ ],
+ "AR-32": [
+  {
+   "distrito": "AR-32",
+   "livro": 3,
+   "volume": "Os Filhos de Duna",
+   "marcador": "[3|Children_of_Dune_split_031|2929]",
+   "trecho": "It lay below the rim of Red Chasm",
+   "resumo": "Jessica se esconde num sietch velho e pobre sob a borda do abismo.",
+   "spoiler": true,
+   "local": "secao 29 de 68 (cerca de 43% do volume)"
+  }
+ ],
+ "AR-36": [
+  {
+   "distrito": "AR-36",
+   "livro": 3,
+   "volume": "Os Filhos de Duna",
+   "marcador": "[3|Children_of_Dune_split_062|5623]",
+   "trecho": "It was Tuek’s Sietch on the inner lip of False Wall",
+   "resumo": "Gurney Halleck espera à porta do sietch dos contrabandistas que decidam se o abrigam.",
+   "spoiler": true,
+   "local": "secao 60 de 68 (cerca de 88% do volume)"
+  }
+ ],
+ "AR-37": [
+  {
+   "distrito": "AR-37",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter004|681]",
+   "trecho": "the wasteland where nothing lives except the spice and the sandworms",
+   "resumo": "\"O ermo onde nada vive além da especiaria e dos vermes\" — é assim que a Reverenda Madre descreve estas planícies a Paul.",
+   "spoiler": false,
+   "local": "capitulo 4"
+  }
+ ],
+ "AR-38": [
+  {
+   "distrito": "AR-38",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|notes|11398]",
+   "trecho": "Somewhere in the Flat is the salt pan which Pardot Kynes",
+   "resumo": "Em algum ponto da chapada fica a salina que Pardot Kynes descobriu.",
+   "spoiler": false,
+   "local": "Notas Cartograficas"
+  },
+  {
+   "distrito": "AR-38",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter016|2847]",
+   "trecho": "all of a man’s water, ultimately, belongs to his people",
+   "resumo": "Kynes, num jantar em Arrakeen: perto da Grande Chapada, toda a água de um homem pertence à tribo.",
+   "spoiler": false,
+   "local": "capitulo 16"
+  }
+ ],
+ "AR-39": [
+  {
+   "distrito": "AR-39",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter042|8680]",
+   "trecho": "I am a Fremen born this day here in the Habbanya erg",
+   "resumo": "\"Sou um fremen nascido hoje, aqui no erg de Habbanya.\"",
+   "spoiler": true,
+   "local": "capitulo 42"
+  }
+ ],
+ "AR-40": [
+  {
+   "distrito": "AR-40",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter042|8717]",
+   "trecho": "Cave of Birds beneath Habbanya Ridge",
+   "resumo": "A Caverna dos Pássaros fica sob a crista; Stilgar leva a tropa para lá.",
+   "spoiler": true,
+   "local": "capitulo 42"
+  },
+  {
+   "distrito": "AR-40",
+   "livro": 1,
+   "volume": "Duna",
+   "marcador": "[1|chapter045|9348]",
+   "trecho": "the mother of his firstborn",
+   "resumo": "Chani sobe da bacia de Habbanya antes do amanhecer: companheira de Muad'Dib, mãe do primeiro filho dele.",
+   "spoiler": true,
+   "local": "capitulo 45"
+  }
+ ]
+}
