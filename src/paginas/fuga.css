@@ -49,13 +49,26 @@
 .fuga-abertura {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   pointer-events: none;
   background: #241d17;
   opacity: 1;
   visibility: visible;
 }
+
+.fuga-etapa-atual {
+  position: absolute; z-index: 1; inset: 14px auto auto 14px;
+  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px;
+  align-items: start; width: min(360px, calc(100% - 28px));
+  padding: 10px 12px; pointer-events: none;
+  color: var(--tinta); background: rgba(250, 244, 229, .94);
+  border: 1px solid var(--fio-forte); box-shadow: 0 3px 12px rgba(27, 18, 7, .12);
+}
+.fuga-indice { color: var(--canone); font: 600 17px/1 var(--f-mono); }
+.fuga-indicador-texto { display: grid; gap: 3px; min-width: 0; }
+.fuga-indicador-texto strong { font: 500 13px/1.25 var(--f-disp); }
+.fuga-indicador-texto small { color: var(--tinta-3); font: 400 10.5px/1.3 var(--f-disp); }
 
 .fuga-abertura img {
   display: block;
@@ -96,4 +109,5 @@
   .fuga-prologo { min-height: 56svh; }
   .fuga-prologo figure { height: 52svh; }
   .fuga-prologo figcaption { padding: 30px 18px 18px; }
+  .fuga-etapa-atual { inset: 9px auto auto 9px; width: calc(100% - 18px); padding: 7px 9px; }
 }

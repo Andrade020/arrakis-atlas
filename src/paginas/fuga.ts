@@ -118,6 +118,7 @@ export async function fuga(alvo: HTMLElement) {
       </ol>
       <div class="fuga-carta">
         <canvas aria-label="${t("Mapa com a rota da fuga", "Map of the escape route")}"></canvas>
+        <div class="fuga-etapa-atual" role="status" aria-live="polite" aria-atomic="true"></div>
         <div class="fuga-abertura" aria-hidden="true">
           <img src="${B}ilustracoes/fuga_abertura.webp" width="1024" height="1536" alt="">
           <span class="fuga-abertura-titulo">${t("A rota da fuga", "The escape route")}</span>
@@ -159,6 +160,7 @@ async function ligaCarta(raiz: HTMLElement) {
 
   const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const abertura = raiz.querySelector<HTMLElement>(".fuga-abertura")!;
+  const indicador = raiz.querySelector<HTMLElement>(".fuga-etapa-atual")!;
   let temporizadorAbertura = 0;
   let atual = 0;
 
@@ -257,19 +259,29 @@ async function ligaCarta(raiz: HTMLElement) {
   ro.observe(tela);
 
   const etapas = [...raiz.querySelectorAll<HTMLElement>(".etapa")];
+  const marcaEtapa = (i: number) => {
+    atual = i;
+    etapas.forEach((el, j) => el.classList.toggle("ativa", j === i));
+    const e = ETAPAS[i];
+    indicador.innerHTML = `<span class="fuga-indice">${String(i + 1).padStart(2, "0")}</span>
+      <span class="fuga-indicador-texto"><strong>${esc(e.titulo)}</strong>
+        <small>${e.cod
+          ? `${t("Ponto no mapa", "Point on the map")}: ${esc(e.lugar ?? e.cod)}`
+          : t("Lugar não indicado no livro · carta no último ponto nomeado",
+              "Location not given in the book · map stays at the last named point")}</small></span>`;
+  };
   const io = new IntersectionObserver((vistos) => {
     // a etapa ativa é a que cruza a faixa do meio da tela
     for (const v of vistos) {
       if (!v.isIntersecting) continue;
       const i = Number((v.target as HTMLElement).dataset.i);
       if (i === atual) continue;
-      atual = i;
-      etapas.forEach((el, j) => el.classList.toggle("ativa", j === i));
+      marcaEtapa(i);
       voa(i);
     }
   }, { rootMargin: "-45% 0px -45% 0px" });
   etapas.forEach((el) => io.observe(el));
-  etapas[0]?.classList.add("ativa");
+  marcaEtapa(0);
 
   const obs = new MutationObserver(() => {
     if (!document.body.contains(tela)) {
