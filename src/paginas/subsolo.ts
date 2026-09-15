@@ -1,6 +1,7 @@
 import { prancha } from "../pranchas";
 import { t } from "../i18n";
 import { cabecalho, esc, rodape, selo } from "../ui";
+import "../subsolo-motion.css";
 
 /* Uma estampa interpretativa, sem escala. Os pontos clicáveis e as fontes são
  * HTML: podem ser traduzidos, selecionados, lidos por tecnologia assistiva e
@@ -43,6 +44,11 @@ export function subsolo(alvo: HTMLElement): void {
           <img src="${B}ilustracoes/corte_subsolo_arrakis.webp" width="1536" height="1024"
             alt="${t("Corte imaginado do solo de Arrakis: trutas-da-areia em torno de um pequeno bolsão de água à esquerda, massa pré-especiaria ao centro e um verme na areia seca à direita.",
                       "Imagined cutaway of Arrakis: sandtrout around a small water pocket on the left, pre-spice mass at the centre and a worm in dry sand on the right.")}" />
+          <svg class="ciclo-camada" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path class="ciclo-fluxo" pathLength="100" d="M 17 45 C 25 45, 29 58, 43 69" />
+            <circle class="ciclo-reacao" cx="43" cy="69" r="7" />
+            <path class="ciclo-erupcao" pathLength="100" d="M 43 69 C 47 56, 46 44, 48 23" />
+          </svg>
           ${itens.map((p, i) => `<button class="corte-ponto" type="button" data-id="${p.id}"
             style="left:${p.x}%;top:${p.y}%" aria-controls="corte-nota"
             aria-pressed="${i === 0}" aria-label="${esc(p.nome)}">${String(i + 1).padStart(2, "0")}</button>`).join("")}
@@ -51,6 +57,14 @@ export function subsolo(alvo: HTMLElement): void {
           <span>${t("Corte imaginado, sem escala: formas, dimensões e disposição não são dados do cânone.",
                       "Imagined cutaway, not to scale: shapes, sizes and arrangement are not canon data.")}</span></figcaption>
       </figure>
+      <div class="ciclo-controle">
+        <button class="ciclo-botao" type="button" aria-pressed="false">${t("Ver o ciclo em movimento", "Watch the cycle in motion")}</button>
+        <ol class="ciclo-etapas" aria-label="${t("Etapas ilustradas", "Illustrated stages")}">
+          <li>${t("Água chega à massa", "Water reaches the mass")}</li>
+          <li>${t("A reação cresce", "The reaction grows")}</li>
+          <li>${t("A areia se rompe", "The sand breaks open")}</li>
+        </ol>
+      </div>
       <nav class="corte-indice" aria-label="${t("Partes do corte", "Parts of the cutaway")}">
         ${itens.map((p, i) => `<button type="button" data-id="${p.id}" aria-pressed="${i === 0}">
           <span>${String(i + 1).padStart(2, "0")}</span>${esc(p.nome)}</button>`).join("")}
@@ -75,4 +89,25 @@ export function subsolo(alvo: HTMLElement): void {
   alvo.querySelectorAll<HTMLButtonElement>("[data-id]").forEach((b) =>
     b.addEventListener("click", () => seleciona(b.dataset.id!)));
   seleciona(itens[0].id);
+
+  const figura = alvo.querySelector<HTMLElement>(".corte-imagem")!;
+  const controle = alvo.querySelector<HTMLElement>(".ciclo-controle")!;
+  const botao = alvo.querySelector<HTMLButtonElement>(".ciclo-botao")!;
+  let fim: number | undefined;
+  const para = () => {
+    window.clearTimeout(fim);
+    figura.classList.remove("em-ciclo");
+    controle.classList.remove("em-ciclo");
+    botao.setAttribute("aria-pressed", "false");
+    botao.textContent = t("Ver o ciclo em movimento", "Watch the cycle in motion");
+  };
+  botao.addEventListener("click", () => {
+    if (figura.classList.contains("em-ciclo")) { para(); return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    figura.classList.add("em-ciclo");
+    controle.classList.add("em-ciclo");
+    botao.setAttribute("aria-pressed", "true");
+    botao.textContent = t("Parar movimento", "Stop motion");
+    fim = window.setTimeout(para, 7800);
+  });
 }
