@@ -1,0 +1,18 @@
+{
+  "ferramenta": "image_gen (built-in)",
+  "data": "2026-09-15",
+  "natureza": "Duas ilustrações interpretativas, sem escala ou localização exata. A tempestade, a passagem rochosa, o trajeto e as pessoas são construções visuais; os custos de travessia vêm do modelo cartográfico, não das estampas.",
+  "fonte_contextual": "[1|terminology|10735]",
+  "imagens": [
+    {
+      "arquivo": "tempestade_fremen.webp",
+      "dimensoes": [1536, 1024],
+      "prompt": "Use case: illustration-story. Asset type: first image of a paired interactive comparison in an editorial atlas website about fictional Arrakis. Create a NEW ORIGINAL image, a wide landscape monochrome sepia photogravure plate, 3:2 or 16:10, no lettering. Scene: one immense Coriolis sandstorm crosses a desert plain at dusk; viewed from a Fremen shelter inside a low weathered rocky ridge. The foreground is protected behind dark sandstone fins and a shallow natural passage, with a single tiny robed traveller for human scale, face unseen, no logos, no film costume references. Beyond the rocky opening, a vast dust wall and the same distinctive forked rock spire on the far horizon, the storm lit by low sun. Sober natural-history expedition print, warm brown ink on pale ivory, precise fine stipple and delicate engraved hatching, tactile stone and sand, subtle depth, quiet archival atmosphere rather than action-movie spectacle. Strong legibility at mobile size; rock framing prominent, storm prominent beyond, horizon at upper third. Composition should be suitable for comparison with a second image from an Imperial exposed route toward that same forked spire and storm; preserve a consistent horizon and storm direction. Interpretive illustration without geographic measurements. No arrows, maps, words, labels, title, legend, border, watermark, signature, machinery, weapons, architecture, worms, or sand sails."
+    },
+    {
+      "arquivo": "tempestade_imperio.webp",
+      "dimensoes": [1536, 1024],
+      "prompt": "Use case: illustration-story. Asset type: second image of a paired interactive comparison in an editorial atlas website about fictional Arrakis. Create a NEW ORIGINAL image, wide landscape 3:2 or 16:10 monochrome sepia photogravure plate, no lettering. Scene: the SAME immense Coriolis sandstorm crosses the same desert plain at dusk, but viewed from an exposed Imperial caravan route on open sand. A narrow barely visible trail in rippled dunes leads toward a distinctive forked rock spire on the far horizon; the dust wall advances from left to right, lit by low sun. In the foreground, two tiny travelling silhouettes with compact packs struggle across unprotected open sand, faces unseen, no logos, no film costume references. No large ships or military hardware. Strong contrast with a Fremen shelter behind rocky sandstone fins: this image is open, vulnerable and windswept, with rock visible only as a distant destination. Sober natural-history expedition print, warm brown ink on pale ivory, precise fine stipple and delicate engraved hatching, tactile stone and sand, subtle depth, quiet archival atmosphere rather than action-movie spectacle. Strong legibility at mobile size; consistent horizon at upper third, same storm direction and forked spire as its companion image. Interpretive illustration without geographic measurements. No arrows, maps, words, labels, title, legend, border, watermark, signature, machinery, weapons, architecture, worms, or sand sails."
+    }
+  ]
+}

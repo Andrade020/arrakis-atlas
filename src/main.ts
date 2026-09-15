@@ -14,6 +14,7 @@ import { agua } from "./paginas/agua";
 import { glossario } from "./paginas/glossario";
 import { ligaGlossario } from "./glossario";
 import { paginaDoc } from "./paginas/documento";
+import { ligaTempestade } from "./paginas/tempestade";
 import { metodo } from "./paginas/metodo";
 import { economia } from "./paginas/economia";
 import { fontes } from "./paginas/fontes";
@@ -57,7 +58,7 @@ export function rotas(): Rota[] {
                "Measuring the planet by the effort of crossing it, rather than in kilometres, already changes the map. It changes again when the traveller is a Fremen and not an Imperial troop. The two maps barely look alike."),
       figura: ["arrakis_dois_arrakis.webp", t("O custo de chegar a cada ponto, para o Império e para os fremen, sobre o mesmo terreno. A única diferença é quanto cada tipo de chão atrasa cada um. Correlação entre os dois mapas: 0,09.",
                "The cost of reaching each point, for the Empire and for the Fremen, over the same terrain. The only difference is how much each kind of ground slows each of them down. Correlation between the two maps: 0.09.")],
-    }),
+    }).then(() => ligaTempestade(a)),
   },
   {
     id: "poder", plac: plac("poder"), titulo: t("Soberania e controle", "Sovereignty and control"),
