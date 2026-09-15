@@ -20,7 +20,7 @@ const detalhes: Record<string, [string, string]> = {
   R1: ["Crosta salina e umidade na Bacia Polar", "Salt crust and moisture in the Polar Basin"],
   R2: ["Abrigo de pedra ao pé da Muralha Escudo", "Stone shelter at the foot of the Shield Wall"],
   R3: ["Canal de pedra na Bacia Imperial", "Stone channel in the Imperial Basin"],
-  R4: ["Santuário de pedra entre as Falsas Muralhas", "Stone shrine between the False Walls"],
+  R4: ["Passagem natural entre as Falsas Muralhas", "Natural passage between the False Walls"],
   R5: ["Borda do Abismo Vermelho nos Planaltos Orientais", "Rim of the Red Chasm in the Eastern Highlands"],
   R6: ["Crista de duna nos Grandes Ergs", "Dune crest in the Great Ergs"],
   R7: ["Areia e rocha na borda dos Ergs Exteriores", "Sand and rock at the edge of the Outer Ergs"],
@@ -48,7 +48,7 @@ export async function regioes(alvo: HTMLElement) {
             <div class="estampa-palco">
               <img class="estampa-paisagem" src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}.webp"
                    alt="${t("Vista imaginada de", "Imagined view of")} ${esc(nomeRegiao(r.nome))}" loading="lazy" />
-              <img class="estampa-detalhe" data-src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}_detalhe.webp"
+              <img class="estampa-detalhe" data-src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}_detalhe${r.cod === "R4" ? "_v2" : ""}.webp"
                    alt="${esc(t(...detalhes[r.cod]))}" aria-hidden="true" loading="lazy" />
             </div>
             <figcaption>${t("Ilustrações imaginadas · paisagem e detalhe", "Imagined illustrations · landscape and detail")}</figcaption>
