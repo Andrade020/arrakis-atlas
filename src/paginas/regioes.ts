@@ -26,8 +26,8 @@ export async function regioes(alvo: HTMLElement) {
 
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(`${prancha("regioes")} · As sete regiões`,
-      "Sete pedaços de um planeta só",
-      "As regiões não são do cânone — o agrupamento é nosso; o que cada uma é está no livro, e vem citado. As estampas são ilustração, não levantamento.")}
+      "Sete regiões de um planeta",
+      "O livro não divide Arrakis em regiões, então o agrupamento é nosso. O que se diz de cada uma vem do texto, com a citação. As imagens são ilustrações.")}
     <div class="corpo" style="max-width:none">
       ${regs.map((r, i) => `<section class="regiao" id="${esc(r.cod)}">
         <div>
@@ -48,7 +48,7 @@ export async function regioes(alvo: HTMLElement) {
             <figcaption class="fonte">${esc(r.citacao.autor)}, <em>${esc(r.citacao.volume)}</em>
               (${r.citacao.ano})${r.citacao.local ? " · " + esc(r.citacao.local) : ""}
               <code>${esc(r.citacao.marcador)}</code></figcaption>
-          </figure>` : `<p class="sem-cita">Nenhuma frase do corpus nomeia esta região.</p>`}
+          </figure>` : `<p class="sem-cita">Sem citação para esta região.</p>`}
           <div class="reg-num">
             <span><b>${num(r.area / 1e6, 2)}</b> milhões de km²</span>
             <span><b>${r.distritos.length}</b> distritos</span>
@@ -61,7 +61,7 @@ export async function regioes(alvo: HTMLElement) {
         </div>
       </section>`).join("")}
       <p class="nota-dag" style="margin:8px 0 0"><b>†</b>
-        <span>população é modelo nosso; o total de 10 milhões de fremen é que é cânone</span></p>
+        <span>população estimada pelo modelo; só o total de 10 milhões de fremen vem do livro</span></p>
     </div>
     ${rodape()}
   </article>`;

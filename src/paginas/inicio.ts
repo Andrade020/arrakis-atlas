@@ -18,7 +18,7 @@ import { areia } from "../areia";
  */
 const FATOS: { v: string; u: string; texto: string; rota: string }[] = [
   { v: "700", u: "km/h", texto: "de vento numa tempestade de Coriolis, carregado de areia.", rota: "regioes" },
-  { v: "400", u: "metros", texto: "de comprimento: vermes assim já foram vistos no deserto profundo.", rota: "economia" },
+  { v: "400", u: "metros", texto: "de comprimento. Já viram vermes desse tamanho no deserto profundo.", rota: "economia" },
   { v: "620 mil", u: "solaris", texto: "por um único decagrama de especiaria, no pico do preço.", rota: "economia" },
   { v: "10", u: "milhões", texto: "de fremen, no mínimo. O Barão que governava o planeta achava que eram poucos.", rota: "poder" },
 ];
@@ -84,12 +84,12 @@ export async function inicio(alvo: HTMLElement) {
 
   <h2 class="titulo-argumentos">O que o mapa mostra</h2>
   <section class="argumentos">
-    ${cartao("padroes", plac("padroes"), "O sítio vence a situação", "c_padroes",
-      "A distância à capital não explica onde as pessoas moram. A distância ao chão sólido explica.")}
-    ${cartao("acessibilidade", plac("acessibilidade"), "Acessibilidade é relacional", "c_acessibilidade",
+    ${cartao("padroes", plac("padroes"), "O terreno pesa mais que o mercado", "c_padroes",
+      "Os assentamentos de Arrakis não seguem a capital. Seguem a rocha firme.")}
+    ${cartao("acessibilidade", plac("acessibilidade"), "Duas geografias no mesmo território", "c_acessibilidade",
       "Para o Império, a areia é barreira. Para os fremen, é estrada.")}
-    ${cartao("poder", plac("poder"), "O Estado que não alcança", "c_poder",
-      "Um feudo no papel, quatro poderes no chão — e metade da especiaria fora de todos.")}
+    ${cartao("poder", plac("poder"), "Quem manda no chão", "c_poder",
+      "O Imperador deu o planeta a uma Casa. Mais da metade da especiaria sai de terra que ninguém governa.")}
   </section>
 
   ${rodape()}`;

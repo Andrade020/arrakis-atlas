@@ -36,10 +36,10 @@ export async function indiceDistritos(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(`${prancha("distritos")} · Índice territorial`,
       "Os quarenta e quatro distritos",
-      `A partição cobre ${num(area / 1e6, 2)} milhões de km² sem deixar vazio nem sobreposição. As fronteiras não são do cânone — Herbert nunca define divisão administrativa. São nossas, e o método está declarado abaixo da tabela.`)}
+      `Os distritos cobrem ${num(area / 1e6, 2)} milhões de km², sem buraco e sem sobreposição. Herbert nunca divide o planeta em unidades administrativas, então as fronteiras são nossas. Como foram traçadas está explicado abaixo da tabela.`)}
     <div class="corpo" style="max-width:none">
-      <p class="nota" style="margin-bottom:18px">A marca ao lado de cada coluna diz a
-      procedência da variável.</p>
+      <p class="nota" style="margin-bottom:18px">A cor ao lado de cada coluna indica de
+      onde vem a variável: do livro, de medida no mapa ou do modelo.</p>
       <div class="tabela">
         <table id="tab-dist">
           <thead><tr>
@@ -50,13 +50,12 @@ export async function indiceDistritos(alvo: HTMLElement) {
       </div>
 
       <h2><span class="g">§</span><span>Como as fronteiras foram traçadas</span></h2>
-      <p>O mapa desenha <strong>feições</strong>, não territórios: uma cadeia de
-      rochas, uma bacia, um erg. Entre elas há branco — e um atlas não pode ter
-      branco.</p>
-      <p>Cada feição cresce dentro da sua própria classe de terreno (rocha só
-      anexa rocha) e o que sobra de areia vai para o rótulo mais próximo. A
-      coluna <code>p_nucleo</code> de cada distrito diz que fração dele é feição
-      de verdade, e não território atribuído.</p>
+      <p>O mapa do livro desenha lugares soltos (uma cadeia de rochas, uma bacia,
+      um erg) e deixa espaço vazio entre eles. Para dividir o planeta inteiro, cada
+      lugar desenhado cresceu sobre o próprio tipo de terreno, rocha sobre rocha, e
+      a areia que sobrou foi para o nome mais próximo.</p>
+      <p>A coluna <code>p_nucleo</code> mostra quanto de cada distrito é o lugar
+      que o mapa desenhou e quanto é terreno que atribuímos a ele.</p>
       <div style="margin-top:18px">${selo("DEDUZIDO", "Geometria: deduzida do mapa")}
         ${selo("SIMULADO", "Recorte distrital: construção nossa")}</div>
     </div>

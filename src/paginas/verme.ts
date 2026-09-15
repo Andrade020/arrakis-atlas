@@ -100,7 +100,7 @@ export function verme(alvo: HTMLElement) {
         <h2><span class="g">${secao("verme", 1)}</span><span>Mais de quatrocentos metros</span></h2>
         <p>O Dr. Yueh tem, para as aulas de Paul, o filme de um espécime pequeno: cento e dez metros de comprimento e
         vinte e dois de diâmetro, das latitudes do norte. Testemunhas confiáveis viram
-        vermes com <strong>mais de quatrocentos metros</strong> — e há razão para crer
+        vermes com <strong>mais de quatrocentos metros</strong>, e há motivo para achar
         que existam maiores. ${mc("[1|chapter005|879]")}</p>
         ${regua()}
         <p class="nota">A boca que Paul vê de perto tem uns oitenta metros de diâmetro, com
@@ -111,15 +111,15 @@ export function verme(alvo: HTMLElement) {
       <section class="vida-sec">
         <h2><span class="g">${secao("verme", 2)}</span><span>O verme fabrica a especiaria</span></h2>
         <p>A pista principal da equipe de Kynes foram retalhos de couro achados junto da
-        massa de especiaria depois de uma explosão — atribuídos, nas histórias fremen, a uma
-        "truta-da-areia" de fábula ${mc("[1|appendixI|10409]")}. Não era fábula. O ciclo
-        fecha assim ${mc("[1|appendixI|10411]")}:</p>
+        massa de especiaria depois de uma explosão. Nas histórias dos fremen, eram restos de
+        uma "truta-da-areia" de lenda ${mc("[1|appendixI|10409]")}, e ela existia. O ciclo
+        funciona assim ${mc("[1|appendixI|10411]")}:</p>
         ${ciclo()}
         <div class="duas">
           <div>
-            <p>A truta-da-areia — o <em>pequeno fazedor</em> — é meio planta, meio animal.
-            Tranca a água em bolsões dentro da rocha porosa do subsolo, e as excreções dela formam a massa
-            pré-especiaria ${mc("[1|terminology|10989]")}. Morre aos milhões em cada
+            <p>A truta-da-areia, ou <em>pequeno fazedor</em>, é meio planta e meio animal.
+            Ela prende a água em bolsões dentro da rocha porosa do subsolo, e o que ela excreta vira a
+            massa de pré-especiaria ${mc("[1|terminology|10989]")}. Morre aos milhões em cada
             explosão; uma variação de cinco graus a mata. As poucas que sobrevivem se
             encistam e, seis anos depois, saem como vermes de uns três metros
             ${mc("[1|appendixI|10410]")}.</p>
@@ -147,7 +147,7 @@ export function verme(alvo: HTMLElement) {
           <div class="especime">
             ${estampa("martelo", "Um martelador cravado na crista de uma duna")}
             <h3>O martelador</h3>
-            <p>Uma estaca curta com um batedor de mola. Cravada na areia, bate — e chama
+            <p>Uma estaca curta com um batedor de mola. Cravada na areia, ela bate sem parar e chama
             shai-hulud ${mc("[1|terminology|11292]")}.</p>
           </div>
           <div class="especime">
@@ -155,7 +155,7 @@ export function verme(alvo: HTMLElement) {
             <h3>Os ganchos</h3>
             <p>Com um gancho mantendo aberta a borda de um anel, a areia entra na parte
             sensível do corpo, e o verme não mergulha: rola o corpo inteiro para
-            afastar da areia o anel aberto — e fica na superfície com quem vai nas costas ${mc("[1|chapter040|8411]")}.</p>
+            afastar da areia o anel aberto, e assim fica na superfície com quem vai nas costas ${mc("[1|chapter040|8411]")}.</p>
           </div>
           <div class="especime">
             ${estampa("cristal", "Uma faca curva feita de um dente leitoso")}

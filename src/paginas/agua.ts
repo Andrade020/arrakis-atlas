@@ -72,7 +72,7 @@ export function agua(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha agua">
     ${cabecalho(`${prancha("agua")} · A economia da água`,
       "Vinte palmeiras valem cem homens",
-      "A especiaria é a riqueza que sai de Arrakis. A que fica é a água: medida em litros por dia, carregada em anéis, herdada dos mortos e guardada em cavernas.")}
+      "A especiaria é a riqueza que sai de Arrakis. A que fica é a água, contada em litros por dia, carregada em anéis e guardada em cavernas.")}
     <div class="corpo">
 
       <section class="vida-sec">
@@ -119,7 +119,7 @@ export function agua(alvo: HTMLElement) {
             <button class="olho" type="button" aria-pressed="false" aria-label="Revelar spoiler do livro 1">${OLHO}</button></div>
           <div class="ev-texto" aria-hidden="true">
             <p>Depois do duelo, Chani entrega a Paul a água de Jamis, anel por anel: trinta litros,
-            dois, um, sete contadores de uma dracma e um de três trinta e dois avos — ao todo,
+            dois, um, sete contadores de uma dracma e um de três trinta e dois avos. Ao todo,
             trinta e três litros e sete dracmas e três trinta e dois avos
             ${mc("[1|chapter034|6879]")} ${mc("[1|chapter034|6880]")}. A água de combate é do
             vencedor: ele lutou sem traje e precisa repor o que perdeu ${mc("[1|chapter034|6760]")}.</p>
@@ -135,7 +135,7 @@ export function agua(alvo: HTMLElement) {
         escondidos e protegidos das trutas-da-areia ${mc("[1|chapter034|6932]")}. E sabem, com
         margem de um milhão de decalitros, quanto ainda falta para mudar a face de Arrakis
         ${mc("[1|chapter034|6938]")}. A água vem do ar, por captadores de vento escondidos
-        ${mc("[1|chapter034|6908]")} e por coletores de orvalho — ovos de cromoplástico de quatro
+        ${mc("[1|chapter034|6908]")} e por coletores de orvalho, ovos de cromoplástico de quatro
         centímetros que esfriam de madrugada e juntam o sereno ${mc("[1|terminology|10761]")}.</p>
         <div class="contas">
           <div class="conta"><div class="v">${num(RESERVA_L / 1e6)} <small>milhões de litros</small></div>

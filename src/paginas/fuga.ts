@@ -28,7 +28,7 @@ const ETAPAS: Etapa[] = [
     texto: "Os Atreides foram morar na Residência, a antiga casa do conde Fenring. Numa nave pousada, o Barão Harkonnen assiste à noite de Arrakeen em chamas.",
     marcas: ["[1|chapter002|457]", "[1|chapter021|3742]"] },
   { cod: null, titulo: "Uma tenda entre as rochas",
-    texto: "Um tóptero estranho mergulha da noite sobre Paul e Jessica no deserto. Depois, Idaho os esconde numa tenda destiladora cercada de rochas. Ali, Paul vê o que vem pela frente — e o nome que vão lhe dar: Muad'Dib.",
+    texto: "Um tóptero estranho mergulha da noite sobre Paul e Jessica no deserto. Depois, Idaho os esconde numa tenda destiladora cercada de rochas. Ali, Paul enxerga o que vem pela frente, inclusive o nome que vão lhe dar, Muad'Dib.",
     marcas: ["[1|chapter022|4043]", "[1|chapter022|4039]", "[1|chapter022|4347]"] },
   { cod: null, titulo: "A tempestade",
     texto: "Acordam com a tenda soterrada. Saem à noite, com a primeira lua avermelhada de poeira. \"Vamos para o sul, pelas rochas. Se nos pegarem em campo aberto…\"",
@@ -66,11 +66,11 @@ export async function fuga(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha fuga">
     ${cabecalho(`${prancha("fuga")} · A rota da fuga`,
       "De Arrakeen a Arrakeen",
-      "A noite em que os Harkonnen voltam, a travessia do deserto e o caminho de volta — sobre o mapa, lugar por lugar, até onde o livro diz onde.")}
+      "A noite em que os Harkonnen voltam, a travessia do deserto e o caminho de volta, marcados no mapa nos lugares que o livro nomeia.")}
     <div class="corpo">
       <div class="aviso-spoiler" ${aberta ? "hidden" : ""}>
-        <p><strong>Esta prancha conta o enredo de <em>Duna</em></strong> — o livro 1 e o que os dois
-        filmes mostram. Se ainda não viu nem leu, talvez queira voltar depois.</p>
+        <p><strong>Esta prancha conta o enredo de <em>Duna</em></strong>, do livro 1 e dos dois
+        filmes. Se ainda não viu nem leu, talvez queira voltar depois.</p>
         <button class="btn-spoiler" type="button">Mostrar a rota</button>
       </div>
     </div>

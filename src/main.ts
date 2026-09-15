@@ -37,9 +37,9 @@ export const ROTAS: Rota[] = [
     id: "padroes", plac: plac("padroes"), titulo: "Onde as pessoas estão", secao: "O argumento",
     monta: (a) => paginaDoc(a, ["PADROES", "ROBUSTEZ"], {
       indice: `${prancha("padroes")} · Padrões de assentamento`,
-      titulo: "O sítio vence a situação",
-      linha: "A hipótese clássica diz que a proximidade do mercado organiza o povoamento. Em Arrakis ela não se sustenta — e o teste foi refeito em dezenove desenhos de grade para que não fosse artefato da unidade de análise.",
-      figura: ["arrakis_padroes.webp", "Os quatro testes de padrão de ponto, todos sobre dado observado: quociente locacional por classe de terreno, vizinho mais próximo, função L de Ripley com envelope de Monte Carlo, e a regressão de Poisson."],
+      titulo: "O terreno pesa mais que o mercado",
+      linha: "A ideia clássica é que as pessoas se instalam perto do mercado. Em Arrakis isso não se confirma. O teste foi refeito com dezenove recortes diferentes do território, e o resultado se manteve em todos.",
+      figura: ["arrakis_padroes.webp", "Quatro testes sobre onde ficam os assentamentos, todos com dados medidos no mapa: preferência por tipo de terreno, distância ao vizinho mais próximo, agrupamento em várias escalas (função L de Ripley) e uma regressão de Poisson."],
     }),
   },
   {
@@ -47,17 +47,19 @@ export const ROTAS: Rota[] = [
     monta: (a) => paginaDoc(a, ["ACESSIBILIDADE"], {
       indice: `${prancha("acessibilidade")} · Custo de travessia`,
       titulo: "Duas geografias sobre o mesmo território",
-      linha: "Trocar distância por custo de travessia muda o mapa. Trocar o agente muda o mapa de novo — e as duas superfícies mal se correlacionam.",
-      figura: ["arrakis_dois_arrakis.webp", "As duas superfícies de custo acumulado, calculadas sobre a mesma grade de terreno com tabelas de fricção distintas. A correlação entre elas é de 0,09."],
+      linha: "Medir o planeta pelo esforço de atravessá-lo, e não em quilômetros, já muda o mapa. Muda outra vez quando quem atravessa é um fremen e não uma tropa do Império. Os dois mapas quase não se parecem.",
+      figura: ["arrakis_dois_arrakis.webp", "O custo de chegar a cada ponto, para o Império e para os fremen, sobre o mesmo terreno. A única diferença é quanto cada tipo de chão atrasa cada um. Correlação entre os dois mapas: 0,09."],
     }),
   },
   {
     id: "poder", plac: plac("poder"), titulo: "Soberania e controle",
     monta: (a) => paginaDoc(a, ["PODER"], {
       indice: `${prancha("poder")} · Geografia política`,
-      titulo: "O Estado que não alcança",
-      linha: "No papel, o planeta é um feudo único entregue por decreto imperial. No chão, quatro poderes — e metade da especiaria sai de terra que nenhum deles administra.",
-      figura: ["arrakis_soberania_x_controle.webp", "Soberania nominal, uniforme por definição, contra controle efetivo, atribuído por regra explícita sobre a composição de assentamentos de cada distrito."],
+      titulo: "Quem manda no chão",
+      linha: "Por decreto do Imperador, Arrakis é um feudo só, entregue a uma Casa. Na prática, quatro poderes dividem o território, e mais da metade da especiaria sai de terra que nenhum deles administra.",
+      spoiler: { desde: "em cada livro", ate: "No QGIS",
+        aviso: "A próxima seção diz quem governa Arrakis em cada um dos seis livros, até o fim da saga. É spoiler de tudo." },
+      figura: ["arrakis_soberania_x_controle.webp", "À esquerda, quem é dono no papel. À direita, quem controla de fato, decidido pelo tipo de assentamento que existe em cada distrito."],
     }),
   },
   { id: "economia", plac: plac("economia"), titulo: "A economia da especiaria", monta: economia },
@@ -67,8 +69,8 @@ export const ROTAS: Rota[] = [
     monta: (a) => paginaDoc(a, ["COMPARACAO"], {
       indice: `${prancha("comparacao")} · Comparação`,
       titulo: "Arrakis na régua do mundo real",
-      linha: "Seis indicadores medidos contra dado do IBGE, da UNCTAD e do IISD, cada um declarando se o lado de Arrakis é observado ou simulado.",
-      figura: ["arrakis_regua_real.webp", "Cada barra compara o valor de Arrakis com uma referência real documentada. Os pares em que o lado de Arrakis é simulado estão marcados como tais."],
+      linha: "Seis indicadores de Arrakis ao lado de números reais do IBGE, da UNCTAD e do IISD. Em cada par fica dito se o valor de Arrakis foi medido no mapa ou saiu do modelo.",
+      figura: ["arrakis_regua_real.webp", "Cada barra põe um número de Arrakis ao lado de uma referência real. Quando o de Arrakis vem do modelo, está marcado."],
     }),
   },
   {
@@ -76,7 +78,7 @@ export const ROTAS: Rota[] = [
     monta: (a) => paginaDoc(a, ["CONTRADICOES"], {
       indice: `${prancha("contradicoes")} · Conflitos na fonte`,
       titulo: "Oito lugares onde o cânone não fecha",
-      linha: "Um modelo precisa de números que fechem. O cânone de Duna, em vários pontos, não fecha. Cada conflito está aqui com a frase literal dos dois lados, a consequência calculada, e a decisão declarada.",
+      linha: "Em oito pontos, os livros dão números que não podem estar certos ao mesmo tempo. Para cada um estão as duas frases, a conta que mostra o choque e a escolha que o atlas fez.",
     }),
   },
   { id: "metodo", plac: plac("metodo"), titulo: "Dado ou modelo", monta: metodo },

@@ -46,7 +46,7 @@ const NATIVOS: Ser[] = [
     texto: "Meio planta, meio animal. Tranca a água no subsolo e morre aos milhões a cada explosão de especiaria; as sobreviventes viram vermes.",
     marcas: ["[1|terminology|10989]", "[1|appendixI|10410]"] },
   { nome: "Plâncton de areia", en: "sand plankton", img: "plancton",
-    texto: "Criaturas microscópicas que comem a especiaria espalhada pelo verme — e servem de comida a ele.",
+    texto: "Criaturas microscópicas que comem a especiaria espalhada pelo verme. O verme, por sua vez, come o plâncton.",
     marcas: ["[1|appendixI|10411]"] },
   { nome: "A raiz d'água", en: "native root plant", img: "raiz",
     texto: "Planta nativa rara, só acima de 2.500 metros na zona temperada do norte. Um tubérculo de dois metros rende meio litro de água.",
@@ -61,7 +61,7 @@ const TRAZIDOS: Ser[] = [
     texto: "Morcego modificado. Um aparelho grava a mensagem no sistema nervoso dele, e o grito normal do bicho a carrega até outro aparelho.",
     marcas: ["[1|terminology|10729]", "[1|terminology|10770]"], rota: "#/mapa#=AR-03" },
   { nome: "Kulon", en: "kulon", img: "kulon",
-    texto: "O asno selvagem das estepes asiáticas da Terra, adaptado. Alguns contrabandistas usam — mas a água custa caro, mesmo com o bicho vestindo trajestil.",
+    texto: "O asno selvagem das estepes asiáticas da Terra, adaptado. Alguns contrabandistas usam, mas a água sai cara, mesmo com o bicho vestindo trajestil.",
     marcas: ["[1|terminology|10968]", "[1|appendixI|10400]"] },
   { nome: "Falcão do deserto", en: "desert hawk", img: "falcao",
     texto: "Conta-se de Muad'Dib que viu um filhote de falcão sair do ovo e sussurrou: \"Kull wahad!\"",
@@ -70,10 +70,10 @@ const TRAZIDOS: Ser[] = [
 
 const DEPOIS: Ser[] = [
   { nome: "Peixe predador", en: "predator fish", img: "peixe", livro: 3,
-    texto: "Os fremen passam a criar peixes predadores na água guardada dos qanats — para manter as trutas-da-areia longe dela.",
+    texto: "Os fremen passam a soltar peixes predadores na água dos qanats para manter as trutas-da-areia longe dela.",
     marcas: ["[3|Children_of_Dune_split_012|625]"] },
   { nome: "Borboleta-esqueleto", en: "skeleton butterfly", img: "borboleta", livro: 3,
-    texto: "Leto II vê uma borboleta de asas quase transparentes voando entre as sombras do penhasco — tão delicada que parece impossível existir ali.",
+    texto: "Leto II vê uma borboleta de asas quase transparentes voando entre as sombras do penhasco, delicada demais para um lugar como aquele.",
     marcas: ["[3|Children_of_Dune_split_030|2841]"], rota: "#/mapa#=AR-09" },
 ];
 
@@ -81,9 +81,9 @@ export function vida(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha vida">
     ${cabecalho(`${prancha("vida")} · O que vive no deserto`,
       "Quase tudo aqui veio de fora",
-      "Bicho de estimação é quase desconhecido e animal de criação é raro: em Arrakis a preocupação não é a água, é a umidade. O que vive no deserto ou nasceu em volta do verme, ou foi trazido.")}
+      "Em Arrakis quase ninguém tem bicho de estimação, e animal de criação é raro. Tudo o que vive no deserto ou nasceu em torno do verme ou veio de fora.")}
     <div class="corpo">
-      <p class="nota">A linha acima é do apêndice ${mc("[1|appendixI|10400]")}. Para o Dr. Yueh, "o planeta parece ter aberto os
+      <p class="nota">Sobre os animais, ver o apêndice ${mc("[1|appendixI|10400]")}. Para o Dr. Yueh, "o planeta parece ter aberto os
       braços a certas formas de vida terrestres, e não está claro como" ${mc("[1|chapter005|860]")}.</p>
 
       <section class="vida-sec">
@@ -109,11 +109,12 @@ export function vida(alvo: HTMLElement) {
             ventos de oeste: com esse lado preso, o outro cresce, e a duna vira barreira
             ${mc("[1|appendixI|10414]")} ${mc("[1|appendixI|10415]")}. Depois, capim-espada no
             barlavento ${mc("[1|appendixI|10416]")}.</p>
-            <p>Só então vêm as plantas mais fundas — efêmeras, arbustos, saguaro, cacto-barril
-            ${mc("[1|appendixI|10417]")} ${mc("[1|appendixI|10418]")} — e depois os bichos, na ordem em que o solo precisa
-            deles: os que cavam e arejam a terra — raposa, rato-canguru, lebre, tartaruga-da-areia —,
-            os predadores que os controlam — falcão, corujas, águia —, os insetos para os nichos
-            que sobram e o morcego para vigiar os insetos ${mc("[1|appendixI|10419]")}.
+            <p>Depois vêm as plantas de raiz mais funda, como efêmeras, arbustos, saguaro e
+            cacto-barril ${mc("[1|appendixI|10417]")} ${mc("[1|appendixI|10418]")}. Os bichos
+            chegam por último, na ordem em que o solo precisa deles. Primeiro os que cavam e
+            arejam a terra (raposa, rato-canguru, lebre, tartaruga-da-areia), depois os
+            predadores que os controlam (falcão, corujas, águia), os insetos para o que sobra
+            e o morcego do deserto para vigiá-los ${mc("[1|appendixI|10419]")}.
             Mais de duzentas plantas de comida foram testadas ${mc("[1|appendixI|10420]")}.</p>
             <p>A conta de Kynes: se três por cento das plantas verdes do planeta entrarem na
             fixação de carbono, o ciclo se sustenta sozinho ${mc("[1|appendixI|10433]")}.</p>
@@ -130,8 +131,8 @@ export function vida(alvo: HTMLElement) {
           <figcaption>Ilustração lida do texto · um palmeiral do sul</figcaption>
         </figure>
         <p class="nota">Na borda das plantações o plâncton de areia se envenenava: as proteínas não
-        combinavam, e formava-se uma água que a vida de Arrakis não tocava — nem shai-hulud
-        entrava na faixa estéril ${mc("[1|appendixI|10425]")}.</p>
+        combinavam, e formava-se uma água que a vida de Arrakis não tocava. Nem shai-hulud
+        entrava naquela faixa sem vida ${mc("[1|appendixI|10425]")}.</p>
       </section>
 
       <section class="vida-sec">

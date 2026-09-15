@@ -33,7 +33,7 @@ export async function fontes(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(`${prancha("fontes")} · Fontes e créditos`,
       "De onde vem cada coisa",
-      "Uma fonte primária fechada, um mapa redesenhado por um fã, três bases de dados reais e uma simulação climática que discorda do livro. Nesta ordem de autoridade.")}
+      "Os livros de Frank Herbert, um mapa redesenhado por um fã, três bases de dados reais e uma simulação de clima que discorda do livro. Quando as fontes discordam, vale essa ordem.")}
     <div class="corpo">
 
       <h2><span class="g">${secao("fontes", 1)}</span><span>O mapa</span></h2>
@@ -44,18 +44,17 @@ export async function fontes(alvo: HTMLElement) {
           <strong>NiptonIceTea</strong>.
         </p>
         <p style="margin:12px 0 0;font:300 16px/1.6 var(--f-text);color:var(--tinta-2)">
-          O mapa impresso no apêndice de Duna — atribuído a de Fontaine, 1965 —
-          chega até nós cortado nas bordas: falta território nas quatro margens, e o que
-          falta inclui distritos inteiros. Sem o redesenho de NiptonIceTea, que recompõe
-          a folha completa, não haveria como medir área, nem calibrar a escala pelo
-          círculo dos 60°, nem fechar uma partição sem vazios. Toda a métrica deste
-          projeto depende dele.
+          O mapa impresso no apêndice de Duna (atribuído a de Fontaine, 1965) chega
+          cortado nas quatro bordas, e o pedaço que falta inclui distritos inteiros.
+          NiptonIceTea redesenhou a folha completa. Sem esse trabalho não daria para medir
+          áreas, acertar a escala pelo círculo dos 60° nem dividir o planeta sem deixar
+          buracos.
         </p>
         <p style="margin:12px 0 0;font:400 12.5px/1.6 var(--f-disp);color:var(--tinta-3)">
-          O mapa original impresso continua no projeto como <strong>controle</strong>: os
-          dois foram georreferenciados de forma independente, e três pontos de controle
-          concordam entre 7 e 127 km num território de 11 307 km de extensão — o que é a
-          verificação de que o redesenho não distorceu a geometria.
+          O mapa impresso original foi usado como <strong>controle</strong>. Os dois
+          foram posicionados na projeção separadamente, e três pontos coincidem com
+          diferença de 7 a 127 km, num território de 11 307 km de ponta a ponta. O
+          redesenho não distorceu a geometria.
         </p>
       </div>
 
@@ -63,8 +62,8 @@ export async function fontes(alvo: HTMLElement) {
       ${d.FONTES ? blocos(d.FONTES, { pularAte: 2 }) : ""}
 
       <h2><span class="g">${secao("fontes", 3)}</span><span>Dados do mundo real</span></h2>
-      <p>Usados só na prancha de comparação, e sempre com o lado de Arrakis declarando se
-      é observado ou simulado.</p>
+      <p>Aparecem só na prancha de comparação. Em cada par fica dito se o número de
+      Arrakis foi medido ou simulado.</p>
       <div class="tabela"><table>
         <thead><tr><th>Fonte</th><th>Ano</th><th>Usada em</th></tr></thead>
         <tbody>${reais.map((r) => `<tr>
@@ -75,8 +74,8 @@ export async function fontes(alvo: HTMLElement) {
       </table></div>
 
       <h2><span class="g">${secao("fontes", 4)}</span><span>Fora do cânone</span></h2>
-      <p>Material que entrou como <strong>camada de comparação</strong> e nunca como
-      lastro. A regra: nada daqui altera um número da malha.</p>
+      <p>Material usado <strong>só para comparar</strong>. Nada daqui muda um número
+      dos distritos.</p>
       ${listaExt.length ? `<div class="tabela"><table>
         <thead><tr><th>Item</th><th>O que é</th><th>Uso permitido</th></tr></thead>
         <tbody>${listaExt.map((f: any) => `<tr>
@@ -87,22 +86,20 @@ export async function fontes(alvo: HTMLElement) {
         </tr>`).join("")}</tbody>
       </table></div>` : ""}
 
-      <p class="nota">Jogos ambientados em Duna foram consultados apenas para
-      verossimilhança: que tipo de instalação faria sentido num distrito, que escala
-      de operação é plausível. Nenhum número de jogo entrou na malha.</p>
+      <p class="nota">Jogos ambientados em Duna ajudaram a imaginar que tipo de
+      instalação faz sentido num distrito e em que escala. Nenhum número de jogo entrou
+      nos dados.</p>
 
       <h2><span class="g">${secao("fontes", 5)}</span><span>As ilustrações</span></h2>
-      <p>As estampas da prancha das regiões e dos cartões da abertura são
-      <strong>imagens geradas por máquina</strong>, tratadas depois numa duotonia
-      para caírem na paleta do papel. Elas não são levantamento, não são cânone e
-      não entram em nenhuma medida — existem para dar a este atlas a estampa que
-      um atlas impresso tem. O prompt de cada uma está registrado abaixo, pela
-      mesma razão que o marcador de cada citação está: quem lê tem direito de
-      saber de onde veio o que está vendo.</p>
-      <p class="nota">Todas partem do mesmo pedido de estilo —
-      <em>fotografia monocromática de expedição em grande formato, fotogravura
-      colada numa monografia científica, luz rasante, sem texto e sem moldura</em>
-      — mais a cena de cada uma, abaixo. O modelo é
+      <p>As imagens da prancha das regiões e dos cartões da abertura foram
+      <strong>geradas por modelos de imagem</strong> e depois tingidas em sépia para
+      combinar com o papel. Não são dados nem vêm do livro, e não entram em nenhuma
+      medida. Estão aí porque um atlas impresso teria gravuras. Abaixo está o pedido
+      feito para cada uma.</p>
+      <p class="nota">Todas usam o mesmo pedido de estilo (<em>fotografia
+      monocromática de expedição em grande formato, fotogravura colada numa monografia
+      científica, luz rasante, sem texto e sem moldura</em>) mais a cena de cada uma. O
+      modelo é
       <code>black-forest-labs/flux-1.1-pro</code>, exceto a fibra de papel,
       em <code>flux-dev</code>.</p>
       <div class="tabela"><table>
@@ -113,12 +110,12 @@ export async function fontes(alvo: HTMLElement) {
         </tr>`).join("")}</tbody>
       </table></div>
 
-      <p>As estampas das pranchas ${plac("verme")} e ${plac("vida")} — o verme, os bichos, as plantas — foram
-      pedidas de outro jeito. Nenhuma parte de foto de filme ou de fan-art: redescrever
-      uma imagem protegida para gerar outra parecida continua sendo derivar dela. Cada
-      cena foi escrita <strong>a partir do trecho do Herbert</strong> que a descreve (o
-      marcador está ao lado), com referência de bicho real quando o livro nomeia um —
-      o rato-canguru, o falcão, o asno selvagem.</p>
+      <p>As imagens das pranchas ${plac("verme")} e ${plac("vida")} (o verme, os bichos
+      e as plantas) foram pedidas de outro jeito. Nenhuma partiu de cena de filme ou de
+      fan-art, porque descrever uma imagem protegida para gerar outra parecida ainda é
+      copiar. Cada cena foi escrita <strong>a partir do trecho do Herbert</strong> que a
+      descreve, indicado ao lado. Quando o livro nomeia um bicho real, como o
+      rato-canguru, o falcão ou o asno selvagem, ele serviu de referência.</p>
       <div class="tabela"><table>
         <thead><tr><th>Estampa</th><th>Trecho que a sustenta</th><th>Cena pedida</th></tr></thead>
         <tbody>${Object.entries(vidaIl as Record<string, any>).map(([k, v]) => `<tr>
@@ -132,27 +129,26 @@ export async function fontes(alvo: HTMLElement) {
       <code>bytedance/seedance-1-lite</code>, animando as próprias estampas com a
       câmera travada. As dunas da abertura, do cabeçalho e do índice são
       <code>black-forest-labs/flux-1.1-pro-ultra</code>, com o céu escurecido depois.
-      O planeta que gira na abertura não é gerado por modelo nem é a malha do atlas:
-      é uma esfera renderizada quadro a quadro a partir de ruído, com geografia
-      inventada — um retrato de Arrakis vista de longe, não um mapa dela.</p>
+      O planeta que gira na abertura não saiu de modelo de imagem nem do mapa: é uma
+      esfera desenhada quadro a quadro por programa, com relevo inventado. Mostra como
+      Arrakis poderia parecer de longe, e não onde fica cada coisa.</p>
 
       <h2><span class="g">${secao("fontes", 6)}</span><span>Reprodutibilidade</span></h2>
-      <p>O atlas inteiro é gerado por linha de comando, do raster ao site. A cadeia é:
-      georreferenciar → extrair símbolos → classificar terreno → particionar →
-      vetorizar → variáveis → estilos → projeto QGIS → análises → exportar.
-      Ao fim, <code>scripts/10_conferir.py</code> roda
-      <strong>130 conferências</strong> sobre geometria, totais, proveniência e
-      coerência com o cânone. Nenhuma entrega é considerada pronta com uma falha aberta.</p>
-      <p class="nota">Os dados que esta página consome são exatamente os arquivos que o
-      QGIS abre — a mesma projeção, a mesma malha, os mesmos números.</p>
+      <p>Todo o atlas sai de scripts, da imagem do mapa até o site, nesta ordem:
+      georreferenciar, extrair símbolos, classificar terreno, dividir em distritos,
+      vetorizar, calcular variáveis, estilos, projeto QGIS, análises e exportação. No fim,
+      <code>scripts/10_conferir.py</code> faz <strong>133 conferências</strong> de
+      geometria, totais, origem dos dados e fidelidade ao livro, e nada é publicado com
+      alguma delas falhando.</p>
+      <p class="nota">O site lê os mesmos arquivos que o QGIS abre, com a mesma projeção
+      e os mesmos números.</p>
 
       <h2><span class="g">${secao("fontes", 7)}</span><span>Aviso</span></h2>
-      <p>Duna e Arrakis são criação de Frank Herbert; os direitos pertencem a
-      seus detentores. Este é um trabalho acadêmico de geografia econômica, sem fim
-      comercial e sem vínculo com eles. A base cartográfica é usada com crédito ao seu
-      autor. Os números classificados como simulados não fazem parte da obra: foram
-      construídos aqui, para fins de análise, e estão marcados como tais em cada lugar
-      onde aparecem.</p>
+      <p>Duna e Arrakis são criação de Frank Herbert, e os direitos pertencem a seus
+      detentores. Este é um trabalho de estudo em geografia econômica, sem fim comercial
+      e sem vínculo com eles. A base cartográfica é usada com crédito ao autor. Os números
+      simulados não fazem parte da obra; foram criados aqui para análise e estão marcados
+      em todo lugar onde aparecem.</p>
     </div>
     ${rodape()}
   </article>`;

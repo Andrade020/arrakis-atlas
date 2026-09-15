@@ -41,20 +41,19 @@ export async function metodo(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(`${prancha("metodo")} · Proveniência`,
       "O que é dado e o que é modelo",
-      "Um atlas de um planeta inventado tem um problema que um atlas real não tem: parte dos números não existe em lugar nenhum, e alguém precisou criá-los. A resposta deste projeto não foi evitar isso, foi declarar tudo.")}
+      "Num planeta inventado, parte dos números simplesmente não existe, e para fazer o atlas alguém teve de criá-los. Esta prancha mostra quais são e de onde vem cada tipo de dado.")}
     <div class="corpo">
       <h2><span class="g">${secao("metodo", 1)}</span><span>As cinco classes</span></h2>
-      <p>Cada variável da malha tem uma e apenas uma classe, gravada em
-      <code>dados/proveniencia_campos.csv</code> pelo pipeline — não por esta página.
-      O site lê aquele arquivo; se a classificação mudar lá, muda aqui.</p>
+      <p>Cada variável dos distritos pertence a uma destas classes. A lista fica em
+      <code>dados/proveniencia_campos.csv</code>, e o site lê daquele arquivo.</p>
 
       <div class="tabela"><table>
         <thead><tr><th>Classe</th><th>O que significa</th><th>Pode sustentar uma conclusão?</th></tr></thead>
         <tbody>
-          <tr><td>${selo("CANONE_FH")}</td><td>Frase de Frank Herbert, localizada no corpus pelo marcador <code>[livro|seção|parágrafo]</code>.</td><td>Sim — é a fonte.</td></tr>
-          <tr><td>${selo("DEDUZIDO")}</td><td>Medição ou inferência técnica sobre o mapa ou sobre uma frase do cânone: áreas, distâncias, custos, classes de terreno.</td><td>Sim, com o método declarado.</td></tr>
-          <tr><td>${selo("SIMULADO")}</td><td>Modelo nosso, com parâmetro escolhido por nós e semente fixa. População distrital, produto, renda, água.</td><td><strong>Não.</strong> Só ilustra.</td></tr>
-          <tr><td>${selo("EXTERNO_NAO_CANONE")}</td><td>Material de fora dos livros: simulação climática publicada, jogos. Entra como camada de comparação.</td><td>Não lastreia nada.</td></tr>
+          <tr><td>${selo("CANONE_FH")}</td><td>Frase de Frank Herbert, com o lugar no livro indicado pelo marcador <code>[livro|seção|parágrafo]</code>.</td><td>Sim. É a fonte.</td></tr>
+          <tr><td>${selo("DEDUZIDO")}</td><td>Medida feita sobre o mapa ou tirada de uma frase do livro, como áreas, distâncias, custos de travessia e tipos de terreno.</td><td>Sim, dizendo como foi medido.</td></tr>
+          <tr><td>${selo("SIMULADO")}</td><td>Saída do nosso modelo, com parâmetros escolhidos por nós, como população por distrito, produto, renda e água.</td><td><strong>Não.</strong> Serve para ilustrar.</td></tr>
+          <tr><td>${selo("EXTERNO_NAO_CANONE")}</td><td>Material de fora dos livros, como uma simulação de clima publicada e jogos. Aparece só para comparar.</td><td>Não.</td></tr>
           <tr><td>${selo("DADO_REAL")}</td><td>Dado do mundo real, com fonte e ano, usado nas comparações.</td><td>Sim, para o lado real da comparação.</td></tr>
         </tbody>
       </table></div>
@@ -64,27 +63,24 @@ export async function metodo(alvo: HTMLElement) {
       ${barras}
       <div class="aviso">
         <div class="rot">A consequência prática</div>
-        <p>As três análises centrais do trabalho não tocam em nada amarelo. A regressão
-        de Poisson usa contagem de símbolos do mapa e distância medida; as superfícies
-        de custo usam classe de terreno e uma âncora canônica. Se toda a coluna
-        simulada fosse apagada, as conclusões continuariam de pé.</p>
+        <p>As três análises principais não usam nenhum número simulado. A regressão usa a
+        contagem de assentamentos do mapa e distâncias medidas; os custos de travessia
+        usam o tipo de terreno e a Linha do Verme do livro. Apagando tudo o que é simulado,
+        as conclusões continuam as mesmas.</p>
       </div>
 
-      <h2><span class="g">${secao("metodo", 3)}</span><span>Onde o cânone simplesmente cala</span></h2>
-      <p>A extração completa dos oito volumes serviu tanto para achar o que existe
-      quanto para provar o que <strong>não</strong> existe. Nenhuma população de cidade.
-      Nenhum segundo par de cidades com distância declarada. Nenhuma divisão
-      administrativa. Nenhum dado de captação de água por região. E
-      ${semCota} dos ${dd.length} distritos não têm cota altimétrica em lugar
-      nenhum — por isso existe uma superfície de elevação modelada, declarada como
-      modelo.</p>
-      <p class="nota">Poder afirmar a ausência é a vantagem metodológica de trabalhar com
-      um corpus fechado. Com dado do mundo real, "não encontrei" e "não existe" não são
-      a mesma coisa; aqui são.</p>
+      <h2><span class="g">${secao("metodo", 3)}</span><span>O que os livros não dizem</span></h2>
+      <p>Com os oito livros inteiros pesquisáveis, dá para saber o que eles dizem e
+      também o que <strong>não</strong> dizem. Não há população de nenhuma cidade. Só um
+      par de cidades tem distância informada. Não há divisão administrativa nem dado de
+      água por região. E ${semCota} dos ${dd.length} distritos não têm altitude em lugar
+      nenhum, por isso a elevação do mapa é modelada.</p>
+      <p class="nota">No mundo real, "não achei" não quer dizer "não existe". Aqui quer,
+      porque a fonte é fechada: são só aqueles livros.</p>
 
-      <h2><span class="g">${secao("metodo", 4)}</span><span>As doze premissas fechadas</span></h2>
-      <p>Onde o cânone se contradiz, o modelo teve de escolher. Esta é a lista completa
-      das escolhas — cada uma reversível, todas explícitas.</p>
+      <h2><span class="g">${secao("metodo", 4)}</span><span>As doze escolhas do modelo</span></h2>
+      <p>Onde os livros se contradizem, o modelo teve de escolher um lado. Estas são
+      todas as escolhas, e qualquer uma pode ser trocada.</p>
       ${d.PREMISSAS ? blocos(d.PREMISSAS, { pularAte: 4 }) : ""}
     </div>
     ${rodape()}
