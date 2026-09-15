@@ -1,5 +1,5 @@
-import { t } from "../i18n";
-import { plac } from "../pranchas";
+import { t, rota as link } from "../i18n";
+import { plac, type IdPrancha } from "../pranchas";
 import { atlas, distritos, assentamentos, rotulos, rasters, mundo } from "../dados";
 import { Mapa } from "../mapa";
 import { rodape } from "../ui";
@@ -28,6 +28,28 @@ const fatos = (): { v: string; u: string; texto: string; rota: string }[] => [
     texto: t("de fremen, no mínimo. O Barão que governava o planeta achava que eram poucos.", "Fremen, at least. The Baron who ruled the planet thought there were only a few.") },
 ];
 
+const outras = (): { grupo: string; itens: [IdPrancha, string][] }[] => [
+  { grupo: t("Lugares e vida", "Places and life"), itens: [
+    ["regioes", t("As sete regiões", "The seven regions")],
+    ["distritos", t("Os 44 distritos", "The 44 districts")],
+    ["verme", t("Shai-Hulud, o verme", "Shai-Hulud, the worm")],
+    ["subsolo", t("Sob a areia", "Beneath the sand")],
+    ["vida", t("O que vive no deserto", "Life in the desert")],
+    ["fuga", t("A rota da fuga", "The escape route")],
+  ] },
+  { grupo: t("Recursos e disputas", "Resources and disputes"), itens: [
+    ["economia", t("A economia da especiaria", "The spice economy")],
+    ["agua", t("A economia da água", "The water economy")],
+    ["comparacao", t("Na régua do mundo real", "Against the real world")],
+    ["contradicoes", t("Contradições do cânone", "Contradictions in the books")],
+  ] },
+  { grupo: t("Como ler o atlas", "How to read the atlas"), itens: [
+    ["metodo", t("Dado ou modelo", "Data or model")],
+    ["glossario", t("Glossário", "Glossary")],
+    ["fontes", t("Fontes e créditos", "Sources and credits")],
+  ] },
+];
+
 export async function inicio(alvo: HTMLElement) {
   const B = import.meta.env.BASE_URL;
   const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -35,7 +57,7 @@ export async function inicio(alvo: HTMLElement) {
   /* Cada cartão tem a estampa parada e, por cima, o cinemagraph dela. O vídeo
      não toca sozinho: ver ligaEstampasVivas, no fim do arquivo. */
   const cartao = (rota: string, plac: string, titulo: string, nome: string, texto: string) =>
-    `<a href="#/${rota}" class="cartao">
+    `<a href="${link(rota)}" class="cartao">
       <div class="n">${t("Prancha", "Plate")} ${plac}</div>
       <h3>${titulo}</h3>
       <div class="estampa-viva">
@@ -58,7 +80,7 @@ export async function inicio(alvo: HTMLElement) {
       pertence à tribo — e a areia esconde a especiaria de que o Império inteiro
       depende.`, `No sea, no rain clouds. Here a dead man's water belongs to the tribe,
       and the sand hides the spice the whole Empire depends on.`)}</p>
-      <a class="cta" href="#/mapa">${t("Abrir o mapa", "Open the map")}<span aria-hidden="true">→</span></a>
+      <a class="cta" href="${link("mapa")}">${t("Abrir o mapa", "Open the map")}<span aria-hidden="true">→</span></a>
     </div>
     <div class="orbita-planeta" aria-hidden="true">
       <img src="${B}capa/planeta.webp" alt="" />
@@ -74,14 +96,14 @@ export async function inicio(alvo: HTMLElement) {
   <section class="superficie">
     <canvas class="areia" aria-hidden="true"></canvas>
     <ul class="fatos">
-      ${fatos().map((f) => `<li><a href="#/${f.rota}">
+      ${fatos().map((f) => `<li><a href="${link(f.rota)}">
         <span class="v">${f.v}<small>${f.u}</small></span>
         <span class="t">${f.texto}</span>
       </a></li>`).join("")}
     </ul>
   </section>
 
-  <a class="faixa-carta" href="#/mapa" aria-label="${t("Abrir o mapa", "Open the map")}">
+  <a class="faixa-carta" href="${link("mapa")}" aria-label="${t("Abrir o mapa", "Open the map")}">
     <canvas aria-hidden="true"></canvas>
     <span class="rotulo-carta">
       <small>${t("Prancha 01 · Arrakis vista do polo", "Plate 01 · Arrakis seen from the pole")}</small>
@@ -101,6 +123,33 @@ export async function inicio(alvo: HTMLElement) {
       t("O Imperador deu o planeta a uma Casa. Mais da metade da especiaria sai de terra que ninguém governa.",
         "The Emperor gave the planet to one House. More than half the spice comes from land nobody governs."))}
   </section>
+
+  <section class="mais-pranchas" aria-labelledby="mais-pranchas-titulo">
+    <div class="mais-pranchas-cab">
+      <span>${t("Outras portas do atlas", "More ways into the atlas")}</span>
+      <h2 id="mais-pranchas-titulo">${t("Continue a leitura", "Keep reading")}</h2>
+      <p>${t("O mapa é só a primeira prancha. Os lugares, a água, a vida e as escolhas do método também têm suas próprias páginas.",
+              "The map is only the first plate. Places, water, life and the choices behind the method have their own pages too.")}</p>
+    </div>
+    <div class="mais-pranchas-grade">
+      ${outras().map((g) => `<section class="mais-pranchas-grupo"><h3>${g.grupo}</h3>
+        <ul>${g.itens.map(([id, titulo]) => `<li><a href="${link(id)}">
+          <span>${plac(id)}</span><b>${titulo}</b><i aria-hidden="true">→</i></a></li>`).join("")}</ul>
+      </section>`).join("")}
+    </div>
+  </section>
+
+  <aside class="autor-nota" aria-label="${t("Sobre o autor", "About the author")}">
+    <a class="autor-retrato" href="https://andrade020.github.io/" target="_blank" rel="noopener noreferrer"
+       aria-label="${t("Conhecer Lucas Rafael de Andrade", "Meet Lucas Rafael de Andrade")}">
+      <img src="${B}autor/lucas_arrakis.webp" width="1254" height="1254"
+        alt="${t("Lucas Rafael de Andrade em cenário desértico ao pôr do sol", "Lucas Rafael de Andrade in a desert scene at sunset")}" loading="lazy" />
+    </a>
+    <div><span>${t("Atlas criado por", "Atlas created by")}</span>
+      <a href="https://andrade020.github.io/" target="_blank" rel="noopener noreferrer">Lucas Rafael de Andrade <i aria-hidden="true">↗</i></a>
+      <p>${t("Mais projetos e pesquisas no site pessoal.", "More projects and research on the personal site.")}</p>
+    </div>
+  </aside>
 
   ${rodape()}`;
 

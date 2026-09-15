@@ -348,9 +348,11 @@ export async function paginaMapa(alvo: HTMLElement) {
 
   function pintaControles() {
     const superf = superficies().filter(([k]) => k === "" || ras[k]);
+    const inicio = `#/${emIngles() ? "en/" : ""}`;
     ctrl.innerHTML = `
       <div class="ctrl-mobile">
-        <a class="ctrl-mobile-volta" href="#/" aria-label="${t("Voltar ao atlas", "Back to the atlas")}">←</a>
+        <a class="ctrl-mobile-volta" href="${inicio}" aria-label="${t("Voltar ao atlas", "Back to the atlas")}">
+          <span aria-hidden="true">←</span><span>${t("Atlas", "Atlas")}</span></a>
         <select id="superficie-mobile" aria-label="${t("Superfície do mapa", "Map surface")}">
           ${superf.map(([k, r]) => `<option value="${k}"${estado.raster === k ? " selected" : ""}>${esc(r)}</option>`).join("")}
         </select>
@@ -359,7 +361,7 @@ export async function paginaMapa(alvo: HTMLElement) {
         <button id="abre-percursos" type="button" aria-label="${t("Abrir percursos guiados", "Open guided tours")}">${t("Guias", "Tours")}</button>
         <button id="abre-controles" type="button" aria-expanded="${controlesAbertos}">${controlesAbertos ? t("Fechar", "Close") : t("Opções", "Options")}</button>
       </div>
-      <a class="volta" href="#/">${t("Voltar ao atlas", "Back to the atlas")}</a>
+      <a class="volta" href="${inicio}"><span aria-hidden="true">←</span>${t("Voltar ao atlas", "Back to the atlas")}</a>
       <div class="ctrl-topo">
         <div class="ctrl-titulo">${t("Prancha 01", "Plate 01")}</div>
         <div class="titulo-prancha">${t("O mapa", "The map")}</div>
