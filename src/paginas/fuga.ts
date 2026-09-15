@@ -3,6 +3,7 @@ import { Mapa } from "../mapa";
 import { prancha } from "../pranchas";
 import { cabecalho, esc, rodape } from "../ui";
 import { t } from "../i18n";
+import "./fuga.css";
 
 /* A fuga de Paul e Jessica, de Arrakeen de volta a Arrakeen.
  *
@@ -70,6 +71,7 @@ let ETAPAS: Etapa[] = [];
 
 const CHAVE = "arrakis-fuga-aberta";
 const mc = (m: string) => `<code class="marca">${esc(m)}</code>`;
+const B = import.meta.env.BASE_URL;
 
 export async function fuga(alvo: HTMLElement) {
   ETAPAS = etapas();
@@ -92,6 +94,19 @@ export async function fuga(alvo: HTMLElement) {
     </div>
     <section class="fuga-palco" ${aberta ? "" : "hidden"}>
       <ol class="fuga-etapas">
+        <li class="fuga-prologo">
+          <figure>
+            <img src="${B}ilustracoes/fuga_abertura.webp" width="1024" height="1536" loading="lazy"
+              alt="${t("Duas figuras pequenas atravessam uma passagem rochosa à noite, diante de uma tempestade distante.",
+                "Two small figures cross a rocky pass at night, facing a distant dust storm.")}">
+            <figcaption>
+              <span>00 · ${t("Prólogo visual", "Visual prologue")}</span>
+              <strong>${t("A noite, a rocha, a travessia", "Night, rock, crossing")}</strong>
+              <small>${t("Cena interpretativa. O percurso e seus lugares são mostrados na carta, conforme as fontes.",
+                "Interpretive scene. The route and its places are shown on the map according to the sources.")}</small>
+            </figcaption>
+          </figure>
+        </li>
         ${ETAPAS.map((e, i) => `<li class="etapa" data-i="${i}">
           <div class="etapa-n">${String(i + 1).padStart(2, "0")}${e.lugar
             ? ` · <a class="link" href="#/mapa#=${e.cod}">${esc(e.lugar)}</a>`
@@ -101,7 +116,13 @@ export async function fuga(alvo: HTMLElement) {
           <p class="marcas">${e.marcas.map(mc).join(" ")}</p>
         </li>`).join("")}
       </ol>
-      <div class="fuga-carta"><canvas aria-label="${t("Mapa com a rota da fuga", "Map of the escape route")}"></canvas></div>
+      <div class="fuga-carta">
+        <canvas aria-label="${t("Mapa com a rota da fuga", "Map of the escape route")}"></canvas>
+        <div class="fuga-abertura" aria-hidden="true">
+          <img src="${B}ilustracoes/fuga_abertura.webp" width="1024" height="1536" alt="">
+          <span class="fuga-abertura-titulo">${t("A rota da fuga", "The escape route")}</span>
+        </div>
+      </div>
     </section>
     ${rodape()}
   </article>`;
@@ -112,7 +133,10 @@ export async function fuga(alvo: HTMLElement) {
   aviso.querySelector("button")!.addEventListener("click", () => {
     try { localStorage.setItem(CHAVE, "1"); } catch { /* ok */ }
     monta();
-    palco.scrollIntoView({ behavior: "smooth", block: "start" });
+    palco.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
   });
   if (aberta) ligaCarta(alvo);
 }
@@ -134,6 +158,8 @@ async function ligaCarta(raiz: HTMLElement) {
   mapa.folha = mun.fan;
 
   const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const abertura = raiz.querySelector<HTMLElement>(".fuga-abertura")!;
+  let temporizadorAbertura = 0;
   let atual = 0;
 
   /* A rota: cada etapa com lugar é um ponto numerado; entre dois pontos
@@ -225,6 +251,8 @@ async function ligaCarta(raiz: HTMLElement) {
   const ajusta = () => { mapa.redimensiona(); const a = alvoDa(atual); if (a) mapa.poeVista(...a); };
   ajusta();
   requestAnimationFrame(ajusta);
+  // A imagem abre a cena; a carta já está desenhada antes da revelação.
+  temporizadorAbertura = window.setTimeout(() => abertura.classList.add("passou"), quieto ? 0 : 1800);
   const ro = new ResizeObserver(ajusta);
   ro.observe(tela);
 
@@ -244,7 +272,10 @@ async function ligaCarta(raiz: HTMLElement) {
   etapas[0]?.classList.add("ativa");
 
   const obs = new MutationObserver(() => {
-    if (!document.body.contains(tela)) { io.disconnect(); ro.disconnect(); obs.disconnect(); cancelAnimationFrame(quadro); }
+    if (!document.body.contains(tela)) {
+      io.disconnect(); ro.disconnect(); obs.disconnect(); cancelAnimationFrame(quadro);
+      window.clearTimeout(temporizadorAbertura);
+    }
   });
   obs.observe(raiz, { childList: true });
 }

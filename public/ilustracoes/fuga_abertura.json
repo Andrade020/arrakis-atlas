@@ -1,0 +1,12 @@
+{
+  "arquivo": "fuga_abertura.webp",
+  "ferramenta": "image_gen (built-in)",
+  "data": "2026-09-15",
+  "natureza": "Cena interpretativa da fuga; não representa um lugar identificado no cânone nem a geometria da rota. Pontos e percurso vêm dos dados do mapa.",
+  "prompt": "NEW original portrait image for an Arrakis literary atlas page: two tiny cloaked silhouettes walking into a narrow rocky pass at night, huge dust storm in distance, faint amber city-glow on far horizon. Sober archival cinematic photography, sepia and charcoal, tactile grain, dramatic desert scale, tall 2:3 composition. Interpretive scene only, no map route, no labels, no text, no logos, no actor likeness, no identifiable film costumes or landmarks.",
+  "fontes": [
+    "[1|chapter022|4043]",
+    "[1|chapter023|4441]"
+  ],
+  "dimensoes": [1024, 1536]
+}
