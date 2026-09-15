@@ -19,8 +19,8 @@ export function plac(id: IdPrancha): string {
   return String(i).padStart(2, "0");
 }
 
-/** "Prancha 07" */
-export const prancha = (id: IdPrancha) => `${t("Prancha", "Plate")} ${plac(id)}`;
+/** Rótulo público da página, como "Página 07". */
+export const prancha = (id: IdPrancha) => `${t("Página", "Page")} ${plac(id)}`;
 
 /** Número de seção dentro da prancha: secao("economia", 2) -> "10.2" */
 export const secao = (id: IdPrancha, n: number) => `${ORDEM.indexOf(id)}.${n}`;

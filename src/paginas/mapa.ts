@@ -274,7 +274,7 @@ export async function paginaMapa(alvo: HTMLElement) {
       <div ${percursoRecolhido ? "hidden" : ""} id="percurso-conteudo"><h2>${esc(nome)}</h2>
       <p class="percurso-progresso" role="status" aria-live="polite">${t("Passo", "Step")} ${passoAtivo + 1} ${t("de", "of")} ${guia.passos.length} · ${esc(emIngles() ? passo.lugarEn : passo.lugarPt)}</p>
       <p class="percurso-texto">${esc(emIngles() ? passo.en : passo.pt)}</p>
-      <a class="link" href="#/${emIngles() ? "en/" : ""}${passo.prancha}">${t("Ler a prancha completa →", "Read the full plate →")}</a>
+      <a class="link" href="#/${emIngles() ? "en/" : ""}${passo.prancha}">${t("Ler a página completa →", "Read the full page →")}</a>
       <div class="percurso-acoes">
         <button type="button" id="percurso-anterior" ${passoAtivo === 0 ? "disabled" : ""}>${t("Anterior", "Previous")}</button>
         <button type="button" id="percurso-proximo" ${passoAtivo === guia.passos.length - 1 ? "disabled" : ""}>${t("Próximo", "Next")}</button>
@@ -331,7 +331,7 @@ export async function paginaMapa(alvo: HTMLElement) {
     if (!r) return "";
     const categorica = r.chaves.some((k) => k.rot && Number.isNaN(Number(k.rot)));
     const CURTA = curta();
-    return `<div class="cab">${t("Legenda · Prancha 01", "Legend · Plate 01")}</div>
+    return `<div class="cab">${t("Legenda · Página 01", "Legend · Page 01")}</div>
       <div>
       <div class="leg-tit">${esc(rasterTxt(r.titulo))}${r.unidade ? ` <span>${esc(r.unidade)}</span>` : ""}</div>
       ${categorica
@@ -363,7 +363,7 @@ export async function paginaMapa(alvo: HTMLElement) {
       </div>
       <a class="volta" href="${inicio}"><span aria-hidden="true">←</span>${t("Voltar ao atlas", "Back to the atlas")}</a>
       <div class="ctrl-topo">
-        <div class="ctrl-titulo">${t("Prancha 01", "Plate 01")}</div>
+        <div class="ctrl-titulo">${t("Página 01", "Page 01")}</div>
         <div class="titulo-prancha">${t("O mapa", "The map")}</div>
         <div class="ctrl-coord" id="coord"></div>
       </div>

@@ -1,0 +1,10 @@
+{
+  "modelo": "bytedance/seedance-1-lite",
+  "predicao": "7f4zpjnp09rmy0d0mwx803sbtr",
+  "imagem_de_partida": "ilustracoes/vida/verme_boca.webp",
+  "arquivo": "ilustracoes/vida/verme_boca_motion.mp4",
+  "duracao_segundos": 5,
+  "resolucao_geracao": "720p",
+  "camera_fixa": true,
+  "prompt": "Animate this exact archival sepia image as one continuous five-second, locked-camera shot. A colossal annulated desert sandworm remains in the same position while its lower ringed rim makes a slow, restrained living undulation; fine dry sand slides from a few segments and drifts across the dune at its base. The moonlight and the two very small stationary human silhouettes remain consistent. Keep the same mouth shape, tooth count, dune contours, photographic photogravure texture and restrained sepia palette. The creature does not lunge, bite or close its mouth. No cuts, zoom, camera movement, new characters, new limbs, text or logos."
+}

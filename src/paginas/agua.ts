@@ -213,9 +213,9 @@ export function agua(alvo: HTMLElement) {
         `In the tent, after the betrayal, Paul works out why: satellites watch the ground, and there are
         things in the deep desert that will not bear frequent inspection`)}
         ${mc("[1|chapter022|4136]")}.</p>
-        <p class="nota">${t(`O livro não diz, ali, que coisas são. Pelo resto da prancha dá para
+        <p class="nota">${t(`O livro não diz, ali, que coisas são. Pelo resto da página dá para
         adivinhar: plantações, captadores de vento, cofres de água.`, `The book doesn't say, at that point, what
-        those things are. The rest of this plate suggests a guess: plantings, windtraps, water vaults.`)}</p>
+        those things are. The rest of this page suggests a guess: plantings, windtraps, water vaults.`)}</p>
       </section>
     </div>
     ${rodape()}

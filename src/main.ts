@@ -135,7 +135,7 @@ function cabecalhoHTML(idAtual: string): string {
       <span>${t("Índice", "Contents")}</span><i aria-hidden="true"></i>
     </button>
   </header>
-  <div class="sumario" id="sumario" role="dialog" aria-modal="true" aria-label="${t("Índice de pranchas", "Contents")}" hidden>
+  <div class="sumario" id="sumario" role="dialog" aria-modal="true" aria-label="${t("Índice de páginas", "Contents")}" hidden>
     <div class="sumario-topo">
       <span class="nome">${t("Atlas de Arrakis", "Atlas of Arrakis")}</span>
       <button class="fecha-sumario" type="button">${t("Fechar", "Close")}</button>

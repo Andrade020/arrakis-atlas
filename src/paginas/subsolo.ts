@@ -70,8 +70,8 @@ export function subsolo(alvo: HTMLElement): void {
           <span>${String(i + 1).padStart(2, "0")}</span>${esc(p.nome)}</button>`).join("")}
       </nav>
       <section class="corte-nota" id="corte-nota" aria-live="polite"></section>
-      <p class="nota">${t("A relação entre água, truta, massa e verme vem do texto; esta vista do subsolo é uma leitura visual dele. Os números e o ciclo completo estão nas pranchas do verme e da água.",
-                         "The relationship between water, sandtrout, mass and worm comes from the books; this underground view is a visual reading of it. The figures and full cycle are on the worm and water plates.")}</p>
+      <p class="nota">${t("A relação entre água, truta, massa e verme vem do texto; esta vista do subsolo é uma leitura visual dele. Os números e o ciclo completo estão nas páginas do verme e da água.",
+                         "The relationship between water, sandtrout, mass and worm comes from the books; this underground view is a visual reading of it. The figures and full cycle are on the worm and water pages.")}</p>
       <p class="corte-links"><a class="link" href="#/verme">${t("O ciclo do verme →", "The worm's cycle →")}</a>
         <a class="link" href="#/agua">${t("A economia da água →", "The water economy →")}</a></p>
     </div>

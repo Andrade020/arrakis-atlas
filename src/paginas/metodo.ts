@@ -43,8 +43,8 @@ export async function metodo(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(`${prancha("metodo")} · ${t("Proveniência", "Provenance")}`,
       t("O que é dado e o que é modelo", "What is data and what is model"),
-      t("Num planeta inventado, parte dos números simplesmente não existe, e para fazer o atlas alguém teve de criá-los. Esta prancha mostra quais são e de onde vem cada tipo de dado.",
-        "On an invented planet, some numbers simply don't exist, and to make the atlas someone had to create them. This plate shows which ones they are and where each kind of data comes from."))}
+      t("Num planeta inventado, parte dos números simplesmente não existe, e para fazer o atlas alguém teve de criá-los. Esta página mostra quais são e de onde vem cada tipo de dado.",
+        "On an invented planet, some numbers simply don't exist, and to make the atlas someone had to create them. This page shows which ones they are and where each kind of data comes from."))}
     <div class="corpo">
       <h2><span class="g">${secao("metodo", 1)}</span><span>${t("As cinco classes", "The five classes")}</span></h2>
       <p>${t(`Cada variável dos distritos pertence a uma destas classes. A lista fica em

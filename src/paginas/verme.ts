@@ -1,6 +1,7 @@
 import { prancha, secao } from "../pranchas";
 import { cabecalho, esc, rodape } from "../ui";
 import { t } from "../i18n";
+import "./verme.css";
 
 /* Prancha 04 · Shai-Hulud.
  *
@@ -16,6 +17,18 @@ const estampa = (cod: string, alt: string, legenda = "") => `<figure class="esta
   <img src="${B}ilustracoes/vida/${cod}.webp" alt="${esc(alt)}" loading="lazy"
        onerror="this.closest('figure').hidden = true" />
   <figcaption>${t("Ilustração lida do texto", "Illustration read from the text")}${legenda ? " · " + legenda : ""}</figcaption>
+</figure>`;
+
+const bocaViva = (alt: string, legenda: string) => `<figure class="estampa-vida verme-vivo">
+  <div class="verme-vivo-palco">
+    <img src="${B}ilustracoes/vida/verme_boca.webp" alt="${esc(alt)}" loading="lazy" />
+    <video data-src="${B}ilustracoes/vida/verme_boca_motion.mp4" muted loop playsinline preload="none"
+      aria-hidden="true"></video>
+    <button class="verme-vivo-botao" type="button" aria-label="${t("Animar o verme", "Animate the worm")}">
+      <span aria-hidden="true">▶</span><span>${t("Animar", "Animate")}</span>
+    </button>
+  </div>
+  <figcaption>${t("Ilustração lida do texto", "Illustration read from the text")} · ${legenda}</figcaption>
 </figure>`;
 
 /* Régua: todos os comprimentos são do cânone. A colheitadeira entra porque é a
@@ -96,7 +109,7 @@ export function verme(alvo: HTMLElement) {
       t("Os fremen o chamam de Velho do Deserto, Velho Pai Eternidade e Avô do Deserto. Ele fabrica a areia, guarda a especiaria e morre se tocar em água.",
         "The Fremen call it Old Man of the Desert, Old Father Eternity and Grandfather of the Desert. It makes the sand, keeps the spice, and dies if it touches water."))}
     <div class="corpo">
-      ${estampa("verme_boca", t("Um verme de areia erguendo-se da duna à noite, com a boca aberta cheia de dentes cristalinos",
+      ${bocaViva(t("Um verme de areia erguendo-se da duna à noite, com a boca aberta cheia de dentes cristalinos",
                                 "A sandworm rising from a dune at night, its open mouth full of crystal teeth"),
         t("a boca com uns oitenta metros de diâmetro, dentes cristalinos em forma de faca",
           "a mouth about eighty metres across, with crystal teeth shaped like knives"))}
@@ -208,4 +221,45 @@ export function verme(alvo: HTMLElement) {
     </div>
     ${rodape()}
   </article>`;
+  ligaBocaViva(alvo);
+}
+
+function ligaBocaViva(raiz: HTMLElement): void {
+  const figura = raiz.querySelector<HTMLElement>(".verme-vivo")!;
+  const video = figura.querySelector<HTMLVideoElement>("video")!;
+  const botao = figura.querySelector<HTMLButtonElement>("button")!;
+  const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const prepara = () => {
+    if (video.src) return;
+    video.src = video.dataset.src!;
+    video.load();
+  };
+  const reproduz = () => {
+    prepara();
+    void video.play().catch(() => { /* a estampa parada continua disponível */ });
+  };
+  const atualizaBotao = (tocando: boolean) => {
+    botao.innerHTML = `<span aria-hidden="true">${tocando ? "Ⅱ" : "▶"}</span><span>${tocando
+      ? t("Pausar", "Pause") : t("Animar", "Animate")}</span>`;
+    botao.setAttribute("aria-label", tocando ? t("Pausar o verme", "Pause the worm")
+      : t("Animar o verme", "Animate the worm"));
+  };
+
+  botao.addEventListener("click", () => video.paused ? reproduz() : video.pause());
+  video.addEventListener("playing", () => { figura.classList.add("animando"); atualizaBotao(true); });
+  video.addEventListener("pause", () => { figura.classList.remove("animando", "acabando"); atualizaBotao(false); });
+  video.addEventListener("timeupdate", () => {
+    if (video.duration) figura.classList.toggle("acabando", video.duration - video.currentTime < .55);
+  });
+  video.addEventListener("error", () => { figura.classList.remove("animando"); botao.hidden = true; });
+
+  const observador = new IntersectionObserver(([entrada]) => {
+    if (entrada.isIntersecting && !quieto) reproduz();
+    else if (!entrada.isIntersecting && !video.paused) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, { threshold: .3 });
+  observador.observe(figura);
 }

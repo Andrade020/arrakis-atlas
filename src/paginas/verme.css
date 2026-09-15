@@ -1,0 +1,41 @@
+.verme-vivo-palco {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--fio-forte);
+  background: var(--papel-3);
+}
+.verme-vivo-palco img { border: 0; }
+.verme-vivo-palco video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+.verme-vivo.animando video { opacity: 1; }
+.verme-vivo.animando.acabando video { opacity: 0; }
+.verme-vivo-botao {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  border: 1px solid rgba(250, 244, 229, .65);
+  background: rgba(34, 26, 16, .82);
+  color: var(--papel);
+  font: 600 11px/1 var(--f-disp);
+  cursor: pointer;
+}
+.verme-vivo-botao:hover { background: var(--tinta); }
+.verme-vivo-botao span:first-child { font: 400 13px/1 var(--f-disp); }
+.verme-vivo-botao[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .verme-vivo-palco video { transition: none; }
+}

@@ -85,9 +85,9 @@ export async function fuga(alvo: HTMLElement) {
         "The night the Harkonnens return, the crossing of the desert and the road back, marked on the map at the places the book names."))}
     <div class="corpo">
       <div class="aviso-spoiler" ${aberta ? "hidden" : ""}>
-        <p>${t(`<strong>Esta prancha conta o enredo de <em>Duna</em></strong>, do livro 1 e dos dois
+        <p>${t(`<strong>Esta página conta o enredo de <em>Duna</em></strong>, do livro 1 e dos dois
         filmes. Se ainda não viu nem leu, talvez queira voltar depois.`,
-        `<strong>This plate tells the plot of <em>Dune</em></strong>, book 1 and both films.
+        `<strong>This page tells the plot of <em>Dune</em></strong>, book 1 and both films.
         If you haven't seen or read it yet, you may want to come back later.`)}</p>
         <button class="btn-spoiler" type="button">${t("Mostrar a rota", "Show the route")}</button>
       </div>
