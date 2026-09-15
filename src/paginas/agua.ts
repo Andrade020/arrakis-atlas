@@ -1,7 +1,8 @@
 import { prancha, secao } from "../pranchas";
-import { cabecalho, esc, ligaSpoilers, rodape } from "../ui";
+import { cabecalho, esc, ligaSpoilers, rodape, selo } from "../ui";
 import { t, localidade } from "../i18n";
 import { OLHO } from "./vida";
+import "../agua-motion.css";
 
 /* A economia da água.
  *
@@ -164,6 +165,26 @@ export function agua(alvo: HTMLElement) {
         ${mc("[1|chapter034|6908]")} ${t(`e por coletores de orvalho, ovos de cromoplástico de quatro
         centímetros que esfriam de madrugada e juntam o sereno`, `and dew precipitators, four-centimetre
         chromoplastic eggs that cool at dawn and gather the dew`)} ${mc("[1|terminology|10761]")}.</p>
+        <div class="agua-mosaico">
+          <figure class="agua-cena agua-cofre">
+            <div class="agua-imagem"><img src="${import.meta.env.BASE_URL}ilustracoes/cofre_agua_fremen.webp"
+              width="1536" height="1024" loading="lazy"
+              alt="${t("Caverna de rocha imaginada, com uma reserva de água protegida e uma pessoa junto ao medidor.",
+                       "Imagined rock cave with a protected water reservoir and one person by a gauge.")}" /></div>
+            <figcaption>${selo("ILUSTRACAO_IA", t("Cofre imaginado", "Imagined vault"))}
+              <span>${t("A reserva vem do livro; a arquitetura, a luz e a escala são interpretação visual.",
+                         "The reserve comes from the book; architecture, light and scale are a visual interpretation.")}</span></figcaption>
+          </figure>
+          <figure class="agua-cena agua-orvalho">
+            <div class="agua-imagem"><img src="${import.meta.env.BASE_URL}ilustracoes/coletores_orvalho.webp"
+              width="1536" height="1024" loading="lazy"
+              alt="${t("Coletores de orvalho ovais imaginados, com gotas sobre a superfície ao amanhecer.",
+                       "Imagined oval dew collectors with droplets on their surfaces at dawn.")}" /></div>
+            <figcaption>${selo("ILUSTRACAO_IA", t("Orvalho imaginado", "Imagined dew"))}
+              <span>${t("Os ovos de quatro centímetros são descritos no livro; esta disposição não é uma medida.",
+                         "Four-centimetre eggs are described in the book; this arrangement is not a measurement.")}</span></figcaption>
+          </figure>
+        </div>
         <div class="contas">
           <div class="conta"><div class="v">${num(RESERVA_L / 1e6)} <small>${t("milhões de litros", "million litres")}</small></div>
             <p>${t("38 milhões de decalitros; um decalitro são dez litros.", "38 million decalitres; a decalitre is ten litres.")}</p></div>
@@ -200,4 +221,17 @@ export function agua(alvo: HTMLElement) {
     ${rodape()}
   </article>`;
   ligaSpoilers(alvo);
+  const cenas = [...alvo.querySelectorAll<HTMLElement>(".agua-cena")];
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    cenas.forEach((cena) => cena.classList.add("vista"));
+  } else {
+    const observa = new IntersectionObserver((entradas) => {
+      for (const entrada of entradas) {
+        if (!entrada.isIntersecting) continue;
+        (entrada.target as HTMLElement).classList.add("vista");
+        observa.unobserve(entrada.target);
+      }
+    }, { threshold: .22 });
+    cenas.forEach((cena) => observa.observe(cena));
+  }
 }

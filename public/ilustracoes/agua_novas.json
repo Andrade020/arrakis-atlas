@@ -1,0 +1,17 @@
+{
+  "tool": "image_gen built-in",
+  "assets": [
+    {
+      "file": "cofre_agua_fremen.webp",
+      "plate": "agua",
+      "source": ["[1|chapter034|6932]"],
+      "prompt": "Asset for a literary cartographic atlas website about Arrakis, an interpretive editorial illustration with cinematic documentary realism. Wide landscape 3:2 composition. Deep inside a hidden Fremen rock cave: a vast dark reservoir of precious water, still reflective surface, rough stratified sandstone vault and carved access ledges, a tiny human silhouette at the edge for atmosphere and scale, a discreet simple water gauge beside the edge, warm shaft of light from a narrow entrance, dusty air. Make the scene solemn and restrained: water is a protected collective treasure rather than luxury. Sepia and warm ochre monochrome, fine film grain, low saturation, natural rough textures; matches an archival desert atlas aesthetic. The image is a visual reading, not a canonical architectural reconstruction. No text, numbers, labels, logos, watermark, weapons, futuristic machinery, ornate fantasy palace, blue-turquoise water. Avoid identifiable film designs. High detail, usable as full-width illustration in an article."
+    },
+    {
+      "file": "coletores_orvalho.webp",
+      "plate": "agua",
+      "source": ["[1|terminology|10761]"],
+      "prompt": "New interpretive editorial image for an archival Arrakis atlas website. Wide 3:2 landscape documentary macro photograph at predawn in the deep desert: several small oval chromoplastic dew precipitators, each about four centimetres across relative to individual sand grains, arranged discreetly among coarse ochre sand and a few weathered rocks. Tiny beads of condensed moisture glint on the matte eggs; a simple sheltered collector cup in the near background. Pale cold dawn light meets warm brown shadows. Atmosphere of careful, nearly invisible water gathering, restrained and scientifically observant. Desaturated sepia palette, fine film grain, tactile detail, low contrast highlights, matching an archival desert field notebook. No text, labels, numbers, watermark, logos, futuristic gadgets, invented people, neon colours, lush vegetation, rain or puddles. The scene is imagined, not a canonical reconstruction. High detail full-width article illustration."
+    }
+  ]
+}
