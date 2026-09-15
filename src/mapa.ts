@@ -180,13 +180,28 @@ export class Mapa {
       folha. Numa azimutal polar o polo e' o centro da projecao: e' dali que a
       escala e' exata e e' em torno dele que a grade se organiza. Centrar pela
       caixa envolvente e' tratar a carta como uma imagem qualquer. */
-  enquadraNoPolo(b: [number, number, number, number]) {
+  escalaNoPolo(b: [number, number, number, number]): number {
     // cobre a tela nos dois eixos, medindo o alcance da folha a partir do polo
     const rx = Math.max(Math.abs(b[0]), Math.abs(b[2]));
     const ry = Math.max(Math.abs(b[1]), Math.abs(b[3]));
     // 4% de sobra: a folha tem de sangrar em todas as bordas, senao aparece
     // faixa preta e a prancha vira um retangulo colado no fundo
-    this.k = Math.max(this.larg / (2 * rx), this.alt / (2 * ry)) * 1.04;
+    return Math.max(this.larg / (2 * rx), this.alt / (2 * ry)) * 1.04;
+  }
+
+  /** Escala de leitura que conserva os distritos vizinhos na carta. Para
+      distritos extensos, a area limita a ampliacao: o diametro equivalente
+      deve ocupar no maximo 40% do menor lado da tela. */
+  escalaDeContexto(cod: string, b: [number, number, number, number]): number {
+    const base = this.escalaNoPolo(b) * 1.7;
+    const area = this.rotulos.find((r) => r.cod === cod)?.area;
+    if (!area || area <= 0) return base;
+    const diametroM = 2 * Math.sqrt(area * 1e6 / Math.PI);
+    return Math.min(base, Math.min(this.larg, this.alt) * 0.4 / diametroM);
+  }
+
+  enquadraNoPolo(b: [number, number, number, number]) {
+    this.k = this.escalaNoPolo(b);
     this.tx = this.larg / 2;
     this.ty = this.alt / 2;
     this.pinta();
@@ -828,15 +843,30 @@ export class Mapa {
     return [this.mx(px), this.my(py)];
   }
 
+  /** Centraliza um distrito numa escala definida pela prancha que o chama.
+      Perto das bordas, limita a faixa vazia para conservar terreno ao lado. */
+  centralizaEm(cod: string, k: number, limites?: [number, number, number, number]) {
+    const r = this.rotulos.find((x) => x.cod === cod);
+    if (!r || !Number.isFinite(k) || k <= 0) return;
+    this.k = k;
+    this.tx = this.larg / 2 - r.x * this.k;
+    this.ty = this.alt / 2 + r.y * this.k;
+    if (limites && (limites[2] - limites[0]) * k > this.larg) {
+      const margem = this.larg * 0.12;
+      const esquerda = limites[0] * k + this.tx;
+      const direita = limites[2] * k + this.tx;
+      if (esquerda > margem) this.tx -= esquerda - margem;
+      else if (direita < this.larg - margem) this.tx += this.larg - margem - direita;
+    }
+    this.estado.selecionado = cod;
+    this.desenha();
+  }
+
   vaiPara(cod: string) {
     const r = this.rotulos.find((x) => x.cod === cod);
     if (!r) return;
     const alvo = Math.sqrt(2.2e10 / (r.area * 1e6));
-    this.k = Math.min(alvo, this.k * 6);
-    this.tx = this.larg / 2 - r.x * this.k;
-    this.ty = this.alt / 2 + r.y * this.k;
-    this.estado.selecionado = cod;
-    this.desenha();
+    this.centralizaEm(cod, Math.min(alvo, this.k * 6));
   }
 }
 

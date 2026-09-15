@@ -207,11 +207,14 @@ export async function paginaMapa(alvo: HTMLElement) {
     estado.coropleto = p.campo;
     estado.camadas = new Set(p.camadas);
     mapa.classifica(p.campo, procParaCampo(p.campo, prov.campos)?.classe ?? "DEDUZIDO");
-    mapa.vaiPara(p.cod);
     // A ficha no celular cobre a carta; o percurso apresenta o lugar em seu
     // painel compacto, enquanto a selecao continua no estado compartilhavel.
     inspetor.hidden = true;
     palco.classList.remove("com-ficha");
+    mapa.redimensiona();
+    // Cada passo parte do enquadramento da folha. Distritos extensos ganham
+    // mais contexto, e centrar outro lugar nao multiplica o zoom anterior.
+    mapa.centralizaEm(p.cod, mapa.escalaDeContexto(p.cod, mun.fan), mun.fan);
     pintaControles();
     pintaPercurso();
   }
