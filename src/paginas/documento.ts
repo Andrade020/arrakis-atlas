@@ -1,5 +1,6 @@
 import { docs } from "../dados";
 import { blocos, cabecalho, rodape, esc } from "../ui";
+import { t, emIngles } from "../i18n";
 
 export interface OpcDoc {
   indice: string;
@@ -22,8 +23,8 @@ export async function paginaDoc(alvo: HTMLElement, quais: string[], o: OpcDoc) {
   const corpo = quais
     .map((q, i) => {
       const pular = Array.isArray(o.pular) ? (o.pular[i] ?? 3) : (o.pular ?? 3);
-      if (!d[q]) return "";
-      const bs = d[q];
+      const bs = (emIngles() && d[q + "_EN"]) ? d[q + "_EN"] : d[q];
+      if (!bs) return "";
       const achaTitulo = (t: string) => bs.findIndex((b: any) => b.t === "h" && String(b.x).includes(t));
       const ini = o.spoiler ? achaTitulo(o.spoiler.desde) : -1;
       if (ini < 0) return blocos(bs, { pularAte: pular });
@@ -34,7 +35,7 @@ export async function paginaDoc(alvo: HTMLElement, quais: string[], o: OpcDoc) {
       return `${antes}
         <div class="trecho-spoiler">
           <div class="aviso-spoiler"><p>${esc(o.spoiler!.aviso)}</p>
-            <button class="btn-spoiler" type="button">Mostrar</button></div>
+            <button class="btn-spoiler" type="button">${t("Mostrar", "Show")}</button></div>
           <div class="trecho-conteudo" hidden>${meio}</div>
         </div>
         ${depois}`;

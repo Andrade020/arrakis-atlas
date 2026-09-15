@@ -16,6 +16,8 @@ declara de onde veio: frase de Frank Herbert, medida sobre o mapa, ou modelo.
   controle, a economia da especiaria, a economia da água, comparação com dados reais.
 - **A oficina** — as contradições do cânone, o que é dado e o que é modelo, o glossário, as fontes.
 
+O site tem versão em inglês em `/#/en/` (botão PT/EN no cabeçalho).
+
 Pelo site, termos do universo (sietch, trajestil, martelador…) mostram a definição ao passar o mouse.
 
 ## Rodar
@@ -38,6 +40,7 @@ src/
   main.ts        roteador, cabeçalho e sumário
   pranchas.ts    ordem das pranchas; os números saem daqui
   glossario.ts   termos, definições e a marcação automática no texto
+  i18n.ts        língua pelo endereço (#/en/...) e textos nas duas línguas
   mapa.ts        renderizador do mapa (canvas)
   areia.ts       areia soprada sobre as dunas da abertura
   dados.ts       carregamento e formatação

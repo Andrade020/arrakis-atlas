@@ -1,3 +1,4 @@
+import { t } from "./i18n";
 /* A ordem das pranchas, num lugar só.
  *
  * O número de cada prancha ("Prancha 07") e das seções dela ("7.2") sai da
@@ -19,7 +20,7 @@ export function plac(id: IdPrancha): string {
 }
 
 /** "Prancha 07" */
-export const prancha = (id: IdPrancha) => `Prancha ${plac(id)}`;
+export const prancha = (id: IdPrancha) => `${t("Prancha", "Plate")} ${plac(id)}`;
 
 /** Número de seção dentro da prancha: secao("economia", 2) -> "10.2" */
 export const secao = (id: IdPrancha, n: number) => `${ORDEM.indexOf(id)}.${n}`;

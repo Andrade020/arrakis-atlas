@@ -1,3 +1,4 @@
+import { localidade, t } from "./i18n";
 // Carregamento dos dados exportados pelo pipeline. Tudo e' estatico: o site
 // nao tem servidor, e nenhum numero e' calculado aqui — o que chega ja veio
 // conferido por scripts/10_conferir.py.
@@ -84,19 +85,22 @@ export type Feicao = Feature<Geometry, Record<string, any>>;
 
 /* ------------------------------------------------------------ formatacao -- */
 
-const pt = new Intl.NumberFormat("pt-BR");
+const formatos = new Map<string, Intl.NumberFormat>();
 
 export function num(v: number | null | undefined, casas = 0): string {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";
-  return pt.format(Number(v.toFixed(casas)));
+  const loc = localidade();
+  let f = formatos.get(loc);
+  if (!f) { f = new Intl.NumberFormat(loc); formatos.set(loc, f); }
+  return f.format(Number(v.toFixed(casas)));
 }
 
 /** Numero grande em escala curta, para caber em coluna estreita. */
 export function compacto(v: number | null | undefined, casas = 1): string {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";
   const a = Math.abs(v);
-  if (a >= 1e9) return num(v / 1e9, casas) + " bi";
-  if (a >= 1e6) return num(v / 1e6, casas) + " mi";
-  if (a >= 1e4) return num(v / 1e3, casas) + " mil";
+  if (a >= 1e9) return num(v / 1e9, casas) + t(" bi", " bn");
+  if (a >= 1e6) return num(v / 1e6, casas) + t(" mi", " m");
+  if (a >= 1e4) return num(v / 1e3, casas) + t(" mil", "k");
   return num(v, a < 10 ? casas : 0);
 }

@@ -1,3 +1,4 @@
+import { emIngles } from "./i18n";
 /* Glossário vivo.
  *
  * As definições são paráfrases do "Terminology of the Imperium", o glossário do
@@ -11,6 +12,7 @@
 
 export interface Termo {
   id: string; termo: string; en: string; def: string; marca: string; formas: string[];
+  termo_en?: string; formas_en?: string[]; def_en?: string;
 }
 
 export const TERMOS: Termo[] = [
@@ -86,13 +88,56 @@ export const TERMOS: Termo[] = [
     def: "Em fremen, \"a base do pilar\"." },
 ];
 
+
+const EN: Record<string, [string, string[], string]> = {
+  "arrakeen": ["Arrakeen", [], "The first settlement on Arrakis and, for a long time, the seat of the planet's government."],
+  "asa": ["Carryall", ["carryall", "carryalls"], "The flying 'wing', the aerial workhorse of Arrakis, used to lift the big machines that hunt, harvest and refine spice."],
+  "bene-gesserit": ["Bene Gesserit", ["Bene Gesserit"], "An old school of mental and physical training, mostly for women, founded after the Butlerian Jihad destroyed the 'thinking machines'."],
+  "bled": ["Bled", ["Bled", "Great Bled"], "Flat, open desert."],
+  "captador": ["Windtrap", ["windtraps", "windtrap"], "A device set in the path of the wind that pulls moisture out of the air it catches, usually with a sudden drop in temperature."],
+  "cavaleiro": ["Sandrider", ["sandrider", "sandriders"], "Fremen word for someone who can catch and ride a sandworm."],
+  "choam": ["CHOAM", ["CHOAM"], "The universal development corporation, run by the Emperor and the Great Houses, with the Guild and the Bene Gesserit as silent partners."],
+  "cielago": ["Cielago", ["cielago", "cielagos"], "A modified bat of Arrakis, adapted to carry messages recorded with a distrans."],
+  "colheitadeira": ["Sandcrawler", ["sandcrawler", "harvester"], "General name for the machines that move across the surface of Arrakis hunting and gathering melange."],
+  "coletor": ["Dew precipitator", ["dew precipitators", "dew collectors", "dew precipitator"], "An egg of chromoplastic about four centimetres long that turns white in sunlight and clear in the dark. It cools at dawn and gathers the dew; the Fremen line their planting pits with them."],
+  "dagacristal": ["Crysknife", ["crysknife", "crysknives"], "The sacred knife of the Fremen, made from the tooth of a dead worm. An 'unfixed' one falls apart away from the electrical field of a human body."],
+  "depressao": ["Sink", [], "A habitable lowland on Arrakis, ringed by high ground that shelters it from storms."],
+  "erg": ["Erg", ["erg", "ergs"], "A large area of dunes; a sea of sand."],
+  "fedaykin": ["Fedaykin", ["Fedaykin"], "Fremen death commandos. Originally, a group sworn to give their lives to right a wrong."],
+  "fremen": ["Fremen", ["Fremen"], "The free tribes of Arrakis who live in the desert, descended from the Zensunni Wanderers. 'Sand pirates', according to the Imperial Dictionary."],
+  "graben": ["Graben", ["graben"], "A long geological trench, formed when the ground sinks as the crust shifts below it."],
+  "guilda": ["Guild", ["Spacing Guild", "Guild"], "The Spacing Guild, one leg of the political tripod that holds up the Great Convention. It has the monopoly on travel and transport through space."],
+  "ibad": ["Eyes of Ibad", [], "What a diet heavy in melange does: the whites and pupils of the eyes turn deep blue, a sign of deep addiction."],
+  "kulon": ["Kulon", ["kulon"], "The wild ass of Earth's Asian steppes, adapted for Arrakis."],
+  "literjon": ["Literjon", ["literjon", "literjons"], "A one-litre container for carrying water, made of hard, unbreakable plastic with a tight seal."],
+  "martelador": ["Thumper", ["thumper", "thumpers"], "A short stake with a spring-driven clapper. Driven into the sand, it keeps beating and calls shai-hulud."],
+  "melange": ["Melange", ["melange"], "The 'spice of spices', produced only on Arrakis. Known for extending life; mildly addictive in small doses and severely so above two grams a day."],
+  "mentat": ["Mentat", ["Mentat", "Mentats"], "A citizen trained to the highest pitch of logic. A 'human computer'."],
+  "muaddib": ["Muad'Dib", [], "The adapted kangaroo mouse of Arrakis, tied in Fremen myth to a shape seen on the second moon. The Fremen admire it for surviving in the open desert."],
+  "pyons": ["Pyons", ["pyon", "pyons"], "Peasants and labourers bound to the planet, one of the base classes of the Empire. Legally, wards of the planet."],
+  "qanat": ["Qanat", ["qanat", "qanats"], "An open canal that carries irrigation water across the desert under control."],
+  "sardaukar": ["Sardaukar", ["Sardaukar"], "The Emperor's fanatical soldiers, raised on a world so harsh it killed six of every thirteen people before the age of eleven."],
+  "shai-hulud": ["Shai-hulud", ["shai-hulud"], "The sandworm of Arrakis, also called Old Man of the Desert, Old Father Eternity and Grandfather of the Desert. Said in a certain tone, or capitalised, it names the Fremen earth god."],
+  "sietch": ["Sietch", ["sietch", "sietches"], "In Fremen, 'place of assembly in time of danger'. By common use, any cave warren where a tribal community lives."],
+  "solari": ["Solari", ["solaris", "solari"], "The official currency of the Empire. Its buying power is set every four hundred years between the Guild, the Landsraad and the Emperor."],
+  "tempestade": ["Coriolis storm", ["Coriolis storm", "Coriolis storms"], "A great sandstorm in which the planet's own spin drives the wind over the open flats up to 700 km/h."],
+  "tenda": ["Stilltent", ["stilltent"], "A small sealable shelter, made of the same fabric as a stillsuit, that turns the moisture of its occupants' breath back into drinkable water."],
+  "toptero": ["Ornithopter", ["ornithopter", "ornithopters", "'thopter", "'thopters"], "Any aircraft that flies by beating its wings, the way birds do."],
+  "trajestil": ["Stillsuit", ["stillsuit", "stillsuits"], "A suit invented on Arrakis. Its layered fabric sheds heat and filters the body's waste; the recovered moisture comes back through a tube."],
+  "usul": ["Usul", [], "Fremen for 'the base of the pillar'."],
+};
+for (const termo of TERMOS) {
+  const e = EN[termo.id];
+  if (e) { termo.termo_en = e[0]; termo.formas_en = e[1]; termo.def_en = e[2]; }
+}
+
 /* ------------------------------------------------------------ marcação --- */
 
 const PROIBIDO = "a, code, button, h1, h2, h3, svg, figcaption, .termo, .sumario, .cabecalho-site, .marca, .marcador, .etapa-n, script, style";
 
 export function ligaGlossario(raiz: HTMLElement) {
   const achados = new Set<string>();
-  const ordem = TERMOS.flatMap((t) => t.formas.map((f) => ({ t, f })))
+  const ordem = TERMOS.flatMap((t) => (emIngles() ? (t.formas_en ?? []) : t.formas).map((f) => ({ t, f })))
     .sort((a, b) => b.f.length - a.f.length);        // "captadores de vento" antes de "vento"
   const walker = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
     acceptNode: (n) => (n.parentElement?.closest(PROIBIDO) || !n.nodeValue?.trim())
@@ -135,7 +180,9 @@ function ligaDica(raiz: HTMLElement) {
   const mostra = (el: HTMLElement) => {
     const t = TERMOS.find((x) => x.id === el.dataset.t);
     if (!t || !dica) return;
-    dica.innerHTML = `<b>${t.termo}</b> <i>${t.en}</i><p>${t.def}</p><code>${t.marca}</code>`;
+    dica.innerHTML = emIngles()
+      ? `<b>${t.termo_en ?? t.en}</b><p>${t.def_en ?? t.def}</p><code>${t.marca}</code>`
+      : `<b>${t.termo}</b> <i>${t.en}</i><p>${t.def}</p><code>${t.marca}</code>`;
     dica.hidden = false;
     const r = el.getBoundingClientRect(), w = Math.min(340, window.innerWidth - 24);
     dica.style.width = w + "px";

@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 import { plac } from "../pranchas";
 import { atlas, distritos, assentamentos, rotulos, rasters, mundo } from "../dados";
 import { Mapa } from "../mapa";
@@ -16,11 +17,15 @@ import { areia } from "../areia";
  *     Quem clica em "Abrir o mapa" já viu o que vai encontrar.
  *  4. As três pranchas do argumento, com seus cinemagraphs.
  */
-const FATOS: { v: string; u: string; texto: string; rota: string }[] = [
-  { v: "700", u: "km/h", texto: "de vento numa tempestade de Coriolis, carregado de areia.", rota: "regioes" },
-  { v: "400", u: "metros", texto: "de comprimento. Já viram vermes desse tamanho no deserto profundo.", rota: "economia" },
-  { v: "620 mil", u: "solaris", texto: "por um único decagrama de especiaria, no pico do preço.", rota: "economia" },
-  { v: "10", u: "milhões", texto: "de fremen, no mínimo. O Barão que governava o planeta achava que eram poucos.", rota: "poder" },
+const fatos = (): { v: string; u: string; texto: string; rota: string }[] => [
+  { v: "700", u: "km/h", rota: "regioes",
+    texto: t("de vento numa tempestade de Coriolis, carregado de areia.", "of wind in a Coriolis storm, loaded with sand.") },
+  { v: "400", u: t("metros", "metres"), rota: "verme",
+    texto: t("de comprimento. Já viram vermes desse tamanho no deserto profundo.", "long. Worms that size have been seen in the deep desert.") },
+  { v: t("620 mil", "620,000"), u: "solaris", rota: "economia",
+    texto: t("por um único decagrama de especiaria, no pico do preço.", "for a single decagram of spice, at the peak price.") },
+  { v: "10", u: t("milhões", "million"), rota: "poder",
+    texto: t("de fremen, no mínimo. O Barão que governava o planeta achava que eram poucos.", "Fremen, at least. The Baron who ruled the planet thought there were only a few.") },
 ];
 
 export async function inicio(alvo: HTMLElement) {
@@ -31,7 +36,7 @@ export async function inicio(alvo: HTMLElement) {
      não toca sozinho: ver ligaEstampasVivas, no fim do arquivo. */
   const cartao = (rota: string, plac: string, titulo: string, nome: string, texto: string) =>
     `<a href="#/${rota}" class="cartao">
-      <div class="n">Prancha ${plac}</div>
+      <div class="n">${t("Prancha", "Plate")} ${plac}</div>
       <h3>${titulo}</h3>
       <div class="estampa-viva">
         <img class="miniatura" src="${B}ilustracoes/${nome}.webp" alt="" loading="lazy" />
@@ -41,17 +46,19 @@ export async function inicio(alvo: HTMLElement) {
         </video>
       </div>
       <p>${texto}</p>
-      <span class="ler">Ler a prancha →</span>
+      <span class="ler">${t("Ler a prancha →", "Read the plate →")}</span>
     </a>`;
 
   alvo.innerHTML = `
   <section class="orbita">
     <div class="orbita-texto">
-      <h1>O lugar mais valioso do universo é um deserto onde nunca choveu.</h1>
-      <p class="abre">Não há mar nem nuvem de chuva. Aqui a água de um morto
+      <h1>${t("O lugar mais valioso do universo é um deserto onde nunca choveu.",
+              "The most valuable place in the universe is a desert where it has never rained.")}</h1>
+      <p class="abre">${t(`Não há mar nem nuvem de chuva. Aqui a água de um morto
       pertence à tribo — e a areia esconde a especiaria de que o Império inteiro
-      depende.</p>
-      <a class="cta" href="#/mapa">Abrir o mapa<span aria-hidden="true">→</span></a>
+      depende.`, `No sea, no rain clouds. Here a dead man's water belongs to the tribe,
+      and the sand hides the spice the whole Empire depends on.`)}</p>
+      <a class="cta" href="#/mapa">${t("Abrir o mapa", "Open the map")}<span aria-hidden="true">→</span></a>
     </div>
     <div class="orbita-planeta" aria-hidden="true">
       <img src="${B}capa/planeta.webp" alt="" />
@@ -67,29 +74,32 @@ export async function inicio(alvo: HTMLElement) {
   <section class="superficie">
     <canvas class="areia" aria-hidden="true"></canvas>
     <ul class="fatos">
-      ${FATOS.map((f) => `<li><a href="#/${f.rota}">
+      ${fatos().map((f) => `<li><a href="#/${f.rota}">
         <span class="v">${f.v}<small>${f.u}</small></span>
         <span class="t">${f.texto}</span>
       </a></li>`).join("")}
     </ul>
   </section>
 
-  <a class="faixa-carta" href="#/mapa" aria-label="Abrir o mapa">
+  <a class="faixa-carta" href="#/mapa" aria-label="${t("Abrir o mapa", "Open the map")}">
     <canvas aria-hidden="true"></canvas>
     <span class="rotulo-carta">
-      <small>Prancha 01 · Arrakis vista do polo</small>
-      <b>A carta inteira <span aria-hidden="true">→</span></b>
+      <small>${t("Prancha 01 · Arrakis vista do polo", "Plate 01 · Arrakis seen from the pole")}</small>
+      <b>${t("A carta inteira", "The full map")} <span aria-hidden="true">→</span></b>
     </span>
   </a>
 
-  <h2 class="titulo-argumentos">O que o mapa mostra</h2>
+  <h2 class="titulo-argumentos">${t("O que o mapa mostra", "What the map shows")}</h2>
   <section class="argumentos">
-    ${cartao("padroes", plac("padroes"), "O terreno pesa mais que o mercado", "c_padroes",
-      "Os assentamentos de Arrakis não seguem a capital. Seguem a rocha firme.")}
-    ${cartao("acessibilidade", plac("acessibilidade"), "Duas geografias no mesmo território", "c_acessibilidade",
-      "Para o Império, a areia é barreira. Para os fremen, é estrada.")}
-    ${cartao("poder", plac("poder"), "Quem manda no chão", "c_poder",
-      "O Imperador deu o planeta a uma Casa. Mais da metade da especiaria sai de terra que ninguém governa.")}
+    ${cartao("padroes", plac("padroes"), t("O terreno pesa mais que o mercado", "Terrain matters more than the market"), "c_padroes",
+      t("Os assentamentos de Arrakis não seguem a capital. Seguem a rocha firme.",
+        "Settlements on Arrakis don't follow the capital. They follow solid rock."))}
+    ${cartao("acessibilidade", plac("acessibilidade"), t("Duas geografias no mesmo território", "Two geographies on the same ground"), "c_acessibilidade",
+      t("Para o Império, a areia é barreira. Para os fremen, é estrada.",
+        "To the Empire, sand is a barrier. To the Fremen, it's a road."))}
+    ${cartao("poder", plac("poder"), t("Quem manda no chão", "Who runs the ground"), "c_poder",
+      t("O Imperador deu o planeta a uma Casa. Mais da metade da especiaria sai de terra que ninguém governa.",
+        "The Emperor gave the planet to one House. More than half the spice comes from land nobody governs."))}
   </section>
 
   ${rodape()}`;

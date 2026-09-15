@@ -1,3 +1,4 @@
+import { emIngles, localidade, t as tr } from "./i18n";
 // Renderizador do mapa.
 //
 // DECISAO CENTRAL: nao ha' biblioteca de mapas aqui, e nao e' economia de
@@ -551,7 +552,8 @@ export class Mapa {
       const areia = String(d?.tipo_terr ?? "") === "Erg" || classe === "erg";
       const bacia = classe === "bacia";
       const peso = grau === 0 ? 600 : grau === 3 ? 400 : 500;
-      const txt = r.nome.toUpperCase();
+      // em inglês, o topônimo original do livro (Arrakeen, Shield Wall, Old Gap)
+      const txt = (emIngles() ? (r.en || r.nome) : r.nome).toUpperCase();
       ctx.font = `${areia ? "italic " : ""}${peso} ${corpo}px 'Archivo', sans-serif`;
       ctx.letterSpacing = bacia ? ["0.2em", "0.16em", "0.12em", "0.09em"][grau]
                                 : ["0.15em", "0.11em", "0.08em", "0.06em"][grau];
@@ -700,11 +702,11 @@ export class Mapa {
     ctx.font = "400 9.5px 'IBM Plex Mono', monospace";
     ctx.letterSpacing = "0.14em";
     ctx.fillText(this.larg < 620
-      ? "AEQD · POLO NORTE · R = 6.371 KM"
-      : "AZIMUTAL EQUIDISTANTE · POLO NORTE · R = 6.371 KM", x0, base - 30);
+      ? tr("AEQD · POLO NORTE · R = 6.371 KM", "AEQD · NORTH POLE · R = 6,371 KM")
+      : tr("AZIMUTAL EQUIDISTANTE · POLO NORTE · R = 6.371 KM", "AZIMUTHAL EQUIDISTANT · NORTH POLE · R = 6,371 KM"), x0, base - 30);
     if (this.larg > 760) {      // numa carta pequena a nota nao cabe sem colidir
       ctx.globalAlpha = 0.72;
-      ctx.fillText("ESCALA EXATA AO LONGO DO RAIO", x0, base - 17);
+      ctx.fillText(tr("ESCALA EXATA AO LONGO DO RAIO", "TRUE SCALE ALONG THE RADIUS"), x0, base - 17);
       ctx.globalAlpha = 1;
     }
 
@@ -729,10 +731,10 @@ export class Mapa {
     ctx.fillText("0", x0, base + 11);
     if (largura > 150) {          // so' rotula o meio quando ha' espaco para ele
       ctx.textAlign = "center";
-      ctx.fillText((passo / 2000).toLocaleString("pt-BR"), x0 + largura / 2, base + 11);
+      ctx.fillText((passo / 2000).toLocaleString(localidade()), x0 + largura / 2, base + 11);
     }
     ctx.textAlign = "right";
-    ctx.fillText(`${(passo / 1000).toLocaleString("pt-BR")} km`, x0 + largura, base + 11);
+    ctx.fillText(`${(passo / 1000).toLocaleString(localidade())} km`, x0 + largura, base + 11);
     ctx.letterSpacing = "0px";
     ctx.textAlign = "left";
   }

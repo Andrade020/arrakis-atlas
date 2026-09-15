@@ -125,6 +125,12 @@ html.travado { overflow: hidden; }
 }
 .atalhos a:hover { color: #FFF6E6; }
 .atalhos a[aria-current] { color: #FFF6E6; border-bottom-color: #E3B676; }
+/* troca de língua: discreta, ao lado do índice */
+.troca-lingua {
+  font: 500 12px/1 var(--f-disp); letter-spacing: .08em; color: rgba(243, 231, 208, .74);
+  text-decoration: none; padding: 9px 4px; border-bottom: 1px solid transparent;
+}
+.troca-lingua:hover { color: #FFF6E6; border-bottom-color: #E3B676; }
 .abre-indice {
   display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
   background: none; color: inherit; border: 1px solid rgba(243, 231, 208, .38);

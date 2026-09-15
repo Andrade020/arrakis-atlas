@@ -3,18 +3,19 @@ import {
   type Distrito, type Proc, type CamadaRaster,
 } from "../dados";
 import { Mapa, type EstadoMapa } from "../mapa";
-import { CAMPOS, COROPLETOS, GRUPOS, formata } from "../campos";
+import { CAMPOS, coropletos, grupos as gruposCampos, formata } from "../campos";
 import { esc, selo } from "../ui";
+import { t, emIngles, localidade, nomeLivro, localCitacao } from "../i18n";
 
-const CAMADAS: [string, string][] = [
-  ["distritos", "Limites distritais"],
-  ["rotulos", "Topônimos"],
-  ["assentamentos", "Assentamentos"],
-  ["grade", "Grade de coordenadas"],
-  ["regioes", "Regiões"],
-  ["poder", "Esferas de controle"],
-  ["rede_imperial", "Rede imperial"],
-  ["rede_fremen", "Rede fremen"],
+const camadas = (): [string, string][] => [
+  ["distritos", t("Limites distritais", "District borders")],
+  ["rotulos", t("Topônimos", "Place names")],
+  ["assentamentos", t("Assentamentos", "Settlements")],
+  ["grade", t("Grade de coordenadas", "Coordinate grid")],
+  ["regioes", t("Regiões", "Regions")],
+  ["poder", t("Esferas de controle", "Spheres of control")],
+  ["rede_imperial", t("Rede imperial", "Imperial network")],
+  ["rede_fremen", t("Rede fremen", "Fremen network")],
 ];
 
 /* Os quatro glifos que o mapa desenha, repetidos em SVG para a legenda. Um
@@ -29,28 +30,43 @@ const GLIFOS: Record<string, string> = {
 };
 
 /* Rotulo curto da classe de procedencia, para caber na legenda da prancha. */
-const CURTA: Record<string, string> = {
-  CANONE_FH: "Cânone de Frank Herbert",
-  DEDUZIDO: "Deduzido do mapa",
-  MODELO_DERIVADO: "Modelo derivado",
-  SIMULADO: "Simulado por nós",
-  EXTERNO_NAO_CANONE: "Fora do cânone",
-  DADO_REAL: "Dado do mundo real",
-};
+const curta = (): Record<string, string> => ({
+  CANONE_FH: t("Cânone de Frank Herbert", "Frank Herbert canon"),
+  DEDUZIDO: t("Deduzido do mapa", "Derived from the map"),
+  MODELO_DERIVADO: t("Modelo derivado", "Derived model"),
+  SIMULADO: t("Simulado por nós", "Simulated by us"),
+  EXTERNO_NAO_CANONE: t("Fora do cânone", "Outside the canon"),
+  DADO_REAL: t("Dado do mundo real", "Real-world data"),
+});
 
-const SUPERFICIES: [string, string][] = [
-  ["relevo", "Terreno"],
-  ["elevacao", "Elevação"],
-  ["custo_imperial", "Custo de travessia · Império"],
-  ["custo_fremen", "Custo de travessia · fremen"],
-  ["densidade", "Densidade de assentamento"],
-  ["", "Sem superfície"],
+const superficies = (): [string, string][] => [
+  ["relevo", t("Terreno", "Terrain")],
+  ["elevacao", t("Elevação", "Elevation")],
+  ["custo_imperial", t("Custo de travessia · Império", "Crossing cost · Empire")],
+  ["custo_fremen", t("Custo de travessia · fremen", "Crossing cost · Fremen")],
+  ["densidade", t("Densidade de assentamento", "Settlement density")],
+  ["", t("Sem superfície", "No surface")],
 ];
+
+/* Títulos e classes das superfícies, que vêm dos dados em português. */
+const RASTER_EN: Record<string, string> = {
+  "Classes de terreno": "Terrain classes", "Bacia / chapada clara": "Basin / light flat",
+  "Erg aberto": "Open erg", "Terreno rochoso": "Rocky ground", "Rocha elevada": "High rock",
+  "Crista / pico": "Ridge / peak", "Elevação modelada": "Modelled elevation",
+  "Custo de travessia — Império": "Crossing cost — Empire", "Custo de travessia — fremen": "Crossing cost — Fremen",
+  "Densidade de assentamento": "Settlement density",
+};
+const rasterTxt = (s: string) => (emIngles() ? (RASTER_EN[s] ?? s) : s);
+
+const estadoEpoca = (v: string) => emIngles()
+  ? ({ retratado: "as depicted", transformado: "transformed", destruido: "destroyed", renomeado: "renamed",
+       sem_informacao: "no information" } as Record<string, string>)[v] ?? v.replace(/_/g, " ")
+  : v.replace(/_/g, " ");
 
 export async function paginaMapa(alvo: HTMLElement) {
   alvo.innerHTML = `<div class="mapa-tela" id="palco">
     <div class="ctrl" id="ctrl"></div>
-    <canvas aria-label="Mapa de Arrakis"></canvas>
+    <canvas aria-label="${t("Mapa de Arrakis", "Map of Arrakis")}"></canvas>
     <div class="inspetor" id="inspetor" hidden></div>
     <div class="dica" id="dica" hidden></div>
   </div>`;
@@ -114,8 +130,8 @@ export async function paginaMapa(alvo: HTMLElement) {
     return `<div class="simbolos">
       <div class="simbolo">${GLIFOS.capital}<span>Capital</span></div>
       <div class="simbolo">${GLIFOS.sietch}<span>Sietch</span></div>
-      <div class="simbolo">${GLIFOS.pyon}<span>Vila pyon</span></div>
-      <div class="simbolo">${GLIFOS.botanica}<span>Estação botânica</span></div>
+      <div class="simbolo">${GLIFOS.pyon}<span>${t("Vila pyon", "Pyon village")}</span></div>
+      <div class="simbolo">${GLIFOS.botanica}<span>${t("Estação botânica", "Botanical station")}</span></div>
     </div>`;
   }
 
@@ -124,7 +140,8 @@ export async function paginaMapa(alvo: HTMLElement) {
     if (cl) {
       const c = CAMPOS[cl.campo];
       const p = prov.campos[cl.campo];
-      return `<div class="cab">Legenda</div>
+      const CURTA = curta();
+      return `<div class="cab">${t("Legenda", "Legend")}</div>
       <div>
         <div class="leg-tit">${esc(c?.rot ?? cl.campo)}${c?.un ? ` <span>${esc(c.un)}</span>` : ""}</div>
         <div class="rampa">${cl.cores.map((k) => `<i style="background:${k}"></i>`).join("")}</div>
@@ -138,15 +155,16 @@ export async function paginaMapa(alvo: HTMLElement) {
     const r: CamadaRaster | undefined = ras[estado.raster];
     if (!r) return "";
     const categorica = r.chaves.some((k) => k.rot && Number.isNaN(Number(k.rot)));
-    return `<div class="cab">Legenda · Prancha 01</div>
+    const CURTA = curta();
+    return `<div class="cab">${t("Legenda · Prancha 01", "Legend · Plate 01")}</div>
       <div>
-      <div class="leg-tit">${esc(r.titulo)}${r.unidade ? ` <span>${esc(r.unidade)}</span>` : ""}</div>
+      <div class="leg-tit">${esc(rasterTxt(r.titulo))}${r.unidade ? ` <span>${esc(r.unidade)}</span>` : ""}</div>
       ${categorica
-        ? barras(r.chaves, r.chaves.map((k) => k.rot))
+        ? barras(r.chaves, r.chaves.map((k) => rasterTxt(k.rot)))
         : `<div class="rampa">${r.chaves.map((k) => `<i style="background:${k.cor}"></i>`).join("")}</div>
            <div class="rampa-rot">
-             <span>${Math.round(r.p1 ?? r.min ?? 0).toLocaleString("pt-BR")}</span>
-             <span>${Math.round(r.p99 ?? r.max ?? 0).toLocaleString("pt-BR")}</span>
+             <span>${Math.round(r.p1 ?? r.min ?? 0).toLocaleString(localidade())}</span>
+             <span>${Math.round(r.p99 ?? r.max ?? 0).toLocaleString(localidade())}</span>
            </div>`}
       ${simbolosHTML()}
       <div class="leg-nota">${selo(r.classe, CURTA[r.classe])}</div>
@@ -154,27 +172,27 @@ export async function paginaMapa(alvo: HTMLElement) {
   }
 
   function pintaControles() {
-    const superf = SUPERFICIES.filter(([k]) => k === "" || ras[k]);
+    const superf = superficies().filter(([k]) => k === "" || ras[k]);
     ctrl.innerHTML = `
-      <a class="volta" href="#/">Voltar ao atlas</a>
+      <a class="volta" href="#/">${t("Voltar ao atlas", "Back to the atlas")}</a>
       <div class="ctrl-topo">
-        <div class="ctrl-titulo">Prancha 01</div>
-        <div class="titulo-prancha">O mapa</div>
+        <div class="ctrl-titulo">${t("Prancha 01", "Plate 01")}</div>
+        <div class="titulo-prancha">${t("O mapa", "The map")}</div>
         <div class="ctrl-coord" id="coord"></div>
       </div>
       <div class="grupo">
-        <div class="rot">Superfície</div>
+        <div class="rot">${t("Superfície", "Surface")}</div>
         <div class="opcoes unica" id="op-raster" role="radiogroup">
           ${superf.map(([k, r]) => `<button data-k="${k}" role="radio"
             aria-checked="${estado.raster === k}"><span>${esc(r)}</span></button>`).join("")}
         </div>
       </div>
       <div class="grupo">
-        <div class="rot">Variável por distrito</div>
+        <div class="rot">${t("Variável por distrito", "District variable")}</div>
         <div class="caixa-sel">
-          <select class="campo" id="sel-campo" aria-label="Variável por distrito">
-            <option value="">Sem variável</option>
-            ${COROPLETOS.map((g) => `<optgroup label="${esc(g.grupo)}">
+          <select class="campo" id="sel-campo" aria-label="${t("Variável por distrito", "District variable")}">
+            <option value="">${t("Sem variável", "No variable")}</option>
+            ${coropletos().map((g) => `<optgroup label="${esc(g.grupo)}">
               ${g.campos.filter((c) => CAMPOS[c]).map((c) =>
                 `<option value="${c}"${estado.coropleto === c ? " selected" : ""}>${esc(CAMPOS[c].rot)}</option>`).join("")}
             </optgroup>`).join("")}
@@ -182,14 +200,14 @@ export async function paginaMapa(alvo: HTMLElement) {
         </div>
       </div>
       <div class="grupo">
-        <div class="rot">Camadas</div>
+        <div class="rot">${t("Camadas", "Layers")}</div>
         <div class="opcoes" id="op-camadas">
-          ${CAMADAS.map(([k, r]) => `<button data-k="${k}"
+          ${camadas().map(([k, r]) => `<button data-k="${k}"
             aria-pressed="${estado.camadas.has(k)}"><span>${esc(r)}</span></button>`).join("")}
         </div>
       </div>
       <div class="legenda-prancha">${legendaHTML()}</div>
-      <div class="colofao">Base: <b>NiptonIceTea</b>, segundo de Fontaine (1965)</div>`;
+      <div class="colofao">${t("Base: <b>NiptonIceTea</b>, segundo de Fontaine (1965)", "Base: <b>NiptonIceTea</b>, after de Fontaine (1965)")}</div>`;
 
     ctrl.querySelectorAll("#op-raster button").forEach((b) =>
       b.addEventListener("click", () => {
@@ -235,7 +253,7 @@ export async function paginaMapa(alvo: HTMLElement) {
     const proc = (campo: string): Proc =>
       prov.campos[campo] ?? { classe: "DEDUZIDO", lastro: "", marcador: "" };
 
-    const grupos = GRUPOS.map((g) => {
+    const grupos = gruposCampos().map((g) => {
       const linhas = g.campos
         .filter((c) => d[c] !== null && d[c] !== undefined && d[c] !== "")
         .map((c) => {
@@ -257,18 +275,18 @@ export async function paginaMapa(alvo: HTMLElement) {
 
     const epocas = (tabs.cronologia ?? []) as any[];
     const tempo = epocas.length ? `<div class="bloco">
-      <div class="rot">Ao longo dos seis livros</div>
+      <div class="rot">${t("Ao longo dos seis livros", "Across the six books")}</div>
       <div class="tempo">
         ${epocas.map((e, i) => {
           const v = String(d[`ep${i + 1}`] ?? "sem_informacao");
           const cls = v === "sem_informacao" ? "vazio"
             : v === "destruido" ? "destruido"
             : v === "transformado" ? "transformado" : "retratado";
-          return `<div class="ep ${cls}" title="${esc(e.titulo)} — ${esc(v.replace(/_/g, " "))}">
+          return `<div class="ep ${cls}" title="${esc(nomeLivro(e.titulo))} — ${esc(estadoEpoca(v))}">
             <b>${i + 1}</b></div>`;
         }).join("")}
       </div>
-      <p class="leg-p">${epocas.map((e, i) => `${i + 1} ${esc(e.titulo)}`).join(" · ")}</p>
+      <p class="leg-p">${epocas.map((e, i) => `${i + 1} ${esc(nomeLivro(e.titulo))}`).join(" · ")}</p>
     </div>` : "";
 
     /* A frase do Herbert vem ANTES da tabela. Abrir uma ficha com trinta
@@ -277,8 +295,8 @@ export async function paginaMapa(alvo: HTMLElement) {
     const c = (citas as Record<string, any>)[d.cod];
     const lede = c ? `<figure class="citacao lede">
         <blockquote>${esc(c.texto)}</blockquote>
-        <figcaption class="fonte">${esc(c.autor)}, <em>${esc(c.volume)}</em>
-          (${c.ano})${c.local ? " · " + esc(c.local) : ""}</figcaption>
+        <figcaption class="fonte">${esc(c.autor)}, <em>${esc(nomeLivro(c.volume))}</em>
+          (${c.ano})${c.local ? " · " + esc(localCitacao(c.local)) : ""}</figcaption>
       </figure>` : "";
 
     /* O que acontece aqui. A citacao acima diz o que o lugar E'; os eventos
@@ -288,14 +306,14 @@ export async function paginaMapa(alvo: HTMLElement) {
     const evs = ((eventos as Record<string, any[]>)[d.cod] ?? []);
     const OLHO = `<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path class="risco" d="M3 21 21 3" stroke="currentColor" stroke-width="1.5"/></svg>`;
     const acontece = evs.length ? `<div class="bloco eventos">
-      <div class="rot">O que acontece aqui</div>
+      <div class="rot">${t("O que acontece aqui", "What happens here")}</div>
       ${evs.map((e) => `<div class="evento${e.spoiler ? " spoiler" : ""}">
         <div class="ev-cab">
-          <span class="ev-livro">Livro ${e.livro} · <em>${esc(e.volume)}</em>${e.spoiler ? ' · <b>spoiler</b>' : ""}</span>
+          <span class="ev-livro">${t("Livro", "Book")} ${e.livro} · <em>${esc(nomeLivro(e.volume))}</em>${e.spoiler ? ' · <b>spoiler</b>' : ""}</span>
           ${e.spoiler ? `<button class="olho" type="button" aria-pressed="false"
-            aria-label="Revelar spoiler do livro ${e.livro}" title="Revelar">${OLHO}</button>` : ""}
+            aria-label="${t("Revelar spoiler do livro", "Reveal spoiler from book")} ${e.livro}" title="${t("Revelar", "Reveal")}">${OLHO}</button>` : ""}
         </div>
-        <p class="ev-texto"${e.spoiler ? ' aria-hidden="true"' : ""}>${esc(e.resumo)}</p>
+        <p class="ev-texto"${e.spoiler ? ' aria-hidden="true"' : ""}>${esc(emIngles() ? (e.resumo_en ?? e.resumo) : e.resumo)}</p>
         <span class="marcador"${e.spoiler ? "" : ` title="${esc(e.trecho)}"`}>${esc(e.marcador)}</span>
       </div>`).join("")}
     </div>` : "";
@@ -303,25 +321,25 @@ export async function paginaMapa(alvo: HTMLElement) {
     /* Quando a citacao ja' abre a ficha, este bloco repetiria a mesma fonte
        com outras palavras. So' aparece para os distritos sem frase no corpus. */
     const canon = (d.canon_ref && !c) ? `<div class="bloco">
-      <div class="rot">Lastro no corpus</div>
+      <div class="rot">${t("Lastro no corpus", "Basis in the books")}</div>
       <p class="canon-p">
-        ${d.canon_st === "canonico_fh" ? "Topônimo com frase de Frank Herbert no corpus."
-          : d.canon_st === "so_no_mapa" ? "Aparece no mapa do apêndice, mas nenhuma frase do corpus o nomeia."
-          : "O corpus usa grafia divergente da do mapa."}
+        ${d.canon_st === "canonico_fh" ? t("Topônimo com frase de Frank Herbert no corpus.", "A place name with a Frank Herbert passage in the books.")
+          : d.canon_st === "so_no_mapa" ? t("Aparece no mapa do apêndice, mas nenhuma frase do corpus o nomeia.", "It appears on the appendix map, but no passage in the books names it.")
+          : t("O corpus usa grafia divergente da do mapa.", "The books spell it differently from the map.")}
       </p>
       <span class="marcador">${esc(String(d.canon_ref))}</span>
       ${d.alias ? `<p class="leg-p">${esc(String(d.alias))}</p>` : ""}
     </div>` : "";
 
     return `<div class="topo">
-        <button class="fechar" aria-label="Fechar">×</button>
+        <button class="fechar" aria-label="${t("Fechar", "Close")}">×</button>
         <div class="cod">${esc(d.cod)}</div>
-        <h2>${esc(d.nome)}</h2>
-        <div class="en">${esc(d.nome_en)}</div>
+        <h2>${esc(emIngles() ? d.nome_en : d.nome)}</h2>
+        ${emIngles() ? "" : `<div class="en">${esc(d.nome_en)}</div>`}
       </div>
       <div class="ficha">${lede}${acontece}${grupos}${tempo}${canon}
         <div class="bloco nota-dag" style="border-bottom:0"><b>†</b>
-          <span>valor construído pelo modelo; não existe no cânone</span></div>
+          <span>${t("valor construído pelo modelo; não existe no cânone", "value built by the model; not in the books")}</span></div>
       </div>`;
   }
 
@@ -342,8 +360,8 @@ export async function paginaMapa(alvo: HTMLElement) {
       const alterna = () => {
         const aberto = ev.classList.toggle("revelado");
         botao.setAttribute("aria-pressed", String(aberto));
-        botao.setAttribute("aria-label", (aberto ? "Esconder" : "Revelar") + " spoiler");
-        botao.title = aberto ? "Esconder" : "Revelar";
+        botao.setAttribute("aria-label", (aberto ? t("Esconder", "Hide") : t("Revelar", "Reveal")) + " spoiler");
+        botao.title = aberto ? t("Esconder", "Hide") : t("Revelar", "Reveal");
         texto.setAttribute("aria-hidden", String(!aberto));
       };
       botao.addEventListener("click", alterna);

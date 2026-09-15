@@ -1,3 +1,4 @@
+import { emIngles, localidade, t } from "./i18n";
 // Pecas de interface compartilhadas e o desenhista dos blocos que
 // scripts/30_exportar_web.py extraiu dos documentos do projeto.
 
@@ -15,6 +16,8 @@ export function linha(s: string): string {
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<em>$2</em>")
+    // link entre documentos do projeto (CONTRADICOES.md#c1...) vira a prancha
+    .replace(/\[([^\]]+)\]\(CONTRADICOES\.md[^)]*\)/g, '<a class="link" href="#/contradicoes">$1</a>')
     .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,
              '<a class="link" href="$2" target="_blank" rel="noopener">$1</a>');
 }
@@ -81,7 +84,7 @@ export function slug(s: string): string {
     .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60);
 }
 
-export const CLASSES_PROC: Record<string, string> = {
+const CLASSES_PROC_PT: Record<string, string> = {
   CANONE_FH: "Cânone (Frank Herbert)",
   CANONE_BHKJA: "Cânone estendido (Brian Herbert & K. J. Anderson)",
   DEDUZIDO: "Deduzido do mapa ou do cânone",
@@ -91,6 +94,19 @@ export const CLASSES_PROC: Record<string, string> = {
   DADO_REAL: "Dado do mundo real",
   ILUSTRACAO_IA: "Ilustração gerada por IA",
 };
+const CLASSES_PROC_EN: Record<string, string> = {
+  CANONE_FH: "Canon (Frank Herbert)",
+  CANONE_BHKJA: "Extended canon (Brian Herbert & K. J. Anderson)",
+  DEDUZIDO: "Derived from the map or the books",
+  MODELO_DERIVADO: "Derived model",
+  SIMULADO: "Simulated by us",
+  EXTERNO_NAO_CANONE: "External, not canon",
+  DADO_REAL: "Real-world data",
+  ILUSTRACAO_IA: "AI-generated illustration",
+};
+export const CLASSES_PROC = new Proxy({} as Record<string, string>, {
+  get: (_, k: string) => (emIngles() ? CLASSES_PROC_EN : CLASSES_PROC_PT)[k],
+});
 
 export function selo(classe: string, texto?: string): string {
   return `<span class="selo-proc p-${esc(classe)}">${esc(texto ?? CLASSES_PROC[classe] ?? classe)}</span>`;
@@ -107,10 +123,13 @@ export function cabecalho(indice: string, titulo: string, linhaFina: string): st
 /* Uma linha, em todas as páginas. O rodapé de quatro colunas repetia crédito,
  * fonte, método e aviso — tudo isso tem página inteira na prancha 13. */
 export function rodape(): string {
-  return `<footer class="rodape-fino">
-    Base cartográfica: <strong>NiptonIceTea</strong>, segundo de Fontaine (1965).
+  return `<footer class="rodape-fino">${t(
+    `Base cartográfica: <strong>NiptonIceTea</strong>, segundo de Fontaine (1965).
     Fonte: HERBERT, Frank. <em>Dune</em>, 1965–1985. Projeto de estudo, sem vínculo
-    com os detentores dos direitos. <a href="#/fontes">Fontes e método →</a>
+    com os detentores dos direitos. <a href="#/fontes">Fontes e método →</a>`,
+    `Base map: <strong>NiptonIceTea</strong>, after de Fontaine (1965).
+    Source: HERBERT, Frank. <em>Dune</em>, 1965–1985. A study project with no link
+    to the rights holders. <a href="#/fontes">Sources and method →</a>`)}
   </footer>`;
 }
 
@@ -129,7 +148,7 @@ export function ligaOrdenacao(tabela: HTMLTableElement) {
         const y = b.cells[i]?.dataset.v ?? b.cells[i]?.textContent ?? "";
         const nx = parseFloat(x), ny = parseFloat(y);
         const cmp = (!Number.isNaN(nx) && !Number.isNaN(ny))
-          ? nx - ny : x.localeCompare(y, "pt-BR");
+          ? nx - ny : x.localeCompare(y, localidade());
         return asc ? cmp : -cmp;
       });
       linhas.forEach((l) => corpo.appendChild(l));

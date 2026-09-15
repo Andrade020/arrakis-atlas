@@ -2,6 +2,7 @@ import { atlas, distritos, rotulos, assentamentos, rasters, mundo } from "../dad
 import { Mapa } from "../mapa";
 import { prancha } from "../pranchas";
 import { cabecalho, esc, rodape } from "../ui";
+import { t } from "../i18n";
 
 /* A fuga de Paul e Jessica, de Arrakeen de volta a Arrakeen.
  *
@@ -23,55 +24,70 @@ interface Etapa {
   lugar?: string;
 }
 
-const ETAPAS: Etapa[] = [
-  { cod: "AR-19", lugar: "Arrakeen", titulo: "A noite da traição",
-    texto: "Os Atreides foram morar na Residência, a antiga casa do conde Fenring. Numa nave pousada, o Barão Harkonnen assiste à noite de Arrakeen em chamas.",
+const etapas = (): Etapa[] => [
+  { cod: "AR-19", lugar: "Arrakeen", titulo: t("A noite da traição", "The night of the betrayal"),
+    texto: t("Os Atreides foram morar na Residência, a antiga casa do conde Fenring. Numa nave pousada, o Barão Harkonnen assiste à noite de Arrakeen em chamas.",
+             "The Atreides have moved into the Residency, once the home of Count Fenring. From a grounded ship, Baron Harkonnen watches Arrakeen burn through the night."),
     marcas: ["[1|chapter002|457]", "[1|chapter021|3742]"] },
-  { cod: null, titulo: "Uma tenda entre as rochas",
-    texto: "Um tóptero estranho mergulha da noite sobre Paul e Jessica no deserto. Depois, Idaho os esconde numa tenda destiladora cercada de rochas. Ali, Paul enxerga o que vem pela frente, inclusive o nome que vão lhe dar, Muad'Dib.",
+  { cod: null, titulo: t("Uma tenda entre as rochas", "A tent among the rocks"),
+    texto: t("Um tóptero estranho mergulha da noite sobre Paul e Jessica no deserto. Depois, Idaho os esconde numa tenda destiladora cercada de rochas. Ali, Paul enxerga o que vem pela frente, inclusive o nome que vão lhe dar, Muad'Dib.",
+             "A strange 'thopter dives out of the night onto Paul and Jessica in the desert. Later, Idaho hides them in a stilltent ringed by rocks. There Paul sees what lies ahead, including the name he will be given: Muad'Dib."),
     marcas: ["[1|chapter022|4043]", "[1|chapter022|4039]", "[1|chapter022|4347]"] },
-  { cod: null, titulo: "A tempestade",
-    texto: "Acordam com a tenda soterrada. Saem à noite, com a primeira lua avermelhada de poeira. \"Vamos para o sul, pelas rochas. Se nos pegarem em campo aberto…\"",
+  { cod: null, titulo: t("A tempestade", "The storm"),
+    texto: t("Acordam com a tenda soterrada. Saem à noite, com a primeira lua avermelhada de poeira. \"Vamos para o sul, pelas rochas. Se nos pegarem em campo aberto…\"",
+             "They wake to find the tent buried. They set out at night under a first moon reddened by dust. \"We'll head south and keep to the rocks. If they caught us in the open…\""),
     marcas: ["[1|chapter023|4364]", "[1|chapter023|4441]", "[1|chapter023|4444]"] },
-  { cod: null, titulo: "O verme na fenda",
-    texto: "Espremidos numa rachadura da rocha, os dois veem a boca subir da areia na direção deles: uns oitenta metros de diâmetro, dentes de cristal brilhando ao luar.",
+  { cod: null, titulo: t("O verme na fenda", "The worm at the crack"),
+    texto: t("Espremidos numa rachadura da rocha, os dois veem a boca subir da areia na direção deles: uns oitenta metros de diâmetro, dentes de cristal brilhando ao luar.",
+             "Wedged into a crack in the rock, the two watch the mouth rise out of the sand toward them: some eighty metres across, crystal teeth flashing in the moonlight."),
     marcas: ["[1|chapter029|5776]", "[1|chapter029|5782]"] },
-  { cod: "AR-06", lugar: "Bacia de Tuono", titulo: "Os fremen",
-    texto: "A tropa de Stilgar os encontra. Numa luta à noite na Bacia de Tuono, Jessica derruba Stilgar; Jamis jura que foi bruxaria.",
+  { cod: "AR-06", lugar: t("Bacia de Tuono", "Tuono Basin"), titulo: t("Os fremen", "The Fremen"),
+    texto: t("A tropa de Stilgar os encontra. Numa luta à noite na Bacia de Tuono, Jessica derruba Stilgar; Jamis jura que foi bruxaria.",
+             "Stilgar's troop finds them. In a struggle at night in Tuono Basin, Jessica throws Stilgar; Jamis swears it was witchcraft."),
     marcas: ["[1|chapter032|6337]", "[1|chapter033|6482]"] },
   { cod: "AR-08", lugar: "Sietch Tabr", titulo: "Usul",
-    texto: "Paul recebe o nome secreto de tropa, Usul, que só os de Sietch Tabr podem usar. Mãe e filho vivem no sietch até terem de fugir de um pogrom.",
+    texto: t("Paul recebe o nome secreto de tropa, Usul, que só os de Sietch Tabr podem usar. Mãe e filho vivem no sietch até terem de fugir de um pogrom.",
+             "Paul is given his secret troop name, Usul, which only the people of Sietch Tabr may use. Mother and son live in the sietch until a pogrom forces them to flee."),
     marcas: ["[1|chapter033|6663]", "[1|chapter041|8433]"] },
-  { cod: "AR-27", lugar: "Passo de Harg", titulo: "O crânio do Duque",
-    texto: "Numa incursão a Arrakeen para recuperar a água dos mortos, Paul encontra os restos do pai. Guarda o crânio num túmulo de pedra fremen sobre o Passo de Harg.",
+  { cod: "AR-27", lugar: t("Passo de Harg", "Harg Pass"), titulo: t("O crânio do Duque", "The Duke's skull"),
+    texto: t("Numa incursão a Arrakeen para recuperar a água dos mortos, Paul encontra os restos do pai. Guarda o crânio num túmulo de pedra fremen sobre o Passo de Harg.",
+             "On a raid into Arrakeen to recover the water of the dead, Paul finds his father's remains. He enshrines the skull in a Fremen rock mound above Harg Pass."),
     marcas: ["[1|chapter040|8220]", "[1|notes|11400]"] },
-  { cod: "AR-39", lugar: "Erg de Habbanya", titulo: "O primeiro verme",
-    texto: "Paul monta o fazedor e o conduz pelo erg. \"Sou um fremen nascido hoje, aqui no erg de Habbanya.\"",
+  { cod: "AR-39", lugar: t("Erg de Habbanya", "Habbanya Erg"), titulo: t("O primeiro verme", "The first worm"),
+    texto: t("Paul monta o fazedor e o conduz pelo erg. \"Sou um fremen nascido hoje, aqui no erg de Habbanya.\"",
+             "Paul mounts the maker and rides it across the erg. \"I am a Fremen born this day here in the Habbanya erg.\""),
     marcas: ["[1|chapter042|8680]"] },
-  { cod: "AR-40", lugar: "Crista de Habbanya", titulo: "A Caverna dos Pássaros",
-    texto: "A tropa acampa na caverna sob a crista. Ela vira o posto de comando de Paul; ao norte, o Passo do Vento dá numa vila-chave dos Harkonnen.",
+  { cod: "AR-40", lugar: t("Crista de Habbanya", "Habbanya Ridge"), titulo: t("A Caverna dos Pássaros", "Cave of Birds"),
+    texto: t("A tropa acampa na caverna sob a crista. Ela vira o posto de comando de Paul; ao norte, o Passo do Vento dá numa vila-chave dos Harkonnen.",
+             "The troop camps in the cave beneath the ridge. It becomes Paul's command post; to the north, Wind Pass opens onto a key Harkonnen village."),
     marcas: ["[1|chapter042|8717]", "[1|chapter044|9215]"] },
-  { cod: "AR-19", lugar: "Arrakeen", titulo: "De volta, com a tempestade",
-    texto: "Da borda da Muralha Escudo, Paul espera \"uma bisavó de tempestade\". A Velha Fenda é aberta a explosivos, e na noite da vitória ele é levado à mesma Residência de onde tinha fugido.",
+  { cod: "AR-19", lugar: "Arrakeen", titulo: t("De volta, com a tempestade", "Back, with the storm"),
+    texto: t("Da borda da Muralha Escudo, Paul espera \"uma bisavó de tempestade\". A Velha Fenda é aberta a explosivos, e na noite da vitória ele é levado à mesma Residência de onde tinha fugido.",
+             "From the rim of the Shield Wall, Paul waits for \"a great grandmother of a storm\". Old Gap is blasted open, and on the evening of victory he is brought to the same Residency he once fled."),
     marcas: ["[1|chapter046|9554]", "[1|chapter046|9590]", "[1|notes|11402]", "[1|chapter048|9892]"] },
 ];
+let ETAPAS: Etapa[] = [];
 
 const CHAVE = "arrakis-fuga-aberta";
 const mc = (m: string) => `<code class="marca">${esc(m)}</code>`;
 
 export async function fuga(alvo: HTMLElement) {
+  ETAPAS = etapas();
   let aberta = false;
   try { aberta = localStorage.getItem(CHAVE) === "1"; } catch { /* sem armazenamento */ }
 
   alvo.innerHTML = `<article class="folha fuga">
-    ${cabecalho(`${prancha("fuga")} · A rota da fuga`,
-      "De Arrakeen a Arrakeen",
-      "A noite em que os Harkonnen voltam, a travessia do deserto e o caminho de volta, marcados no mapa nos lugares que o livro nomeia.")}
+    ${cabecalho(`${prancha("fuga")} · ${t("A rota da fuga", "The escape route")}`,
+      t("De Arrakeen a Arrakeen", "From Arrakeen to Arrakeen"),
+      t("A noite em que os Harkonnen voltam, a travessia do deserto e o caminho de volta, marcados no mapa nos lugares que o livro nomeia.",
+        "The night the Harkonnens return, the crossing of the desert and the road back, marked on the map at the places the book names."))}
     <div class="corpo">
       <div class="aviso-spoiler" ${aberta ? "hidden" : ""}>
-        <p><strong>Esta prancha conta o enredo de <em>Duna</em></strong>, do livro 1 e dos dois
-        filmes. Se ainda não viu nem leu, talvez queira voltar depois.</p>
-        <button class="btn-spoiler" type="button">Mostrar a rota</button>
+        <p>${t(`<strong>Esta prancha conta o enredo de <em>Duna</em></strong>, do livro 1 e dos dois
+        filmes. Se ainda não viu nem leu, talvez queira voltar depois.`,
+        `<strong>This plate tells the plot of <em>Dune</em></strong>, book 1 and both films.
+        If you haven't seen or read it yet, you may want to come back later.`)}</p>
+        <button class="btn-spoiler" type="button">${t("Mostrar a rota", "Show the route")}</button>
       </div>
     </div>
     <section class="fuga-palco" ${aberta ? "" : "hidden"}>
@@ -79,13 +95,13 @@ export async function fuga(alvo: HTMLElement) {
         ${ETAPAS.map((e, i) => `<li class="etapa" data-i="${i}">
           <div class="etapa-n">${String(i + 1).padStart(2, "0")}${e.lugar
             ? ` · <a class="link" href="#/mapa#=${e.cod}">${esc(e.lugar)}</a>`
-            : ` · <span class="sem-lugar">o livro não diz onde</span>`}</div>
+            : ` · <span class="sem-lugar">${t("o livro não diz onde", "the book doesn't say where")}</span>`}</div>
           <h2>${esc(e.titulo)}</h2>
           <p>${esc(e.texto)}</p>
           <p class="marcas">${e.marcas.map(mc).join(" ")}</p>
         </li>`).join("")}
       </ol>
-      <div class="fuga-carta"><canvas aria-label="Mapa com a rota da fuga"></canvas></div>
+      <div class="fuga-carta"><canvas aria-label="${t("Mapa com a rota da fuga", "Map of the escape route")}"></canvas></div>
     </section>
     ${rodape()}
   </article>`;

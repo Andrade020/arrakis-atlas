@@ -1,3 +1,4 @@
+import { emIngles, localidade } from "./i18n";
 // Dicionario de variaveis: rotulo legivel, unidade e formato de cada um dos
 // campos da malha. E' a unica coisa do site escrita a mao sobre os dados — e
 // escrita aqui, num lugar so', para que a ficha do distrito, o seletor de
@@ -20,7 +21,7 @@ export interface Campo {
 
 export interface Grupo { rot: string; campos: string[]; }
 
-export const CAMPOS: Record<string, Campo> = {
+const CAMPOS_PT: Record<string, Campo> = {
   // --- identificacao
   regiao:     { rot: "Região", fmt: "txt" },
   fonte_nome: { rot: "Origem do topônimo", fmt: "txt" },
@@ -99,7 +100,48 @@ export const CAMPOS: Record<string, Campo> = {
                 ajuda: "Contrafactual: quanto o custo cairia se a passagem fosse transitável." },
 };
 
-export const GRUPOS: Grupo[] = [
+
+/* Rótulos em inglês. Unidade e formato são os mesmos; só o texto muda. */
+const EN: Record<string, [string, string?, string?]> = {
+  regiao: ["Region"], fonte_nome: ["Place-name source"], canon_st: ["Gazetteer status"],
+  alias: ["Variant spelling"], sober_nom: ["Nominal sovereignty"], poder_ef: ["Effective control"],
+  area_km2: ["Area", undefined, "Measured on the sphere, with the area correction of the azimuthal equidistant projection."],
+  perim_km: ["Perimeter"], lat: ["Centroid latitude"], lon: ["Centroid longitude"],
+  tipo_terr: ["Dominant terrain"], p_erg: ["Open erg"], p_relevo: ["Rock and ridge"], p_bacia: ["Light basin"],
+  area_nuc: ["Core area", undefined, "The part of the district that matches the feature drawn on the map; the rest is assigned territory."],
+  p_nucleo: ["Core share"],
+  alt_m: ["Canon altitude", undefined, "Altitude given in the Cartographic Notes or on a map label."],
+  alt_mod: ["Modelled mean altitude"], alt_min: ["Modelled minimum altitude"], alt_max: ["Modelled maximum altitude"],
+  declive: ["Mean slope"],
+  n_assent: ["Settlements on the map"], n_sietch: ["Sietches drawn"], n_pyon: ["Pyon villages"], n_botan: ["Botanical stations"],
+  n_sietch_e: ["Estimated sietches", undefined, "The map draws 46 sietches; the books call for about a thousand. The gap is under-recording on the map, not absence."],
+  populacao: ["Population"], pop_fremen: ["Fremen"], pop_pyon: ["Pyon"], pop_urbana: ["Urban"], pop_nomade: ["Nomadic"],
+  dens_Mkm2: ["Density", "people/Mkm²"], taxa_urb: ["Urbanisation rate"],
+  espec_t: ["Spice harvested", "t/year"], esp_kg_km2: ["Yield"], pib_Msol: ["Output"], p_esp_pib: ["Spice share of output"],
+  renda_Msol: ["Income generated"], renda_pc: ["Income per person"], saldo_Msol: ["Local balance"], p_retido: ["Share retained"],
+  massa_mkt: ["Market mass", undefined, "Population weighted by each group's tendency to trade with the Imperial economy."],
+  acesso_mkt: ["Market access"],
+  agua_Ml: ["Water captured", "Ml/year"], agua_hab_l: ["Water per person", "l/year"],
+  risco_verm: ["Worm risk"], risco_temp: ["Storm risk"],
+  dist_arrak: ["Distance to Arrakeen", undefined, "Geodesic distance on the sphere, the distance a map shows."],
+  cd_arrak: ["Cost to Arrakeen", "km eq.", "Accumulated crossing cost with Imperial friction: what it takes to get there, not how far it is."],
+  cd_tabr: ["Cost to Sietch Tabr", "km eq.", "The same calculation with Fremen friction, for those who ride the worm."],
+  isolam: ["Isolation", undefined, "Crossing cost divided by straight-line distance. Above 1, the terrain charges a toll."],
+  acesso_cd: ["Access by cost"],
+  ganho_gap: ["Gain from Old Gap", undefined, "Counterfactual: how much the cost would drop if the pass were open."],
+};
+
+/* O mesmo dicionário, no idioma do momento. */
+export const CAMPOS: Record<string, Campo> = new Proxy(CAMPOS_PT, {
+  get(alvo, chave: string) {
+    const c = alvo[chave];
+    if (!c || !emIngles()) return c;
+    const e = EN[chave];
+    return e ? { ...c, rot: e[0], un: e[1] ?? c.un, ajuda: e[2] ?? c.ajuda } : c;
+  },
+});
+
+const GRUPOS_PT: Grupo[] = [
   { rot: "Situação", campos: ["regiao", "sober_nom", "poder_ef", "canon_st", "alias", "fonte_nome"] },
   { rot: "Território", campos: ["area_km2", "perim_km", "tipo_terr", "p_erg", "p_relevo", "p_bacia", "p_nucleo", "lat", "lon"] },
   { rot: "Relevo", campos: ["alt_m", "alt_mod", "alt_min", "alt_max", "declive"] },
@@ -111,7 +153,7 @@ export const GRUPOS: Grupo[] = [
 ];
 
 /** Campos numericos que fazem sentido como coropleto, na ordem do seletor. */
-export const COROPLETOS: { grupo: string; campos: string[] }[] = [
+const COROPLETOS_PT: { grupo: string; campos: string[] }[] = [
   { grupo: "Território", campos: ["area_km2", "p_erg", "p_relevo", "p_nucleo", "alt_mod", "declive"] },
   { grupo: "População", campos: ["populacao", "dens_Mkm2", "taxa_urb", "n_assent", "n_sietch_e"] },
   { grupo: "Economia", campos: ["espec_t", "esp_kg_km2", "pib_Msol", "renda_pc", "p_retido", "acesso_mkt"] },
@@ -119,7 +161,18 @@ export const COROPLETOS: { grupo: string; campos: string[] }[] = [
   { grupo: "Água e risco", campos: ["agua_hab_l", "risco_verm", "risco_temp"] },
 ];
 
-const fmtPt = new Intl.NumberFormat("pt-BR");
+const GRUPOS_EN: Record<string, string> = {
+  "Situação": "Status", "Território": "Territory", "Relevo": "Relief", "Assentamento": "Settlement",
+  "População": "Population", "Economia": "Economy", "Água e risco": "Water and risk", "Acessibilidade": "Accessibility",
+};
+/** Grupos da ficha, no idioma do momento. */
+export const grupos = (): Grupo[] =>
+  GRUPOS_PT.map((g) => (emIngles() ? { ...g, rot: GRUPOS_EN[g.rot] ?? g.rot } : g));
+/** Grupos do seletor de coropleto, no idioma do momento. */
+export const coropletos = () =>
+  COROPLETOS_PT.map((g) => (emIngles() ? { ...g, grupo: GRUPOS_EN[g.grupo] ?? g.grupo } : g));
+
+const fmtNum = () => new Intl.NumberFormat(localidade());
 
 /* Valores de codigo que nao devem chegar ao leitor como codigo. */
 const LEGIVEL: Record<string, string> = {
@@ -131,11 +184,25 @@ const LEGIVEL: Record<string, string> = {
   erg: "erg", relevo: "relevo", bacia: "bacia",
   Imperio: "Império",
 };
+const LEGIVEL_EN: Record<string, string> = {
+  canonico_fh: "named by Herbert",
+  so_no_mapa: "only on the map",
+  contradicao_grafia: "variant spelling",
+  mapa: "appendix map",
+  derivado: "derived",
+  erg: "erg", relevo: "rock", bacia: "basin",
+  Imperio: "Empire", Fremen: "Fremen", Contrabandistas: "Smugglers", "Sem controle efetivo": "No effective control",
+  Bacia: "Basin", Erg: "Erg", Macico: "Massif", Misto: "Mixed",
+  "Bacia Polar": "Polar Basin", "Muralha Escudo": "Shield Wall", "Bacia Imperial": "Imperial Basin",
+  "Falsas Muralhas": "False Walls", "Planaltos Orientais": "Eastern Highlands", "Grandes Ergs": "Great Ergs",
+  "Ergs Exteriores": "Outer Ergs", "Feudo imperial (contrato CHOAM)": "Imperial fief (CHOAM contract)",
+};
 
 export function formata(campo: string, v: unknown): string {
   const c = CAMPOS[campo];
   if (v === null || v === undefined || v === "") return "—";
-  if (!c || c.fmt === "txt") return LEGIVEL[String(v)] ?? String(v);
+  if (!c || c.fmt === "txt") return (emIngles() ? LEGIVEL_EN[String(v)] : LEGIVEL[String(v)]) ?? String(v);
+  const fmtPt = fmtNum();
   const n = Number(v);
   if (Number.isNaN(n)) return String(v);
   switch (c.fmt) {
@@ -144,8 +211,8 @@ export function formata(campo: string, v: unknown): string {
     case "dec2": return fmtPt.format(Number(n.toFixed(2)));
     case "pct":  return fmtPt.format(Number(n.toFixed(1)));
     case "comp": {
-      if (Math.abs(n) >= 1e6) return fmtPt.format(Number((n / 1e6).toFixed(2))) + " mi";
-      if (Math.abs(n) >= 1e4) return fmtPt.format(Number((n / 1e3).toFixed(1))) + " mil";
+      if (Math.abs(n) >= 1e6) return fmtPt.format(Number((n / 1e6).toFixed(2))) + (emIngles() ? " m" : " mi");
+      if (Math.abs(n) >= 1e4) return fmtPt.format(Number((n / 1e3).toFixed(1))) + (emIngles() ? "k" : " mil");
       return fmtPt.format(Math.round(n));
     }
     default: return String(v);

@@ -7,6 +7,7 @@
    "marcador": "[1|appendixI|10374]",
    "trecho": "a sietch that looked down on Wind Pass",
    "resumo": "Pardot Kynes vai parar num sietch sobre o passo e fala aos fremen de dunas presas por capim, palmeirais e qanats a céu aberto.",
+   "resumo_en": "Pardot Kynes ends up in a sietch above the pass and tells the Fremen about dunes held down by grass, palm groves and open qanats.",
    "spoiler": false,
    "local": "Apêndice I: A Ecologia de Duna"
   },
@@ -17,6 +18,7 @@
    "marcador": "[1|chapter044|9215]",
    "trecho": "a key village, home of artisans and technicians",
    "resumo": "O passo dá numa vila importante, de artesãos e técnicos, que faz a manutenção de todo um setor de defesa dos Harkonnen.",
+   "resumo_en": "The pass leads to a key village of artisans and technicians that maintains a whole Harkonnen defence sector.",
    "spoiler": true,
    "local": "capítulo 44"
   }
@@ -29,6 +31,7 @@
    "marcador": "[1|terminology|10729]",
    "trecho": "any modified",
    "resumo": "O nome é o do cielago, o morcego modificado de Arrakis que leva mensagens gravadas no próprio grito.",
+   "resumo_en": "The name comes from the cielago, the modified bat of Arrakis that carries messages recorded in its own cry.",
    "spoiler": false,
    "local": "Terminologia do Império (glossário)"
   }
@@ -41,6 +44,7 @@
    "marcador": "[1|notes|11412]",
    "trecho": "Moisture, not cold, is determining factor",
    "resumo": "Ao norte desta linha nenhum verme foi registrado. O que o detém é a umidade, não o frio.",
+   "resumo_en": "No worm has ever been recorded north of this line. What stops them is moisture, not cold.",
    "spoiler": false,
    "local": "Notas Cartográficas"
   }
@@ -53,6 +57,7 @@
    "marcador": "[1|chapter033|6482]",
    "trecho": "There was witch-force at Tuono Basin",
    "resumo": "Numa luta à noite na Bacia de Tuono, Jessica derruba Stilgar. Jamis jura que foi bruxaria.",
+   "resumo_en": "In a night fight at Tuono Basin, Jessica throws Stilgar. Jamis swears it was witchcraft.",
    "spoiler": true,
    "local": "capítulo 33"
   }
@@ -65,6 +70,7 @@
    "marcador": "[1|chapter031|6193]",
    "trecho": "a place called “Sietch Tabr” on the chart",
    "resumo": "No mapa de rotas de fuga que Kynes mostrou a Jessica havia um lugar chamado Sietch Tabr, com uma nota: Stilgar.",
+   "resumo_en": "On the escape-route chart Kynes showed Jessica there was a place called Sietch Tabr, with a note: Stilgar.",
    "spoiler": false,
    "local": "capítulo 31"
   },
@@ -75,6 +81,7 @@
    "marcador": "[1|chapter033|6663]",
    "trecho": "You shall be known among us as Usul",
    "resumo": "Paul recebe o nome secreto de tropa, Usul, que quer dizer a base do pilar. Só os de Sietch Tabr podem usá-lo.",
+   "resumo_en": "Paul receives his secret troop name, Usul, meaning the base of the pillar. Only the people of Sietch Tabr may use it.",
    "spoiler": true,
    "local": "capítulo 33"
   }
@@ -87,6 +94,7 @@
    "marcador": "[3|Children_of_Dune_split_030|2841]",
    "trecho": "A skeleton butterfly flew in and out of the shadows",
    "resumo": "Anos depois, Leto II espia da saída secreta do sietch o penhasco, e uma borboleta-esqueleto voa entre as sombras.",
+   "resumo_en": "Years later, Leto II watches the cliff from the sietch's secret exit, and a skeleton butterfly flits through the shadows.",
    "spoiler": true,
    "local": "seção 28 de 68 (cerca de 41% do volume)"
   }
@@ -99,6 +107,7 @@
    "marcador": "[1|chapter024|4466]",
    "trecho": "Two battle groups at Splintered Rock",
    "resumo": "Na noite da traição, um dos relatórios que chegam a Hawat fala de dois grupos de combate na Rocha Lascada.",
+   "resumo_en": "On the night of the betrayal, one of the reports reaching Hawat mentions two battle groups at Splintered Rock.",
    "spoiler": true,
    "local": "capítulo 24"
   }
@@ -111,6 +120,7 @@
    "marcador": "[1|appendixI|10438]",
    "trecho": "killed in the cave-in at Plaster Basin",
    "resumo": "Pardot Kynes, planetólogo e pai de Liet-Kynes, morre num desabamento na Bacia de Gesso.",
+   "resumo_en": "Pardot Kynes, planetologist and father of Liet-Kynes, dies in a cave-in at Plaster Basin.",
    "spoiler": false,
    "local": "Apêndice I: A Ecologia de Duna"
   }
@@ -123,6 +133,7 @@
    "marcador": "[1|notes|11386]",
    "trecho": "meridian through Observatory Mountain",
    "resumo": "As Notas Cartográficas usam o meridiano que passa por esta montanha como referência do mapa. O desenho, porém, marca outro (ver a contradição C4).",
+   "resumo_en": "The Cartographic Notes use the meridian through this mountain as the map's reference. The drawing, however, marks another one (see contradiction C4).",
    "spoiler": false,
    "local": "Notas Cartográficas"
   }
@@ -135,6 +146,7 @@
    "marcador": "[1|chapter007|1064]",
    "trecho": "two hundred kilometers northeast across the Broken Land",
    "resumo": "Carthag fica a duzentos quilômetros de Arrakeen, do outro lado da Terra Quebrada.",
+   "resumo_en": "Carthag lies two hundred kilometres from Arrakeen, on the far side of the Broken Land.",
    "spoiler": false,
    "local": "capítulo 7"
   }
@@ -147,6 +159,7 @@
    "marcador": "[3|Children_of_Dune_split_052|4751]",
    "trecho": "breached the qanats at Kagga Basin",
    "resumo": "Saqueadores vindos da Terra Quebrada rompem os qanats da bacia e derramam a água na areia; Arrakeen entra em racionamento.",
+   "resumo_en": "Raiders from the Broken Land breach the basin's qanats and spill the water onto the sand; Arrakeen goes on rationing.",
    "spoiler": true,
    "local": "seção 50 de 68 (cerca de 74% do volume)"
   }
@@ -159,6 +172,7 @@
    "marcador": "[1|chapter024|4460]",
    "trecho": "a garrison village, buffer outpost for the former capital city, Carthag",
    "resumo": "Vila-guarnição que protegia Carthag. Hawat estava aqui na pior noite da vida dele.",
+   "resumo_en": "A garrison village that shielded Carthag. Hawat was here on the worst night of his life.",
    "spoiler": true,
    "local": "capítulo 24"
   }
@@ -171,6 +185,7 @@
    "marcador": "[1|chapter024|4465]",
    "trecho": "A legion at Arsunt",
    "resumo": "Na noite do ataque, uma legião inteira desce em Arsunt.",
+   "resumo_en": "On the night of the attack, a whole legion lands at Arsunt.",
    "spoiler": true,
    "local": "capítulo 24"
   }
@@ -183,6 +198,7 @@
    "marcador": "[1|chapter007|1064]",
    "trecho": "new megalopolis of Carthag—a cheap and brassy place",
    "resumo": "A cidade que os Harkonnen fizeram capital. Para Jessica, um lugar \"barato e vistoso\".",
+   "resumo_en": "The city the Harkonnens made their capital. To Jessica, a \"cheap and brassy\" place.",
    "spoiler": false,
    "local": "capítulo 7"
   },
@@ -193,6 +209,7 @@
    "marcador": "[1|chapter022|4104]",
    "trecho": "no survivors in Carthag and the Guild Bank has been sacked",
    "resumo": "Chega a notícia de que não há sobreviventes em Carthag e de que o Banco da Guilda foi saqueado.",
+   "resumo_en": "Word arrives that there are no survivors in Carthag and that the Guild Bank has been sacked.",
    "spoiler": true,
    "local": "capítulo 22"
   }
@@ -205,6 +222,7 @@
    "marcador": "[1|chapter002|457]",
    "trecho": "the Duke and his family will occupy the Residency",
    "resumo": "Os Atreides chegam e ocupam a Residência, antiga casa do conde Fenring.",
+   "resumo_en": "The Atreides arrive and take over the Residency, Count Fenring's old house.",
    "spoiler": false,
    "local": "capítulo 2"
   },
@@ -215,6 +233,7 @@
    "marcador": "[1|chapter021|3742]",
    "trecho": "the flame-lighted night of Arrakeen",
    "resumo": "O Barão assiste de uma nave pousada à noite de Arrakeen em chamas.",
+   "resumo_en": "From a grounded ship, the Baron watches Arrakeen's night lit by fire.",
    "spoiler": true,
    "local": "capítulo 21"
   },
@@ -225,6 +244,7 @@
    "marcador": "[1|chapter048|9892]",
    "trecho": "on the evening of his victory",
    "resumo": "Paul-Muad'Dib é levado à velha Residência na noite da vitória.",
+   "resumo_en": "Paul-Muad'Dib is brought to the old Residency on the evening of his victory.",
    "spoiler": true,
    "local": "capítulo 48"
   }
@@ -237,6 +257,7 @@
    "marcador": "[3|Children_of_Dune_split_060|5295]",
    "trecho": "by which the first Fremen had migrated into the desert",
    "resumo": "A fenda funda e sinuosa na Muralha Escudo por onde os primeiros fremen entraram no deserto.",
+   "resumo_en": "The deep, winding cleft in the Shield Wall through which the first Fremen entered the desert.",
    "spoiler": false,
    "local": "seção 58 de 68 (cerca de 85% do volume)"
   },
@@ -247,6 +268,7 @@
    "marcador": "[1|notes|11402]",
    "trecho": "blasted out by Paul-Muad",
    "resumo": "Paul-Muad'Dib a abre a explosivos.",
+   "resumo_en": "Paul-Muad'Dib blasts it open.",
    "spoiler": true,
    "local": "Notas Cartográficas"
   }
@@ -259,6 +281,7 @@
    "marcador": "[1|chapter046|9638]",
    "trecho": "like a hawk into a nest of rock partridge",
    "resumo": "Um carro de superfície vem da Muralha Oeste \"como um falcão num ninho de perdizes\".",
+   "resumo_en": "A groundcar comes from the Western Wall \"like a hawk into a nest of rock partridge\".",
    "spoiler": true,
    "local": "capítulo 46"
   }
@@ -271,6 +294,7 @@
    "marcador": "[1|chapter034|6801]",
    "trecho": "When the hawk plane stooped upon us at Hole-in-the-Rock",
    "resumo": "Um avião mergulhou sobre a tropa de Stilgar aqui; foi Jamis quem o puxou para longe.",
+   "resumo_en": "A plane dived on Stilgar's troop here; it was Jamis who drew it away.",
    "spoiler": true,
    "local": "capítulo 34"
   }
@@ -283,6 +307,7 @@
    "marcador": "[1|chapter040|8220]",
    "trecho": "I enshrined the skull of my father in a Fremen rock mound overlooking Harg Pass",
    "resumo": "Paul guarda o crânio do pai num túmulo de pedra fremen sobre o passo.",
+   "resumo_en": "Paul enshrines his father's skull in a Fremen rock mound above the pass.",
    "spoiler": true,
    "local": "capítulo 40"
   }
@@ -295,6 +320,7 @@
    "marcador": "[2|herb_9781101157879_oeb_c23_r1|3475]",
    "trecho": "the shrine atop Chin Rock",
    "resumo": "Um santuário no alto da rocha, junto ao primeiro sietch de Paul, um lugar cheio de lembranças.",
+   "resumo_en": "A shrine on top of the rock, next to Paul's first sietch, a place full of memories.",
    "spoiler": true,
    "local": "seção 27 de 30 (cerca de 90% do volume)"
   }
@@ -307,6 +333,7 @@
    "marcador": "[3|Children_of_Dune_split_031|2929]",
    "trecho": "It lay below the rim of Red Chasm",
    "resumo": "Jessica se esconde num sietch velho e pobre sob a borda do abismo.",
+   "resumo_en": "Jessica hides in an old, poor sietch below the rim of the chasm.",
    "spoiler": true,
    "local": "seção 29 de 68 (cerca de 43% do volume)"
   }
@@ -319,6 +346,7 @@
    "marcador": "[3|Children_of_Dune_split_062|5623]",
    "trecho": "It was Tuek’s Sietch on the inner lip of False Wall",
    "resumo": "Gurney Halleck espera à porta do sietch dos contrabandistas que decidam se o abrigam.",
+   "resumo_en": "Gurney Halleck waits at the door of the smugglers' sietch for them to decide whether to take him in.",
    "spoiler": true,
    "local": "seção 60 de 68 (cerca de 88% do volume)"
   }
@@ -331,6 +359,7 @@
    "marcador": "[1|chapter004|681]",
    "trecho": "the wasteland where nothing lives except the spice and the sandworms",
    "resumo": "A Reverenda Madre descreve estas planícies a Paul como \"o ermo onde nada vive além da especiaria e dos vermes\".",
+   "resumo_en": "The Reverend Mother describes these flats to Paul as \"the wasteland where nothing lives except the spice and the sandworms\".",
    "spoiler": false,
    "local": "capítulo 4"
   }
@@ -343,6 +372,7 @@
    "marcador": "[1|notes|11398]",
    "trecho": "Somewhere in the Flat is the salt pan which Pardot Kynes",
    "resumo": "Em algum ponto da chapada fica a salina que Pardot Kynes descobriu.",
+   "resumo_en": "Somewhere on the Flat is the salt pan that Pardot Kynes discovered.",
    "spoiler": false,
    "local": "Notas Cartográficas"
   },
@@ -353,6 +383,7 @@
    "marcador": "[1|chapter016|2847]",
    "trecho": "all of a man’s water, ultimately, belongs to his people",
    "resumo": "Num jantar em Arrakeen, Kynes explica que perto da Grande Chapada toda a água de um homem pertence à tribo.",
+   "resumo_en": "At a dinner in Arrakeen, Kynes explains that near the Great Flat all of a man's water belongs to the tribe.",
    "spoiler": false,
    "local": "capítulo 16"
   }
@@ -365,6 +396,7 @@
    "marcador": "[1|chapter042|8680]",
    "trecho": "I am a Fremen born this day here in the Habbanya erg",
    "resumo": "\"Sou um fremen nascido hoje, aqui no erg de Habbanya.\"",
+   "resumo_en": "\"I am a Fremen born this day here in the Habbanya erg.\"",
    "spoiler": true,
    "local": "capítulo 42"
   }
@@ -377,6 +409,7 @@
    "marcador": "[1|chapter042|8717]",
    "trecho": "Cave of Birds beneath Habbanya Ridge",
    "resumo": "A Caverna dos Pássaros fica sob a crista; Stilgar leva a tropa para lá.",
+   "resumo_en": "The Cave of Birds lies beneath the ridge; Stilgar leads the troop there.",
    "spoiler": true,
    "local": "capítulo 42"
   },
@@ -387,6 +420,7 @@
    "marcador": "[1|chapter045|9348]",
    "trecho": "the mother of his firstborn",
    "resumo": "Antes do amanhecer, Chani sobe da bacia de Habbanya. Ela é a companheira de Muad'Dib e mãe do primeiro filho dele.",
+   "resumo_en": "Before dawn, Chani comes up from Habbanya basin. She is Muad'Dib's companion and the mother of his firstborn.",
    "spoiler": true,
    "local": "capítulo 45"
   }
