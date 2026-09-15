@@ -5,7 +5,9 @@ import {
 import { Mapa, type EstadoMapa } from "../mapa";
 import { CAMPOS, coropletos, grupos as gruposCampos, formata } from "../campos";
 import { esc, selo } from "../ui";
+import { ligaRastros, procParaCampo, rastroBotaoHTML, rastroHTML } from "../rastro";
 import { t, emIngles, localidade, nomeLivro, localCitacao } from "../i18n";
+import { PERCURSOS, type PassoPercurso } from "../percursos";
 
 const camadas = (): [string, string][] => [
   ["distritos", t("Limites distritais", "District borders")],
@@ -68,6 +70,7 @@ export async function paginaMapa(alvo: HTMLElement) {
     <div class="ctrl" id="ctrl"></div>
     <canvas aria-label="${t("Mapa de Arrakis", "Map of Arrakis")}"></canvas>
     <div class="inspetor" id="inspetor" hidden></div>
+    <section class="percurso-painel" id="percurso-painel" hidden aria-label="${t("Percurso guiado", "Guided tour")}"></section>
     <div class="dica" id="dica" hidden></div>
   </div>`;
 
@@ -116,8 +119,177 @@ export async function paginaMapa(alvo: HTMLElement) {
 
   const porCod = new Map(dist.map((d) => [d.cod, d]));
 
+  /* A vista compartilhada fica inteiramente no hash: assim ela continua sendo
+     uma rota do atlas estatico e nao depende de configuracao no servidor.
+     Valores desconhecidos sao descartados antes de chegarem ao renderizador;
+     um link antigo, ou escrito a mao, nunca pode deixar a prancha num estado
+     que os dados nao sabem desenhar. */
+  const camadasValidas = new Set(camadas().map(([k]) => k));
+  const rastersValidos = new Set([...superficies().map(([k]) => k), ...Object.keys(ras)]);
+  const camposValidos = new Set(coropletos().flatMap((g) => g.campos).filter((c) => Boolean(CAMPOS[c])));
+  const camadasPadrao = ["distritos", "rotulos", "assentamentos", "grade"];
+
+  function leVistaDoEndereco() {
+    const hash = location.hash;
+    const inicio = hash.indexOf("?");
+    const fim = hash.indexOf("#=", inicio < 0 ? 0 : inicio);
+    const busca = inicio < 0 ? new URLSearchParams() : new URLSearchParams(hash.slice(inicio + 1, fim < 0 ? undefined : fim));
+    const raster = busca.get("superficie");
+    if (raster === "nenhuma") estado.raster = "";
+    else if (raster && rastersValidos.has(raster) && (raster === "" || ras[raster])) estado.raster = raster;
+
+    const campo = busca.get("variavel");
+    if (campo && camposValidos.has(campo)) estado.coropleto = campo;
+
+    const listaCamadas = busca.get("camadas");
+    if (listaCamadas !== null) {
+      const escolhidas = listaCamadas.split(",").filter((c) => camadasValidas.has(c));
+      // Uma lista vazia e' uma escolha valida: ela permite compartilhar a
+      // carta sem sobreposicoes. Repeticoes nao alteram o resultado.
+      estado.camadas = new Set(escolhidas);
+    }
+
+    const distrito = hash.match(/#=([^&#]+)/)?.[1];
+    if (distrito && porCod.has(distrito)) estado.selecionado = distrito;
+  }
+
+  function linkDaVista(): string {
+    const busca = new URLSearchParams();
+    if (estado.raster === "") busca.set("superficie", "nenhuma");
+    else if (estado.raster !== "relevo") busca.set("superficie", estado.raster);
+    if (estado.coropleto) busca.set("variavel", estado.coropleto);
+    const ativas = camadas().map(([k]) => k).filter((k) => estado.camadas.has(k));
+    if (ativas.join(",") !== camadasPadrao.join(",")) busca.set("camadas", ativas.join(","));
+    const rotaMapa = `#/${emIngles() ? "en/" : ""}mapa`;
+    const sufixo = busca.toString() ? `?${busca}` : "";
+    const distrito = estado.selecionado && porCod.has(estado.selecionado) ? `#=${estado.selecionado}` : "";
+    return new URL(`${rotaMapa}${sufixo}${distrito}`, location.href).href;
+  }
+
+  async function copiaVista() {
+    const texto = linkDaVista();
+    let copiado = false;
+    try {
+      await navigator.clipboard.writeText(texto);
+      copiado = true;
+    } catch {
+      const campo = document.createElement("textarea");
+      campo.value = texto;
+      campo.setAttribute("readonly", "");
+      campo.style.position = "fixed";
+      campo.style.opacity = "0";
+      document.body.append(campo);
+      campo.select();
+      copiado = document.execCommand("copy");
+      campo.remove();
+    }
+    const retorno = ctrl.querySelector("#link-vista-feedback");
+    if (retorno) retorno.textContent = copiado
+      ? t("Link copiado.", "Link copied.")
+      : t(`Copia indisponível. Link: ${texto}`, `Copy unavailable. Link: ${texto}`);
+  }
+
+  leVistaDoEndereco();
+  if (estado.coropleto) mapa.classifica(estado.coropleto, procParaCampo(estado.coropleto, prov.campos)?.classe ?? "DEDUZIDO");
+
   /* ------------------------------------------------------------ controles */
   const ctrl = alvo.querySelector("#ctrl") as HTMLElement;
+  let controlesAbertos = false;
+  type Camera = typeof mapa.vista;
+  let anteriorAoPercurso: { raster: string; coropleto: string; camadas: Set<string>; selecionado: string | null; camera: Camera } | null = null;
+  let percursoAtivo: number | null = null;
+  let passoAtivo = 0;
+  let percursoRecolhido = false;
+
+  function aplicaPasso(p: PassoPercurso) {
+    if (!porCod.has(p.cod)) return;
+    estado.raster = p.raster;
+    estado.coropleto = p.campo;
+    estado.camadas = new Set(p.camadas);
+    mapa.classifica(p.campo, procParaCampo(p.campo, prov.campos)?.classe ?? "DEDUZIDO");
+    mapa.vaiPara(p.cod);
+    // A ficha no celular cobre a carta; o percurso apresenta o lugar em seu
+    // painel compacto, enquanto a selecao continua no estado compartilhavel.
+    inspetor.hidden = true;
+    palco.classList.remove("com-ficha");
+    pintaControles();
+    pintaPercurso();
+  }
+
+  function iniciaPercurso(i: number) {
+    if (!PERCURSOS[i]) return;
+    if (percursoAtivo === null) anteriorAoPercurso = {
+      raster: estado.raster, coropleto: estado.coropleto,
+      camadas: new Set(estado.camadas), selecionado: estado.selecionado,
+      camera: mapa.vista,
+    };
+    percursoAtivo = i;
+    passoAtivo = 0;
+    percursoRecolhido = false;
+    controlesAbertos = false;
+    aplicaPasso(PERCURSOS[i].passos[0]);
+    palco.querySelector<HTMLButtonElement>("#percurso-proximo")?.focus();
+  }
+
+  function saiPercurso() {
+    const salvo = anteriorAoPercurso;
+    const ultimoPercurso = percursoAtivo;
+    percursoAtivo = null;
+    anteriorAoPercurso = null;
+    if (salvo) {
+      estado.raster = salvo.raster;
+      estado.coropleto = salvo.coropleto;
+      estado.camadas = new Set(salvo.camadas);
+      estado.selecionado = salvo.selecionado;
+      mapa.classifica(salvo.coropleto, procParaCampo(salvo.coropleto, prov.campos)?.classe ?? "DEDUZIDO");
+      mostra(salvo.selecionado);
+      // Reabrir a ficha altera a largura do canvas. Atualizar seu tamanho
+      // antes de repor a camera evita que o ResizeObserver desloque a vista.
+      mapa.redimensiona();
+      const atual = mapa.vista;
+      mapa.poeVista(salvo.camera.k,
+        salvo.camera.tx + (atual.larg - salvo.camera.larg) / 2,
+        salvo.camera.ty + (atual.alt - salvo.camera.alt) / 2);
+    }
+    pintaControles();
+    pintaPercurso();
+    const foco = window.matchMedia("(max-width: 760px)").matches
+      ? "#abre-percursos" : `[data-percurso="${ultimoPercurso}"]`;
+    ctrl.querySelector<HTMLButtonElement>(foco)?.focus();
+  }
+
+  function pintaPercurso() {
+    const painel = alvo.querySelector<HTMLElement>("#percurso-painel")!;
+    if (percursoAtivo === null) { painel.hidden = true; painel.innerHTML = ""; mapa.desenha(); return; }
+    const guia = PERCURSOS[percursoAtivo];
+    const passo = guia.passos[passoAtivo];
+    const nome = emIngles() ? guia.en : guia.pt;
+    painel.hidden = false;
+    painel.classList.toggle("recolhido", percursoRecolhido);
+    painel.innerHTML = `<div class="percurso-etiqueta">${t("Percurso guiado", "Guided tour")}</div>
+      <button type="button" id="percurso-recolher" aria-controls="percurso-conteudo" aria-expanded="${!percursoRecolhido}">${percursoRecolhido ? t("Abrir", "Open") : t("Recolher", "Collapse")}</button>
+      <div ${percursoRecolhido ? "hidden" : ""} id="percurso-conteudo"><h2>${esc(nome)}</h2>
+      <p class="percurso-progresso" role="status" aria-live="polite">${t("Passo", "Step")} ${passoAtivo + 1} ${t("de", "of")} ${guia.passos.length} · ${esc(emIngles() ? passo.lugarEn : passo.lugarPt)}</p>
+      <p class="percurso-texto">${esc(emIngles() ? passo.en : passo.pt)}</p>
+      <a class="link" href="#/${emIngles() ? "en/" : ""}${passo.prancha}">${t("Ler a prancha completa →", "Read the full plate →")}</a>
+      <div class="percurso-acoes">
+        <button type="button" id="percurso-anterior" ${passoAtivo === 0 ? "disabled" : ""}>${t("Anterior", "Previous")}</button>
+        <button type="button" id="percurso-proximo" ${passoAtivo === guia.passos.length - 1 ? "disabled" : ""}>${t("Próximo", "Next")}</button>
+        <button type="button" id="percurso-sair">${t("Sair", "Exit")}</button>
+      </div></div>${percursoRecolhido ? `<button type="button" id="percurso-sair-recolhido">${t("Sair", "Exit")}</button>` : ""}`;
+    painel.querySelector<HTMLButtonElement>("#percurso-recolher")?.addEventListener("click", () => { percursoRecolhido = !percursoRecolhido; pintaPercurso(); painel.querySelector<HTMLButtonElement>("#percurso-recolher")?.focus(); });
+    painel.querySelector<HTMLButtonElement>("#percurso-anterior")?.addEventListener("click", () => { passoAtivo--; aplicaPasso(guia.passos[passoAtivo]); (painel.querySelector<HTMLButtonElement>(passoAtivo === 0 ? "#percurso-proximo" : "#percurso-anterior"))?.focus(); });
+    painel.querySelector<HTMLButtonElement>("#percurso-proximo")?.addEventListener("click", () => { passoAtivo++; aplicaPasso(guia.passos[passoAtivo]); (painel.querySelector<HTMLButtonElement>(passoAtivo === guia.passos.length - 1 ? "#percurso-sair" : "#percurso-proximo"))?.focus(); });
+    painel.querySelectorAll<HTMLButtonElement>("#percurso-sair, #percurso-sair-recolhido").forEach((b) => b.addEventListener("click", saiPercurso));
+    mapa.desenha();
+  }
+
+  function achaDistrito(texto: string): Distrito | undefined {
+    const chave = texto.trim().toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (!chave) return undefined;
+    return dist.find((d) => [d.cod, d.nome, d.nome_en].some((v) =>
+      String(v).toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === chave));
+  }
 
   function barras(chaves: { cor: string; rot: string }[], rotulos: string[]) {
     return `<div class="chaves">${chaves.map((k, i) => `<div class="chave">
@@ -139,7 +311,7 @@ export async function paginaMapa(alvo: HTMLElement) {
     const cl = mapa.legenda();
     if (cl) {
       const c = CAMPOS[cl.campo];
-      const p = prov.campos[cl.campo];
+      const p = procParaCampo(cl.campo, prov.campos);
       const CURTA = curta();
       return `<div class="cab">${t("Legenda", "Legend")}</div>
       <div>
@@ -174,6 +346,16 @@ export async function paginaMapa(alvo: HTMLElement) {
   function pintaControles() {
     const superf = superficies().filter(([k]) => k === "" || ras[k]);
     ctrl.innerHTML = `
+      <div class="ctrl-mobile">
+        <a class="ctrl-mobile-volta" href="#/" aria-label="${t("Voltar ao atlas", "Back to the atlas")}">←</a>
+        <select id="superficie-mobile" aria-label="${t("Superfície do mapa", "Map surface")}">
+          ${superf.map(([k, r]) => `<option value="${k}"${estado.raster === k ? " selected" : ""}>${esc(r)}</option>`).join("")}
+        </select>
+        <button id="zoom-mais" type="button" aria-label="${t("Aproximar mapa", "Zoom in")}">+</button>
+        <button id="zoom-menos" type="button" aria-label="${t("Afastar mapa", "Zoom out")}">−</button>
+        <button id="abre-percursos" type="button" aria-label="${t("Abrir percursos guiados", "Open guided tours")}">${t("Guias", "Tours")}</button>
+        <button id="abre-controles" type="button" aria-expanded="${controlesAbertos}">${controlesAbertos ? t("Fechar", "Close") : t("Opções", "Options")}</button>
+      </div>
       <a class="volta" href="#/">${t("Voltar ao atlas", "Back to the atlas")}</a>
       <div class="ctrl-topo">
         <div class="ctrl-titulo">${t("Prancha 01", "Plate 01")}</div>
@@ -206,8 +388,25 @@ export async function paginaMapa(alvo: HTMLElement) {
             aria-pressed="${estado.camadas.has(k)}"><span>${esc(r)}</span></button>`).join("")}
         </div>
       </div>
+      <form class="busca-distrito" id="busca-distrito">
+        <label for="nome-distrito">${t("Ir a um distrito", "Go to a district")}</label>
+        <div><input id="nome-distrito" type="search" list="lista-distritos"
+          placeholder="${t("Nome ou código", "Name or code")}" autocomplete="off" />
+          <button type="submit">${t("Ir", "Go")}</button></div>
+        <datalist id="lista-distritos">${dist.map((d) => `<option value="${esc(d.cod)}">${esc(emIngles() ? d.nome_en : d.nome)}</option>`).join("")}</datalist>
+        <span id="busca-feedback" role="status" aria-live="polite"></span>
+      </form>
+      <div class="grupo percurso-lista">
+        <div class="rot">${t("Percursos guiados", "Guided tours")}</div>
+        <div class="opcoes">${PERCURSOS.map((g, i) => `<button type="button" data-percurso="${i}">${esc(emIngles() ? g.en : g.pt)}</button>`).join("")}</div>
+      </div>
       <div class="legenda-prancha">${legendaHTML()}</div>
+      <div style="margin-top:18px">
+        <button type="button" id="copiar-vista" style="background:none;border:0;border-bottom:1px solid currentColor;padding:0;color:var(--tinta-2);font:400 12px/1.4 var(--f-disp);cursor:pointer">${t("Copiar link desta vista", "Copy link to this view")}</button>
+        <span id="link-vista-feedback" role="status" aria-live="polite" style="display:block;min-height:1.4em;margin-top:4px;color:var(--tinta-3);font:400 11px/1.4 var(--f-disp)"></span>
+      </div>
       <div class="colofao">${t("Base: <b>NiptonIceTea</b>, segundo de Fontaine (1965)", "Base: <b>NiptonIceTea</b>, after de Fontaine (1965)")}</div>`;
+    ctrl.classList.toggle("aberto", controlesAbertos);
 
     ctrl.querySelectorAll("#op-raster button").forEach((b) =>
       b.addEventListener("click", () => {
@@ -226,10 +425,45 @@ export async function paginaMapa(alvo: HTMLElement) {
     (ctrl.querySelector("#sel-campo") as HTMLSelectElement)
       .addEventListener("change", (e) => {
         estado.coropleto = (e.target as HTMLSelectElement).value;
-        const cl = prov.campos[estado.coropleto]?.classe ?? "DEDUZIDO";
+        const cl = procParaCampo(estado.coropleto, prov.campos)?.classe ?? "DEDUZIDO";
         mapa.classifica(estado.coropleto, cl);
         pintaControles(); mapa.desenha();
       });
+
+    ctrl.querySelector("#copiar-vista")?.addEventListener("click", () => { void copiaVista(); });
+    ctrl.querySelectorAll<HTMLButtonElement>("[data-percurso]").forEach((b) => b.addEventListener("click", () => iniciaPercurso(Number(b.dataset.percurso))));
+
+    ctrl.querySelector<HTMLSelectElement>("#superficie-mobile")?.addEventListener("change", (e) => {
+      estado.raster = (e.target as HTMLSelectElement).value;
+      pintaControles(); mapa.desenha();
+    });
+    ctrl.querySelector("#zoom-mais")?.addEventListener("click", () => mapa.zoom(1.35));
+    ctrl.querySelector("#zoom-menos")?.addEventListener("click", () => mapa.zoom(1 / 1.35));
+    ctrl.querySelector("#abre-percursos")?.addEventListener("click", () => {
+      controlesAbertos = true;
+      pintaControles();
+      ctrl.querySelector<HTMLButtonElement>("[data-percurso]")?.focus();
+    });
+    ctrl.querySelector("#abre-controles")?.addEventListener("click", () => {
+      controlesAbertos = !controlesAbertos;
+      pintaControles(); mapa.desenha();
+      ctrl.querySelector<HTMLElement>("#abre-controles")?.focus();
+    });
+    ctrl.querySelector<HTMLFormElement>("#busca-distrito")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const campo = ctrl.querySelector<HTMLInputElement>("#nome-distrito")!;
+      const distrito = achaDistrito(campo.value);
+      if (!distrito) {
+        ctrl.querySelector<HTMLElement>("#busca-feedback")!.textContent =
+          t("Distrito não encontrado.", "District not found.");
+        return;
+      }
+      mapa.vaiPara(distrito.cod);
+      mostra(distrito.cod);
+      controlesAbertos = false;
+      pintaControles(); mapa.desenha();
+      inspetor.querySelector<HTMLElement>(".fechar")?.focus();
+    });
   }
   pintaControles();
 
@@ -246,12 +480,11 @@ export async function paginaMapa(alvo: HTMLElement) {
     return [r.left - c.left, r.top - c.top,
             r.right - c.left, r.bottom - c.top] as [number, number, number, number];
   };
-  mapa.zonasProibidas = [zona(ctrl)];
+  mapa.zonasProibidas = [zona(ctrl), zona(alvo.querySelector<HTMLElement>("#percurso-painel")!)];
   mapa.desenha();
 
   function fichaHTML(d: Distrito): string {
-    const proc = (campo: string): Proc =>
-      prov.campos[campo] ?? { classe: "DEDUZIDO", lastro: "", marcador: "" };
+    const proc = (campo: string): Proc | undefined => procParaCampo(campo, prov.campos);
 
     const grupos = gruposCampos().map((g) => {
       const linhas = g.campos
@@ -259,15 +492,15 @@ export async function paginaMapa(alvo: HTMLElement) {
         .map((c) => {
           const p = proc(c);
           const u = CAMPOS[c].un;
-          const sim = p.classe === "SIMULADO";
+          const sim = p?.classe === "SIMULADO";
           const txt = esc(formata(c, d[c]));
           // Valor de texto longo nao cabe na coluna da direita sem espremer o
           // rotulo; nesses casos ele desce para a linha de baixo.
           const longo = CAMPOS[c].fmt === "txt" && txt.length > 16;
-          return `<div class="linha-dado${longo ? " empilhada" : ""}" title="${esc(p.lastro)}">
-            <span class="rotulo"><i class="pip p-${esc(p.classe)}"></i>${esc(CAMPOS[c].rot)}</span>
+          return `<div class="linha-dado-wrap"><div class="linha-dado${longo ? " empilhada" : ""}">
+            <span class="rotulo"><i class="pip p-${esc(p?.classe ?? "SEM_NOTA")}"></i>${esc(CAMPOS[c].rot)}${rastroBotaoHTML(c)}</span>
             <span class="valor">${txt}${sim ? '<sup class="dag">†</sup>' : ""}${u ? `<span class="un">${esc(u)}</span>` : ""}</span>
-          </div>`;
+          </div>${rastroHTML(c, p)}</div>`;
         });
       if (!linhas.length) return "";
       return `<div class="bloco"><div class="rot">${esc(g.rot)}</div>${linhas.join("")}</div>`;
@@ -354,6 +587,7 @@ export async function paginaMapa(alvo: HTMLElement) {
     palco.classList.add("com-ficha");
     inspetor.innerHTML = fichaHTML(d);
     inspetor.scrollTop = 0;
+    ligaRastros(inspetor);
     inspetor.querySelectorAll<HTMLElement>(".evento.spoiler").forEach((ev) => {
       const botao = ev.querySelector<HTMLButtonElement>(".olho")!;
       const texto = ev.querySelector<HTMLElement>(".ev-texto")!;
@@ -375,9 +609,8 @@ export async function paginaMapa(alvo: HTMLElement) {
   }
   mapa.aoSelecionar = mostra;
 
-  // distrito vindo de outra pagina: #/mapa#=AR-27
-  const alvoInicial = location.hash.match(/#=([A-Z]{2}-\d{2})/);
-  if (alvoInicial) { mapa.vaiPara(alvoInicial[1]); mostra(alvoInicial[1]); }
+  // Distrito vindo de outra pagina ou de uma vista compartilhada.
+  if (estado.selecionado) { mapa.vaiPara(estado.selecionado); mostra(estado.selecionado); }
 
   /* -------------------------------------------------------- dica e coord */
   const dica = alvo.querySelector("#dica") as HTMLElement;
@@ -410,6 +643,8 @@ export async function paginaMapa(alvo: HTMLElement) {
   };
 
   const tecla = (e: KeyboardEvent) => {
+    const alvoTecla = e.target as HTMLElement;
+    if (alvoTecla.closest("input, textarea, select, [contenteditable]")) return;
     if (e.key === "Escape") {
       estado.selecionado = null; inspetor.hidden = true;
       palco.classList.remove("com-ficha"); mapa.desenha();

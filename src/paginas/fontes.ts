@@ -32,9 +32,11 @@ const EXTERNA_EN: Record<string, [string, string]> = {
 };
 
 export async function fontes(alvo: HTMLElement) {
-  const [d, t, ilus] = await Promise.all([
+  const [d, t, ilus, corte] = await Promise.all([
     docs(), tabelas(),
     fetch(import.meta.env.BASE_URL + "ilustracoes/ilustracoes.json")
+      .then((r) => r.json()).catch(() => ({})),
+    fetch(import.meta.env.BASE_URL + "ilustracoes/corte_subsolo_arrakis.json")
       .then((r) => r.json()).catch(() => ({})),
   ]);
   const vidaIl = await fetch(import.meta.env.BASE_URL + "ilustracoes/vida.json")
@@ -148,6 +150,18 @@ export async function fontes(alvo: HTMLElement) {
           <td style="color:var(--tinta-3)">${esc(String(v.prompt).split(". large-format")[0].split(". extreme")[0])}</td>
         </tr>`).join("")}</tbody>
       </table></div>
+
+      <p>${tr(`O corte do subsolo na ${prancha("subsolo")} foi gerado com a ferramenta
+      integrada <code>image_gen</code> a partir da relação entre truta-da-areia,
+      água, massa pré-especiaria e verme descrita no apêndice`, `The underground
+      cutaway on ${prancha("subsolo")} was generated with the built-in
+      <code>image_gen</code> tool from the relationship among sandtrout, water,
+      pre-spice mass and worm described in the appendix`)}
+      <span class="marcador">[1|appendixI|10411]</span>. ${tr(`É uma interpretação sem escala;
+      nenhum contorno ou distância da estampa entrou nos dados do atlas.`, `It is an
+      interpretation without scale; no outline or distance in the plate entered the atlas data.`)}</p>
+      ${corte.prompt ? `<details class="pedido-corte"><summary>${tr("Ler o pedido completo da estampa", "Read the full image request")}</summary>
+        <p class="nota">${esc(corte.prompt)}</p></details>` : ""}
 
       <p>${tr(`As imagens das pranchas ${plac("verme")} e ${plac("vida")} (o verme, os bichos
       e as plantas) foram pedidas de outro jeito. Nenhuma partiu de cena de filme ou de

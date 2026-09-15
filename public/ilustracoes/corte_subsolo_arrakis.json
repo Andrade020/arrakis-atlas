@@ -1,0 +1,14 @@
+{
+  "arquivo": "corte_subsolo_arrakis.webp",
+  "ferramenta": "image_gen (built-in)",
+  "data": "2026-09-15",
+  "natureza": "Ilustração interpretativa; sem escala. Formas, dimensões e disposição do corte não são dados do cânone.",
+  "prompt": "Use case: illustration-story. Asset type: a wide landscape editorial plate for a Portuguese natural-history atlas of fictional Arrakis. Create a NEW original subterranean cutaway illustration, no lettering. Wide 3:2 composition, sober scientific expedition photogravure, monochromatic warm sepia brown on pale ivory paper, meticulous fine stipple and delicate engraved hatching, tactile mineral textures, quiet archival atmosphere, excellent legibility. Upper quarter: barren dunes and a low rocky ridge. Lower three quarters: an imaginary sliced-open section of sand and porous rock, four visually distinguishable motifs integrated into one continuous landscape. On the left, a small sealed water pocket in porous stone lined by clustered flat leathery lobed sandtrout organisms (not fish; no eyes, fins or legs), enclosing the water. Near lower center, a rounded dark granular fermenting pre-spice mass with a few restrained gas bubbles and branching cracks rising toward the dry surface. On the right, one long thick annulated sandworm moving through DRY sand, separated from all water, visible partly in side section with a modest round tooth-lined mouth, no film-specific design. Convey the contrast between sealed subterranean moisture and the arid sand above through texture and light rather than color. This is an interpretive biological/geological illustration, not a measured diagram: no scales, arrows, text, labels, numbers, legends, logos, frames, signature or watermark. No humans, machinery, cities or ornamental objects. Preserve ample detail but avoid horror or dramatic cinematic explosion. Keep the water pocket clearly small and enclosed, not a giant underground lake.",
+  "fontes": [
+    "[1|appendixI|10411]"
+  ],
+  "dimensoes": [
+    1536,
+    1024
+  ]
+}

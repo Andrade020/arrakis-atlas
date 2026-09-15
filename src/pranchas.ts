@@ -6,7 +6,7 @@ import { t } from "./i18n";
  * prancha nova obrigava a renumerar o site inteiro. Fica fora de main.ts para
  * as páginas poderem importar sem importar o roteador de volta. */
 export const ORDEM = [
-  "", "mapa", "regioes", "distritos", "verme", "vida", "fuga",
+  "", "mapa", "regioes", "distritos", "verme", "subsolo", "vida", "fuga",
   "padroes", "acessibilidade", "poder", "economia", "agua", "comparacao",
   "contradicoes", "metodo", "glossario", "fontes",
 ] as const;

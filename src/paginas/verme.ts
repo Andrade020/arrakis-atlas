@@ -128,6 +128,7 @@ export function verme(alvo: HTMLElement) {
         funciona assim`, `, and it turned out to be real. The cycle works like
         this`)} ${mc("[1|appendixI|10411]")}:</p>
         ${ciclo()}
+        <p class="nota"><a class="link" href="#/subsolo">${t("Ver o corte ilustrado do subsolo →", "See the illustrated underground cutaway →")}</a></p>
         <div class="duas">
           <div>
             <p>${t(`A truta-da-areia, ou <em>pequeno fazedor</em>, é meio planta e meio animal.

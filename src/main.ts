@@ -7,6 +7,7 @@ import { paginaMapa } from "./paginas/mapa";
 import { indiceDistritos } from "./paginas/distritos";
 import { regioes } from "./paginas/regioes";
 import { verme } from "./paginas/verme";
+import { subsolo } from "./paginas/subsolo";
 import { vida } from "./paginas/vida";
 import { fuga } from "./paginas/fuga";
 import { agua } from "./paginas/agua";
@@ -33,6 +34,7 @@ export function rotas(): Rota[] {
   { id: "regioes", plac: plac("regioes"), titulo: t("As sete regiões", "The seven regions"), monta: regioes },
   { id: "distritos", plac: plac("distritos"), titulo: t("Os 44 distritos", "The 44 districts"), monta: indiceDistritos },
   { id: "verme", plac: plac("verme"), titulo: t("Shai-Hulud, o verme", "Shai-Hulud, the worm"), monta: verme },
+  { id: "subsolo", plac: plac("subsolo"), titulo: t("Sob a areia", "Beneath the sand"), monta: subsolo },
   { id: "vida", plac: plac("vida"), titulo: t("O que vive no deserto", "What lives in the desert"), monta: vida },
   { id: "fuga", plac: plac("fuga"), titulo: t("A rota da fuga", "The escape route"), monta: fuga },
   {
