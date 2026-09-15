@@ -1,3 +1,4 @@
+import { prancha, secao } from "../pranchas";
 import { cabecalho, esc, rodape } from "../ui";
 
 /* Prancha 04 · Shai-Hulud.
@@ -88,7 +89,7 @@ function ciclo(): string {
 
 export function verme(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha vida">
-    ${cabecalho("Prancha 04 · Shai-Hulud",
+    ${cabecalho(`${prancha("verme")} · Shai-Hulud`,
       "O Velho do Deserto",
       "Os fremen o chamam de Velho do Deserto, Velho Pai Eternidade e Avô do Deserto. Ele fabrica a areia, guarda a especiaria e morre se tocar em água.")}
     <div class="corpo">
@@ -96,7 +97,7 @@ export function verme(alvo: HTMLElement) {
         "a boca com uns oitenta metros de diâmetro, dentes cristalinos em forma de faca")}
 
       <section class="vida-sec">
-        <h2><span class="g">4.1</span><span>Mais de quatrocentos metros</span></h2>
+        <h2><span class="g">${secao("verme", 1)}</span><span>Mais de quatrocentos metros</span></h2>
         <p>O Dr. Yueh tem, para as aulas de Paul, o filme de um espécime pequeno: cento e dez metros de comprimento e
         vinte e dois de diâmetro, das latitudes do norte. Testemunhas confiáveis viram
         vermes com <strong>mais de quatrocentos metros</strong> — e há razão para crer
@@ -108,7 +109,7 @@ export function verme(alvo: HTMLElement) {
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">4.2</span><span>O verme fabrica a especiaria</span></h2>
+        <h2><span class="g">${secao("verme", 2)}</span><span>O verme fabrica a especiaria</span></h2>
         <p>A pista principal da equipe de Kynes foram retalhos de couro achados junto da
         massa de especiaria depois de uma explosão — atribuídos, nas histórias fremen, a uma
         "truta-da-areia" de fábula ${mc("[1|appendixI|10409]")}. Não era fábula. O ciclo
@@ -129,7 +130,7 @@ export function verme(alvo: HTMLElement) {
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">4.3</span><span>Água é veneno</span></h2>
+        <h2><span class="g">${secao("verme", 3)}</span><span>Água é veneno</span></h2>
         <p>Os vermes vivem até idade enorme, a não ser que outro os mate ou que se afoguem
         em água, que é veneno para eles. Quase toda a areia de Arrakis é obra deles
         ${mc("[1|terminology|11207]")}. E respiram para o planeta: um verme médio, de
@@ -141,7 +142,7 @@ export function verme(alvo: HTMLElement) {
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">4.4</span><span>Chamar, montar, matar</span></h2>
+        <h2><span class="g">${secao("verme", 4)}</span><span>Chamar, montar, matar</span></h2>
         <div class="grade-vida">
           <div class="especime">
             ${estampa("martelo", "Um martelador cravado na crista de uma duna")}

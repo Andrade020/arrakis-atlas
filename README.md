@@ -11,9 +11,12 @@ declara de onde veio: frase de Frank Herbert, medida sobre o mapa, ou modelo.
   original (azimutal equidistante polar). Clique num distrito para ver a frase
   do livro sobre ele, o que acontece ali (com spoilers borrados) e os dados.
 - **Regiões, distritos, o verme, a vida no deserto** — pranchas sobre o planeta.
+- **A rota da fuga** — o caminho de Paul e Jessica sobre o mapa, etapa por etapa, atrás de um aviso de spoiler.
 - **O argumento** — padrões de assentamento, custo de travessia, soberania e
-  controle, a economia da especiaria, comparação com dados reais.
-- **A oficina** — as contradições do cânone, o que é dado e o que é modelo, as fontes.
+  controle, a economia da especiaria, a economia da água, comparação com dados reais.
+- **A oficina** — as contradições do cânone, o que é dado e o que é modelo, o glossário, as fontes.
+
+Pelo site, termos do universo (sietch, trajestil, martelador…) mostram a definição ao passar o mouse.
 
 ## Rodar
 
@@ -33,6 +36,8 @@ aqui eles já vêm prontos.
 ```
 src/
   main.ts        roteador, cabeçalho e sumário
+  pranchas.ts    ordem das pranchas; os números saem daqui
+  glossario.ts   termos, definições e a marcação automática no texto
   mapa.ts        renderizador do mapa (canvas)
   areia.ts       areia soprada sobre as dunas da abertura
   dados.ts       carregamento e formatação
@@ -58,7 +63,7 @@ scripts/         capturas e verificações com Chrome headless
   Seedance), tratadas em sépia. As estampas do verme e da fauna foram descritas
   a partir do texto do livro, não de imagens de filmes ou de fan-arts. O planeta
   da abertura é um render próprio a partir de ruído. Nenhuma delas é dado; a
-  prancha 13 lista cada uma com o que foi pedido.
+  prancha de fontes lista cada uma com o que foi pedido.
 
 ## Aviso
 

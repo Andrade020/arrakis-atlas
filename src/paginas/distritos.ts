@@ -1,3 +1,4 @@
+import { prancha } from "../pranchas";
 import { distritos, proveniencia, num } from "../dados";
 import { CAMPOS, formata } from "../campos";
 import { cabecalho, esc, ligaOrdenacao, rodape, selo } from "../ui";
@@ -33,7 +34,7 @@ export async function indiceDistritos(alvo: HTMLElement) {
   const area = d.reduce((s, x) => s + Number(x.area_km2 ?? 0), 0);
 
   alvo.innerHTML = `<article class="folha">
-    ${cabecalho("Prancha 03 · Índice territorial",
+    ${cabecalho(`${prancha("distritos")} · Índice territorial`,
       "Os quarenta e quatro distritos",
       `A partição cobre ${num(area / 1e6, 2)} milhões de km² sem deixar vazio nem sobreposição. As fronteiras não são do cânone — Herbert nunca define divisão administrativa. São nossas, e o método está declarado abaixo da tabela.`)}
     <div class="corpo" style="max-width:none">

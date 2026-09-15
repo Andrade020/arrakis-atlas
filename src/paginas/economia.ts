@@ -1,3 +1,4 @@
+import { prancha, secao } from "../pranchas";
 import { distritos, tabelas, num, compacto } from "../dados";
 import { cabecalho, esc, rodape, selo } from "../ui";
 
@@ -15,12 +16,12 @@ export async function economia(alvo: HTMLElement) {
   const planeta = (t.planeta ?? {}) as Record<string, any>;
 
   alvo.innerHTML = `<article class="folha">
-    ${cabecalho("Prancha 09 · Economia da especiaria",
+    ${cabecalho(`${prancha("economia")} · Economia da especiaria`,
       "Três números que não podem ser verdade ao mesmo tempo",
       "O cânone dá um preço, uma receita e uma massa colhida. Qualquer dois deles determinam o terceiro — e o terceiro sempre sai errado, por seis ordens de grandeza. Esta prancha mostra a conta e declara qual âncora o modelo adota.")}
     <div class="corpo">
 
-      <h2><span class="g">9.1</span><span>As três âncoras</span></h2>
+      <h2><span class="g">${secao("economia", 1)}</span><span>As três âncoras</span></h2>
       <p class="nota" style="margin-bottom:4px">As três primeiras são frases do livro. A quarta é conta nossa.</p>
       <div class="tabela"><table>
         <thead><tr><th>Âncora</th><th>Valor no texto</th><th class="num">Implicação</th><th>Decisão</th></tr></thead>
@@ -62,7 +63,7 @@ export async function economia(alvo: HTMLElement) {
         da Guilda e da CHOAM.</p>
       </div>
 
-      <h2><span class="g">9.2</span><span>Onde a especiaria sai</span></h2>
+      <h2><span class="g">${secao("economia", 2)}</span><span>Onde a especiaria sai</span></h2>
       <p>A massa total é cânone; a <strong>distribuição</strong> entre distritos é nossa.
       Ela segue a área de erg aberto ponderada pelo risco, porque é isso que o cânone
       descreve — a especiaria aflora na areia profunda, onde o verme circula.</p>
@@ -87,7 +88,7 @@ export async function economia(alvo: HTMLElement) {
       <p class="nota">Os dez maiores respondem por ${num((dezMaiores / massa) * 100, 1)}% da colheita
       dos ${num(massa, 0)} t/ano do território cartografado. ${selo("SIMULADO", "distribuição simulada")}</p>
 
-      <h2><span class="g">9.3</span><span>Uma economia de enclave, por construção</span></h2>
+      <h2><span class="g">${secao("economia", 3)}</span><span>Uma economia de enclave, por construção</span></h2>
       <p>O modelo reparte a renda da especiaria em três destinos, e os três percentuais
       <strong>foram inventados por nós</strong>: 70% sai do planeta (Guilda, CHOAM,
       imposto imperial), 20% custeia a logística de superfície, 10% fica com quem extrai.
@@ -107,7 +108,7 @@ export async function economia(alvo: HTMLElement) {
         </tbody>
       </table></div>
 
-      <h2><span class="g">9.4</span><span>Constantes planetárias do cânone</span></h2>
+      <h2><span class="g">${secao("economia", 4)}</span><span>Constantes planetárias do cânone</span></h2>
       <p>Nem tudo é invenção. Estas são medidas que Herbert dá explicitamente, e que o
       modelo usa como restrição:</p>
       <div class="tabela"><table>

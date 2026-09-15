@@ -1,4 +1,5 @@
 import "./estilo.css";
+import { plac, prancha } from "./pranchas";
 import { esc } from "./ui";
 import { inicio } from "./paginas/inicio";
 import { paginaMapa } from "./paginas/mapa";
@@ -6,6 +7,10 @@ import { indiceDistritos } from "./paginas/distritos";
 import { regioes } from "./paginas/regioes";
 import { verme } from "./paginas/verme";
 import { vida } from "./paginas/vida";
+import { fuga } from "./paginas/fuga";
+import { agua } from "./paginas/agua";
+import { glossario } from "./paginas/glossario";
+import { ligaGlossario } from "./glossario";
 import { paginaDoc } from "./paginas/documento";
 import { metodo } from "./paginas/metodo";
 import { economia } from "./paginas/economia";
@@ -21,59 +26,62 @@ export interface Rota {
 }
 
 export const ROTAS: Rota[] = [
-  { id: "", plac: "00", titulo: "Abertura", secao: "O planeta", monta: inicio },
-  { id: "mapa", plac: "01", titulo: "O mapa", monta: paginaMapa, cheia: true },
-  { id: "regioes", plac: "02", titulo: "As sete regiões", monta: regioes },
-  { id: "distritos", plac: "03", titulo: "Os 44 distritos", monta: indiceDistritos },
-  { id: "verme", plac: "04", titulo: "Shai-Hulud, o verme", monta: verme },
-  { id: "vida", plac: "05", titulo: "O que vive no deserto", monta: vida },
+  { id: "", plac: plac(""), titulo: "Abertura", secao: "O planeta", monta: inicio },
+  { id: "mapa", plac: plac("mapa"), titulo: "O mapa", monta: paginaMapa, cheia: true },
+  { id: "regioes", plac: plac("regioes"), titulo: "As sete regiões", monta: regioes },
+  { id: "distritos", plac: plac("distritos"), titulo: "Os 44 distritos", monta: indiceDistritos },
+  { id: "verme", plac: plac("verme"), titulo: "Shai-Hulud, o verme", monta: verme },
+  { id: "vida", plac: plac("vida"), titulo: "O que vive no deserto", monta: vida },
+  { id: "fuga", plac: plac("fuga"), titulo: "A rota da fuga", monta: fuga },
   {
-    id: "padroes", plac: "06", titulo: "Onde as pessoas estão", secao: "O argumento",
+    id: "padroes", plac: plac("padroes"), titulo: "Onde as pessoas estão", secao: "O argumento",
     monta: (a) => paginaDoc(a, ["PADROES", "ROBUSTEZ"], {
-      indice: "Prancha 06 · Padrões de assentamento",
+      indice: `${prancha("padroes")} · Padrões de assentamento`,
       titulo: "O sítio vence a situação",
       linha: "A hipótese clássica diz que a proximidade do mercado organiza o povoamento. Em Arrakis ela não se sustenta — e o teste foi refeito em dezenove desenhos de grade para que não fosse artefato da unidade de análise.",
       figura: ["arrakis_padroes.webp", "Os quatro testes de padrão de ponto, todos sobre dado observado: quociente locacional por classe de terreno, vizinho mais próximo, função L de Ripley com envelope de Monte Carlo, e a regressão de Poisson."],
     }),
   },
   {
-    id: "acessibilidade", plac: "07", titulo: "Dois Arrakis",
+    id: "acessibilidade", plac: plac("acessibilidade"), titulo: "Dois Arrakis",
     monta: (a) => paginaDoc(a, ["ACESSIBILIDADE"], {
-      indice: "Prancha 07 · Custo de travessia",
+      indice: `${prancha("acessibilidade")} · Custo de travessia`,
       titulo: "Duas geografias sobre o mesmo território",
       linha: "Trocar distância por custo de travessia muda o mapa. Trocar o agente muda o mapa de novo — e as duas superfícies mal se correlacionam.",
       figura: ["arrakis_dois_arrakis.webp", "As duas superfícies de custo acumulado, calculadas sobre a mesma grade de terreno com tabelas de fricção distintas. A correlação entre elas é de 0,09."],
     }),
   },
   {
-    id: "poder", plac: "08", titulo: "Soberania e controle",
+    id: "poder", plac: plac("poder"), titulo: "Soberania e controle",
     monta: (a) => paginaDoc(a, ["PODER"], {
-      indice: "Prancha 08 · Geografia política",
+      indice: `${prancha("poder")} · Geografia política`,
       titulo: "O Estado que não alcança",
       linha: "No papel, o planeta é um feudo único entregue por decreto imperial. No chão, quatro poderes — e metade da especiaria sai de terra que nenhum deles administra.",
       figura: ["arrakis_soberania_x_controle.webp", "Soberania nominal, uniforme por definição, contra controle efetivo, atribuído por regra explícita sobre a composição de assentamentos de cada distrito."],
     }),
   },
-  { id: "economia", plac: "09", titulo: "A economia da especiaria", monta: economia },
+  { id: "economia", plac: plac("economia"), titulo: "A economia da especiaria", monta: economia },
+  { id: "agua", plac: plac("agua"), titulo: "A economia da água", monta: agua },
   {
-    id: "comparacao", plac: "10", titulo: "Na régua do mundo real",
+    id: "comparacao", plac: plac("comparacao"), titulo: "Na régua do mundo real",
     monta: (a) => paginaDoc(a, ["COMPARACAO"], {
-      indice: "Prancha 10 · Comparação",
+      indice: `${prancha("comparacao")} · Comparação`,
       titulo: "Arrakis na régua do mundo real",
       linha: "Seis indicadores medidos contra dado do IBGE, da UNCTAD e do IISD, cada um declarando se o lado de Arrakis é observado ou simulado.",
       figura: ["arrakis_regua_real.webp", "Cada barra compara o valor de Arrakis com uma referência real documentada. Os pares em que o lado de Arrakis é simulado estão marcados como tais."],
     }),
   },
   {
-    id: "contradicoes", plac: "11", titulo: "Contradições do cânone", secao: "A oficina",
+    id: "contradicoes", plac: plac("contradicoes"), titulo: "Contradições do cânone", secao: "A oficina",
     monta: (a) => paginaDoc(a, ["CONTRADICOES"], {
-      indice: "Prancha 11 · Conflitos na fonte",
+      indice: `${prancha("contradicoes")} · Conflitos na fonte`,
       titulo: "Oito lugares onde o cânone não fecha",
       linha: "Um modelo precisa de números que fechem. O cânone de Duna, em vários pontos, não fecha. Cada conflito está aqui com a frase literal dos dois lados, a consequência calculada, e a decisão declarada.",
     }),
   },
-  { id: "metodo", plac: "12", titulo: "Dado ou modelo", monta: metodo },
-  { id: "fontes", plac: "13", titulo: "Fontes e créditos", monta: fontes },
+  { id: "metodo", plac: plac("metodo"), titulo: "Dado ou modelo", monta: metodo },
+  { id: "glossario", plac: plac("glossario"), titulo: "Glossário", monta: glossario },
+  { id: "fontes", plac: plac("fontes"), titulo: "Fontes e créditos", monta: fontes },
 ];
 
 const app = document.getElementById("app")!;
@@ -178,6 +186,8 @@ async function navega() {
     ? `${rota.titulo} — Atlas de Arrakis`
     : "Atlas de Arrakis — geografia econômica de um planeta inventado";
   await rota.monta(main);
+  // termos do glossário: não na prancha do mapa, nem na abertura, nem no próprio glossário
+  if (!rota.cheia && rota.id !== "" && rota.id !== "glossario") ligaGlossario(main);
   if (!location.hash.includes("#=")) window.scrollTo(0, 0);
 }
 

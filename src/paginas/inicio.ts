@@ -1,3 +1,4 @@
+import { plac } from "../pranchas";
 import { atlas, distritos, assentamentos, rotulos, rasters, mundo } from "../dados";
 import { Mapa } from "../mapa";
 import { rodape } from "../ui";
@@ -83,11 +84,11 @@ export async function inicio(alvo: HTMLElement) {
 
   <h2 class="titulo-argumentos">O que o mapa mostra</h2>
   <section class="argumentos">
-    ${cartao("padroes", "06", "O sítio vence a situação", "c_padroes",
+    ${cartao("padroes", plac("padroes"), "O sítio vence a situação", "c_padroes",
       "A distância à capital não explica onde as pessoas moram. A distância ao chão sólido explica.")}
-    ${cartao("acessibilidade", "07", "Acessibilidade é relacional", "c_acessibilidade",
+    ${cartao("acessibilidade", plac("acessibilidade"), "Acessibilidade é relacional", "c_acessibilidade",
       "Para o Império, a areia é barreira. Para os fremen, é estrada.")}
-    ${cartao("poder", "08", "O Estado que não alcança", "c_poder",
+    ${cartao("poder", plac("poder"), "O Estado que não alcança", "c_poder",
       "Um feudo no papel, quatro poderes no chão — e metade da especiaria fora de todos.")}
   </section>
 

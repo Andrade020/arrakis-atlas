@@ -98,6 +98,15 @@ export class Mapa {
   molduraDupla = true;
   /** Distritos a destacar (usado nas cartinhas de regiao). */
   destaque: Set<string> | null = null;
+  /** Desenho extra por cima da prancha inteira (a rota da fuga). Recebe a
+      funcao que leva metros da projecao a pixels de tela. Nulo = nada muda. */
+  sobreposicao: ((ctx: CanvasRenderingContext2D, tela: (x: number, y: number) => [number, number]) => void) | null = null;
+
+  /** Enquadramento atual, para animar a camera de fora do mapa. */
+  get vista() { return { k: this.k, tx: this.tx, ty: this.ty, larg: this.larg, alt: this.alt }; }
+  poeVista(k: number, tx: number, ty: number) {
+    this.k = k; this.tx = tx; this.ty = ty; this.pinta();
+  }
 
   aoSelecionar: (cod: string | null) => void = () => {};
   aoMover: (x: number, y: number, cod: string | null) => void = () => {};
@@ -436,6 +445,11 @@ export class Mapa {
         ctx.strokeRect(E - d, M - d, this.larg - M - E + 2 * d, this.alt - 2 * M + 2 * d);
         this.desenhaTicks();
       }
+    }
+
+    if (this.sobreposicao) {
+      ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+      this.sobreposicao(ctx, (x, y) => [this.px(x), this.py(y)]);
     }
   }
 

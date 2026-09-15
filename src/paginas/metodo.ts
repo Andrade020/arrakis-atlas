@@ -1,3 +1,4 @@
+import { prancha, secao } from "../pranchas";
 import { docs, distritos, proveniencia } from "../dados";
 import { CAMPOS } from "../campos";
 import { blocos, cabecalho, esc, rodape, selo } from "../ui";
@@ -38,11 +39,11 @@ export async function metodo(alvo: HTMLElement) {
   const semCota = dd.filter((x) => x.alt_m === null || x.alt_m === undefined).length;
 
   alvo.innerHTML = `<article class="folha">
-    ${cabecalho("Prancha 12 · Proveniência",
+    ${cabecalho(`${prancha("metodo")} · Proveniência`,
       "O que é dado e o que é modelo",
       "Um atlas de um planeta inventado tem um problema que um atlas real não tem: parte dos números não existe em lugar nenhum, e alguém precisou criá-los. A resposta deste projeto não foi evitar isso, foi declarar tudo.")}
     <div class="corpo">
-      <h2><span class="g">12.1</span><span>As cinco classes</span></h2>
+      <h2><span class="g">${secao("metodo", 1)}</span><span>As cinco classes</span></h2>
       <p>Cada variável da malha tem uma e apenas uma classe, gravada em
       <code>dados/proveniencia_campos.csv</code> pelo pipeline — não por esta página.
       O site lê aquele arquivo; se a classificação mudar lá, muda aqui.</p>
@@ -58,7 +59,7 @@ export async function metodo(alvo: HTMLElement) {
         </tbody>
       </table></div>
 
-      <h2><span class="g">12.2</span><span>Quanto deste atlas é invenção</span></h2>
+      <h2><span class="g">${secao("metodo", 2)}</span><span>Quanto deste atlas é invenção</span></h2>
       <p>Contando as ${total} variáveis que a ficha de distrito exibe:</p>
       ${barras}
       <div class="aviso">
@@ -69,7 +70,7 @@ export async function metodo(alvo: HTMLElement) {
         simulada fosse apagada, as conclusões continuariam de pé.</p>
       </div>
 
-      <h2><span class="g">12.3</span><span>Onde o cânone simplesmente cala</span></h2>
+      <h2><span class="g">${secao("metodo", 3)}</span><span>Onde o cânone simplesmente cala</span></h2>
       <p>A extração completa dos oito volumes serviu tanto para achar o que existe
       quanto para provar o que <strong>não</strong> existe. Nenhuma população de cidade.
       Nenhum segundo par de cidades com distância declarada. Nenhuma divisão
@@ -81,7 +82,7 @@ export async function metodo(alvo: HTMLElement) {
       um corpus fechado. Com dado do mundo real, "não encontrei" e "não existe" não são
       a mesma coisa; aqui são.</p>
 
-      <h2><span class="g">12.4</span><span>As doze premissas fechadas</span></h2>
+      <h2><span class="g">${secao("metodo", 4)}</span><span>As doze premissas fechadas</span></h2>
       <p>Onde o cânone se contradiz, o modelo teve de escolher. Esta é a lista completa
       das escolhas — cada uma reversível, todas explícitas.</p>
       ${d.PREMISSAS ? blocos(d.PREMISSAS, { pularAte: 4 }) : ""}

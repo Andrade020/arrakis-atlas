@@ -1,15 +1,16 @@
+import { plac, prancha, secao } from "../pranchas";
 import { docs, tabelas } from "../dados";
 import { blocos, cabecalho, esc, rodape, selo } from "../ui";
 
 /* Onde cada estampa aparece, para a tabela de creditos nao listar so' codigo. */
 const ONDE: Record<string, string> = {
-  R1: "Prancha 02 · Bacia Polar", R2: "Prancha 02 · Muralha Escudo",
-  R3: "Prancha 02 · Bacia Imperial", R4: "Prancha 02 · Falsas Muralhas",
-  R5: "Prancha 02 · Planaltos Orientais", R6: "Prancha 02 · Grandes Ergs",
-  R7: "Prancha 02 · Ergs Exteriores",
-  c_padroes: "Abertura · cartão da prancha 06",
-  c_acessibilidade: "Abertura · cartão da prancha 07",
-  c_poder: "Abertura · cartão da prancha 08",
+  R1: `${prancha("regioes")} · Bacia Polar`, R2: `${prancha("regioes")} · Muralha Escudo`,
+  R3: `${prancha("regioes")} · Bacia Imperial`, R4: `${prancha("regioes")} · Falsas Muralhas`,
+  R5: `${prancha("regioes")} · Planaltos Orientais`, R6: `${prancha("regioes")} · Grandes Ergs`,
+  R7: `${prancha("regioes")} · Ergs Exteriores`,
+  c_padroes: `Abertura · cartão da ${prancha("padroes").toLowerCase()}`,
+  c_acessibilidade: `Abertura · cartão da ${prancha("acessibilidade").toLowerCase()}`,
+  c_poder: `Abertura · cartão da ${prancha("poder").toLowerCase()}`,
   papel: "Fundo de papel do site inteiro",
 };
 
@@ -30,12 +31,12 @@ export async function fontes(alvo: HTMLElement) {
     : Object.values(ext).filter((v: any) => v && typeof v === "object" && v.titulo);
 
   alvo.innerHTML = `<article class="folha">
-    ${cabecalho("Prancha 13 · Fontes e créditos",
+    ${cabecalho(`${prancha("fontes")} · Fontes e créditos`,
       "De onde vem cada coisa",
       "Uma fonte primária fechada, um mapa redesenhado por um fã, três bases de dados reais e uma simulação climática que discorda do livro. Nesta ordem de autoridade.")}
     <div class="corpo">
 
-      <h2><span class="g">13.1</span><span>O mapa</span></h2>
+      <h2><span class="g">${secao("fontes", 1)}</span><span>O mapa</span></h2>
       <div style="border-left:2px solid var(--canone);padding:4px 0 4px 22px;margin:20px 0 26px;max-width:64ch">
         <div style="font:500 9.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--canone)">Crédito principal</div>
         <p style="margin:12px 0 0;font:300 21px/1.4 var(--f-text)">
@@ -58,10 +59,10 @@ export async function fontes(alvo: HTMLElement) {
         </p>
       </div>
 
-      <h2><span class="g">13.2</span><span>Hierarquia de autoridade</span></h2>
+      <h2><span class="g">${secao("fontes", 2)}</span><span>Hierarquia de autoridade</span></h2>
       ${d.FONTES ? blocos(d.FONTES, { pularAte: 2 }) : ""}
 
-      <h2><span class="g">13.3</span><span>Dados do mundo real</span></h2>
+      <h2><span class="g">${secao("fontes", 3)}</span><span>Dados do mundo real</span></h2>
       <p>Usados só na prancha de comparação, e sempre com o lado de Arrakis declarando se
       é observado ou simulado.</p>
       <div class="tabela"><table>
@@ -73,7 +74,7 @@ export async function fontes(alvo: HTMLElement) {
         </tr>`).join("")}</tbody>
       </table></div>
 
-      <h2><span class="g">13.4</span><span>Fora do cânone</span></h2>
+      <h2><span class="g">${secao("fontes", 4)}</span><span>Fora do cânone</span></h2>
       <p>Material que entrou como <strong>camada de comparação</strong> e nunca como
       lastro. A regra: nada daqui altera um número da malha.</p>
       ${listaExt.length ? `<div class="tabela"><table>
@@ -90,7 +91,7 @@ export async function fontes(alvo: HTMLElement) {
       verossimilhança: que tipo de instalação faria sentido num distrito, que escala
       de operação é plausível. Nenhum número de jogo entrou na malha.</p>
 
-      <h2><span class="g">13.5</span><span>As ilustrações</span></h2>
+      <h2><span class="g">${secao("fontes", 5)}</span><span>As ilustrações</span></h2>
       <p>As estampas da prancha das regiões e dos cartões da abertura são
       <strong>imagens geradas por máquina</strong>, tratadas depois numa duotonia
       para caírem na paleta do papel. Elas não são levantamento, não são cânone e
@@ -112,7 +113,7 @@ export async function fontes(alvo: HTMLElement) {
         </tr>`).join("")}</tbody>
       </table></div>
 
-      <p>As estampas das pranchas 04 e 05 — o verme, os bichos, as plantas — foram
+      <p>As estampas das pranchas ${plac("verme")} e ${plac("vida")} — o verme, os bichos, as plantas — foram
       pedidas de outro jeito. Nenhuma parte de foto de filme ou de fan-art: redescrever
       uma imagem protegida para gerar outra parecida continua sendo derivar dela. Cada
       cena foi escrita <strong>a partir do trecho do Herbert</strong> que a descreve (o
@@ -135,7 +136,7 @@ export async function fontes(alvo: HTMLElement) {
       é uma esfera renderizada quadro a quadro a partir de ruído, com geografia
       inventada — um retrato de Arrakis vista de longe, não um mapa dela.</p>
 
-      <h2><span class="g">13.6</span><span>Reprodutibilidade</span></h2>
+      <h2><span class="g">${secao("fontes", 6)}</span><span>Reprodutibilidade</span></h2>
       <p>O atlas inteiro é gerado por linha de comando, do raster ao site. A cadeia é:
       georreferenciar → extrair símbolos → classificar terreno → particionar →
       vetorizar → variáveis → estilos → projeto QGIS → análises → exportar.
@@ -145,7 +146,7 @@ export async function fontes(alvo: HTMLElement) {
       <p class="nota">Os dados que esta página consome são exatamente os arquivos que o
       QGIS abre — a mesma projeção, a mesma malha, os mesmos números.</p>
 
-      <h2><span class="g">13.7</span><span>Aviso</span></h2>
+      <h2><span class="g">${secao("fontes", 7)}</span><span>Aviso</span></h2>
       <p>Duna e Arrakis são criação de Frank Herbert; os direitos pertencem a
       seus detentores. Este é um trabalho acadêmico de geografia econômica, sem fim
       comercial e sem vínculo com eles. A base cartográfica é usada com crédito ao seu

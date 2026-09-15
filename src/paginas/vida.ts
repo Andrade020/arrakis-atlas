@@ -1,3 +1,4 @@
+import { prancha, secao } from "../pranchas";
 import { cabecalho, esc, rodape, ligaSpoilers } from "../ui";
 
 /* Prancha 05 · O que vive no deserto.
@@ -31,7 +32,7 @@ function cartao(s: Ser): string {
     ${spoiler ? `<div class="ev-cab"><span class="ev-livro">Livro ${s.livro} · <b>spoiler</b></span>
       <button class="olho" type="button" aria-pressed="false" aria-label="Revelar spoiler do livro ${s.livro}">${OLHO}</button></div>` : ""}
     <p class="ev-texto"${spoiler ? ' aria-hidden="true"' : ""}>${s.texto} ${s.marcas.map(mc).join(" ")}</p>
-    ${s.rota ? `<a class="link" href="${s.rota}">${s.rota.includes("verme") ? "Prancha 04 →" : "Ver no mapa →"}</a>` : ""}
+    ${s.rota ? `<a class="link" href="${s.rota}">${s.rota.includes("verme") ? `${prancha("verme")} →` : "Ver no mapa →"}</a>` : ""}
   </div>`;
 }
 
@@ -78,7 +79,7 @@ const DEPOIS: Ser[] = [
 
 export function vida(alvo: HTMLElement) {
   alvo.innerHTML = `<article class="folha vida">
-    ${cabecalho("Prancha 05 · O que vive no deserto",
+    ${cabecalho(`${prancha("vida")} · O que vive no deserto`,
       "Quase tudo aqui veio de fora",
       "Bicho de estimação é quase desconhecido e animal de criação é raro: em Arrakis a preocupação não é a água, é a umidade. O que vive no deserto ou nasceu em volta do verme, ou foi trazido.")}
     <div class="corpo">
@@ -86,12 +87,12 @@ export function vida(alvo: HTMLElement) {
       braços a certas formas de vida terrestres, e não está claro como" ${mc("[1|chapter005|860]")}.</p>
 
       <section class="vida-sec">
-        <h2><span class="g">5.1</span><span>Nascidos aqui</span></h2>
+        <h2><span class="g">${secao("vida", 1)}</span><span>Nascidos aqui</span></h2>
         <div class="grade-vida">${NATIVOS.map(cartao).join("")}</div>
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">5.2</span><span>Trazidos e adaptados</span></h2>
+        <h2><span class="g">${secao("vida", 2)}</span><span>Trazidos e adaptados</span></h2>
         <p>Muito antes da especiaria, o Império manteve em Arrakis uma estação botânica de
         testes. O filme-livro dela, que Yueh mostra a Paul, já listava saguaro, palmeira-tâmara,
         verbena-da-areia, arbusto-de-creosoto… raposa-do-deserto, falcão, rato-canguru
@@ -100,7 +101,7 @@ export function vida(alvo: HTMLElement) {
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">5.3</span><span>O jardim de Kynes</span></h2>
+        <h2><span class="g">${secao("vida", 3)}</span><span>O jardim de Kynes</span></h2>
         <div class="duas">
           <div>
             <p>O plano começa pelo capim. Os fremen plantam gramíneas de pobreza mutantes na
@@ -134,7 +135,7 @@ export function vida(alvo: HTMLElement) {
       </section>
 
       <section class="vida-sec">
-        <h2><span class="g">5.4</span><span>Nos livros seguintes</span></h2>
+        <h2><span class="g">${secao("vida", 4)}</span><span>Nos livros seguintes</span></h2>
         <div class="grade-vida">${DEPOIS.map(cartao).join("")}</div>
       </section>
     </div>

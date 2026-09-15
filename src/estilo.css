@@ -831,6 +831,94 @@ code.marca {
   .duas { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ========================================================== glossário == */
+
+.termo {
+  cursor: help; text-decoration: underline dotted; text-decoration-color: var(--canone);
+  text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+}
+.termo:hover, .termo:focus-visible { color: var(--canone); outline: none; }
+.dica-termo {
+  position: fixed; z-index: 95; padding: 12px 14px 12px;
+  background: var(--tinta); color: var(--papel); box-shadow: 0 8px 28px rgba(20, 14, 6, .28);
+  font: 400 13px/1.5 var(--f-disp); pointer-events: none;
+}
+.dica-termo b { font: 400 18px/1.1 var(--f-text); }
+.dica-termo i { color: #C9A36A; font-size: 12.5px; margin-left: 4px; }
+.dica-termo p { margin: 6px 0 8px; font: 300 15px/1.45 var(--f-text); color: #F1E8D6; }
+.dica-termo code { font: 400 10px/1 var(--f-mono); color: #BFAE90; }
+
+.glossario .letra { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 20px; margin-top: 36px; }
+.glossario .letra-l { margin: 0; font: 300 46px/1 var(--f-text); color: var(--canone); }
+.glossario dl { margin: 0; }
+.verbete { padding: 12px 0 14px; border-top: 1px solid var(--fio); }
+.verbete dt { font: 400 22px/1.2 var(--f-text); }
+.verbete dt .en { font: italic 300 15px/1 var(--f-text); color: var(--tinta-3); margin-left: 6px; }
+.verbete dd { margin: 6px 0 0; font: 300 16.5px/1.55 var(--f-text); color: var(--tinta-2); max-width: 70ch; }
+
+/* ============================================================== a água == */
+
+.diagrama .agua { fill: #6F8A96; }
+.diagrama .palma { fill: #8A6238; }
+.diagrama .gota { fill: var(--tinta); }
+.diagrama .anel-agua { fill: none; stroke: #8A6238; stroke-width: 5; }
+.diagrama .anel-agua.dentro { stroke-width: 1; stroke: rgba(34,26,16,.35); }
+.diagrama .anel-agua.conta { stroke-width: 3; }
+.fato-agua { border-top: 2px solid var(--tinta); padding-top: 18px; }
+.fato-agua .v { font: 300 clamp(52px, 5vw, 76px)/1 var(--f-text); letter-spacing: -.03em; }
+.fato-agua .v small { font: 400 16px/1 var(--f-disp); color: var(--tinta-3); letter-spacing: 0; }
+.fato-agua .igual { font: 300 40px/1.1 var(--f-text); color: var(--canone); margin: 4px 0; }
+.fato-agua p { font: 400 13px/1.5 var(--f-disp); color: var(--tinta-3); margin-top: 14px; }
+.especime.estreito { max-width: 760px; margin: 22px 0; padding: 16px 20px; background: var(--papel-3); }
+.contas { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 26px 30px; margin: 30px 0 18px; }
+.conta { border-top: 1px solid var(--fio-forte); padding-top: 12px; }
+.conta .v { font: 300 38px/1 var(--f-text); letter-spacing: -.02em; }
+.conta .v small { font: 400 13px/1 var(--f-disp); color: var(--tinta-3); letter-spacing: 0; }
+.conta p { margin: 8px 0 0; font: 300 15px/1.45 var(--f-text); color: var(--tinta-2); }
+.conta::after { content: "conta nossa"; display: block; margin-top: 8px; font: 400 10.5px/1 var(--f-disp); color: var(--deduzido); }
+
+/* ============================================================== a fuga == */
+
+.aviso-spoiler {
+  margin: 10px 0 0; padding: 22px 26px; max-width: 64ch;
+  border-left: 2px solid var(--simulado); background: var(--papel-3);
+}
+.aviso-spoiler p { margin: 0 0 16px; }
+.btn-spoiler {
+  font: 400 19px/1 var(--f-text); padding: 14px 24px; cursor: pointer;
+  background: var(--tinta); color: var(--papel); border: 0;
+}
+.btn-spoiler:hover { background: var(--canone); }
+
+/* texto rola à esquerda; a carta fica presa à direita, abaixo do cabeçalho */
+.fuga-palco {
+  display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 40px;
+  padding: 40px 60px 0; margin-top: 10px;
+}
+.fuga-etapas { list-style: none; margin: 0; padding: 12vh 0 40vh; }
+.etapa {
+  min-height: 62vh; padding: 0 0 0 20px; border-left: 2px solid var(--fio);
+  opacity: .42; transition: opacity .4s ease, border-color .4s ease;
+}
+.etapa.ativa { opacity: 1; border-left-color: var(--canone); }
+.etapa-n { font: 400 13px/1.3 var(--f-disp); color: var(--tinta-3); }
+.etapa-n .sem-lugar { font-style: italic; }
+.etapa h2 { margin: 10px 0 12px; font: 300 clamp(28px, 2.6vw, 38px)/1.08 var(--f-text); letter-spacing: -.025em; }
+.etapa p { margin: 0 0 12px; font: 300 18px/1.55 var(--f-text); max-width: 46ch; }
+.etapa .marcas { font-size: 13px; }
+.fuga-carta {
+  position: sticky; top: 76px; height: calc(100svh - 96px);
+  border: 1px solid var(--fio-forte); background: var(--papel-2);
+}
+.fuga-carta canvas { display: block; width: 100%; height: 100%; }
+
+@media (max-width: 900px) {
+  .fuga-palco { grid-template-columns: minmax(0, 1fr); padding: 20px 22px 0; gap: 0; }
+  .fuga-carta { order: -1; top: 60px; height: 46svh; z-index: 5; }
+  .fuga-etapas { padding: 20px 0 30vh; }
+  .etapa { min-height: 58svh; padding-top: 24px; background: var(--papel); }
+}
+
 /* ================================================================ rodape == */
 
 .rodape {

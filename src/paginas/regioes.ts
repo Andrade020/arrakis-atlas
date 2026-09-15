@@ -1,3 +1,4 @@
+import { prancha } from "../pranchas";
 import {
   atlas, distritos, rotulos, assentamentos, rasters, mundo, num, compacto,
 } from "../dados";
@@ -24,7 +25,7 @@ export async function regioes(alvo: HTMLElement) {
     .then((r) => r.json())) as Regiao[];
 
   alvo.innerHTML = `<article class="folha">
-    ${cabecalho("Prancha 02 · As sete regiões",
+    ${cabecalho(`${prancha("regioes")} · As sete regiões`,
       "Sete pedaços de um planeta só",
       "As regiões não são do cânone — o agrupamento é nosso; o que cada uma é está no livro, e vem citado. As estampas são ilustração, não levantamento.")}
     <div class="corpo" style="max-width:none">
