@@ -5,6 +5,7 @@ import {
 import { Mapa } from "../mapa";
 import { cabecalho, esc, rodape } from "../ui";
 import { t, emIngles, nomeRegiao, nomePoder, nomeLivro, localCitacao } from "../i18n";
+import "./regioes.css";
 
 interface Regiao {
   cod: string; nome: string; abertura: string; abertura_en?: string;
@@ -14,6 +15,16 @@ interface Regiao {
   citacao: { texto: string; marcador: string; volume: string; autor: string;
              ano: number; local: string } | null;
 }
+
+const detalhes: Record<string, [string, string]> = {
+  R1: ["Crosta salina e umidade na Bacia Polar", "Salt crust and moisture in the Polar Basin"],
+  R2: ["Abrigo de pedra ao pé da Muralha Escudo", "Stone shelter at the foot of the Shield Wall"],
+  R3: ["Canal de pedra na Bacia Imperial", "Stone channel in the Imperial Basin"],
+  R4: ["Santuário de pedra entre as Falsas Muralhas", "Stone shrine between the False Walls"],
+  R5: ["Borda do Abismo Vermelho nos Planaltos Orientais", "Rim of the Red Chasm in the Eastern Highlands"],
+  R6: ["Crista de duna nos Grandes Ergs", "Dune crest in the Great Ergs"],
+  R7: ["Areia e rocha na borda dos Ergs Exteriores", "Sand and rock at the edge of the Outer Ergs"],
+};
 
 /** Prancha das regioes: o lugar antes do numero.
  *
@@ -33,9 +44,18 @@ export async function regioes(alvo: HTMLElement) {
     <div class="corpo" style="max-width:none">
       ${regs.map((r, i) => `<section class="regiao" id="${esc(r.cod)}">
         <div>
-          <figure class="estampa">
-            <img src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}.webp"
-                 alt="${t("Vista imaginada de", "Imagined view of")} ${esc(nomeRegiao(r.nome))}" loading="lazy" />
+          <figure class="estampa estampa-dupla" data-estampa="${esc(r.cod)}">
+            <div class="estampa-palco">
+              <img class="estampa-paisagem" src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}.webp"
+                   alt="${t("Vista imaginada de", "Imagined view of")} ${esc(nomeRegiao(r.nome))}" loading="lazy" />
+              <img class="estampa-detalhe" data-src="${import.meta.env.BASE_URL}ilustracoes/${esc(r.cod)}_detalhe.webp"
+                   alt="${esc(t(...detalhes[r.cod]))}" aria-hidden="true" loading="lazy" />
+            </div>
+            <figcaption>${t("Ilustrações imaginadas · paisagem e detalhe", "Imagined illustrations · landscape and detail")}</figcaption>
+            <button type="button" class="estampa-alterna" aria-pressed="false"
+                    aria-label="${t("Ver detalhe de", "View detail of")} ${esc(nomeRegiao(r.nome))}">
+              ${t("Ver detalhe", "View detail")}
+            </button>
           </figure>
           <figure class="carta-regiao">
             <canvas data-reg="${esc(r.cod)}" aria-label="${t("Localização de", "Location of")} ${esc(nomeRegiao(r.nome))}"></canvas>
@@ -68,6 +88,34 @@ export async function regioes(alvo: HTMLElement) {
     </div>
     ${rodape()}
   </article>`;
+
+  alvo.querySelectorAll<HTMLElement>(".estampa-dupla").forEach((figura) => {
+    const botao = figura.querySelector<HTMLButtonElement>(".estampa-alterna")!;
+    const paisagem = figura.querySelector<HTMLImageElement>(".estampa-paisagem")!;
+    const detalhe = figura.querySelector<HTMLImageElement>(".estampa-detalhe")!;
+    const regiao = regs.find((r) => r.cod === figura.dataset.estampa)!;
+    const nome = nomeRegiao(regiao.nome);
+    const mostra = (ativo: boolean) => {
+      figura.classList.toggle("detalhe-ativo", ativo);
+      botao.setAttribute("aria-pressed", String(ativo));
+      botao.setAttribute("aria-label", `${t(ativo ? "Ver paisagem de" : "Ver detalhe de", ativo ? "View landscape of" : "View detail of")} ${nome}`);
+      botao.textContent = t(ativo ? "Ver paisagem" : "Ver detalhe", ativo ? "View landscape" : "View detail");
+      paisagem.setAttribute("aria-hidden", String(ativo));
+      detalhe.setAttribute("aria-hidden", String(!ativo));
+    };
+    botao.addEventListener("click", () => {
+      if (figura.classList.contains("detalhe-ativo")) { mostra(false); return; }
+      if (detalhe.complete && detalhe.naturalWidth > 0) { mostra(true); return; }
+      botao.disabled = true;
+      botao.textContent = t("Carregando detalhe…", "Loading detail…");
+      detalhe.addEventListener("load", () => { botao.disabled = false; mostra(true); }, { once: true });
+      detalhe.addEventListener("error", () => {
+        botao.disabled = false;
+        botao.textContent = t("Detalhe indisponível", "Detail unavailable");
+      }, { once: true });
+      detalhe.src = detalhe.dataset.src!;
+    });
+  });
 
   // ---- as cartinhas: mesmo motor, a regiao acesa sobre a folha inteira ----
   const [atl, d, rots, ass, ras, mun] = await Promise.all([

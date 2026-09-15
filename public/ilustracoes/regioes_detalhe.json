@@ -1,0 +1,37 @@
+{
+  "R1": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R1_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R1 in a fictional Arrakis geographic atlas. Scene: close-up of cracked evaporite crust and a shallow pocket of moisture at the polar sink, tiny salt crystals and dark seams, a distant blurred cold scarp. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R2": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R2_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R2 in a fictional Arrakis geographic atlas. Scene: close-up of a narrow rock shelter carved into the lee side of the Shield Wall, worn stone threshold and wind-scoured cliff face, storm dust visible beyond the protective ridge. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R3": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R3_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R3 in a fictional Arrakis geographic atlas. Scene: close-up of massive carved stone blocks and a shaded aqueduct channel at an Arrakeen-like desert settlement below the imperial basin escarpment, quiet inhabited architecture without people. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R4": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R4_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R4 in a fictional Arrakis geographic atlas. Scene: close-up of a small weathered stone shrine nested in the narrow Harg Pass between broken parallel false-wall ridges, wind-blown grit collecting on carved rock steps. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R5": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R5_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R5 in a fictional Arrakis geographic atlas. Scene: close-up of a sheer red chasm rim cutting through a pale flat-topped mesa, fractured rock and scree plunging into shadow, high eastern plateau context. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R6": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R6_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R6 in a fictional Arrakis geographic atlas. Scene: close-up of rhythmic wind-carved dune crest and rippled sand grains in a vast empty erg, no settlement, one line of faint footprints conveying scale without humans. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  },
+  "R7": {
+    "modelo": "image_gen (built-in)",
+    "arquivo": "ilustracoes/R7_detalhe.webp",
+    "prompt": "Use case: editorial illustration. Asset type: secondary detail portrait paired with the existing broad landscape image R7 in a fictional Arrakis geographic atlas. Scene: close-up of wind-erased sand ripples at the outer unmapped erg edge, sparse dark mineral grains disappearing toward an utterly empty horizon, quiet and desolate. Style: large-format monochrome expedition photograph, sepia photogravure plate tipped into a scientific monograph, raking low sunlight, tactile stone/salt/sand detail, fine film grain, restrained tonal range, believable physical geography. Composition: horizontal 3:2 landscape, distinct close detail that complements rather than repeats the existing wide regional panorama, subject centered with margin for crop. Constraints: no words, no lettering, no border, no caption, no watermark, no modern objects, no recognizable actors or franchise film imagery."
+  }
+}
