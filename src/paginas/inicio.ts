@@ -125,18 +125,20 @@ export async function inicio(alvo: HTMLElement) {
   </section>
 
   <section class="mais-pranchas" aria-labelledby="mais-pranchas-titulo">
-    <div class="mais-pranchas-cab">
-      <span>${t("Outras portas do atlas", "More ways into the atlas")}</span>
-      <h2 id="mais-pranchas-titulo">${t("Continue a leitura", "Keep reading")}</h2>
-      <p>${t("O mapa é só a primeira página. Os lugares, a água, a vida e as escolhas do método também têm suas próprias páginas.",
-              "The map is only the first page. Places, water, life and the choices behind the method have their own pages too.")}</p>
-    </div>
     <div class="mais-pranchas-conteudo">
-      <div class="mais-pranchas-grade">
-        ${outras().map((g) => `<section class="mais-pranchas-grupo"><h3>${g.grupo}</h3>
-          <ul>${g.itens.map(([id, titulo]) => `<li><a href="${link(id)}">
-            <span>${plac(id)}</span><b>${titulo}</b><i aria-hidden="true">→</i></a></li>`).join("")}</ul>
-        </section>`).join("")}
+      <div class="mais-pranchas-texto">
+        <div class="mais-pranchas-cab">
+          <span>${t("Outras portas do atlas", "More ways into the atlas")}</span>
+          <h2 id="mais-pranchas-titulo">${t("Continue a leitura", "Keep reading")}</h2>
+          <p>${t("O mapa é só a primeira página. Os lugares, a água, a vida e as escolhas do método também têm suas próprias páginas.",
+                  "The map is only the first page. Places, water, life and the choices behind the method have their own pages too.")}</p>
+        </div>
+        <div class="mais-pranchas-grade">
+          ${outras().map((g) => `<section class="mais-pranchas-grupo"><h3>${g.grupo}</h3>
+            <ul>${g.itens.map(([id, titulo]) => `<li><a href="${link(id)}">
+              <span>${plac(id)}</span><b>${titulo}</b><i aria-hidden="true">→</i></a></li>`).join("")}</ul>
+          </section>`).join("")}
+        </div>
       </div>
       <figure class="mais-pranchas-retrato">
         <img src="${B}ilustracoes/modelo_fremen_luciani.webp" width="1086" height="1448"
