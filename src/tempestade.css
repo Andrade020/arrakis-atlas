@@ -70,12 +70,53 @@
 .tempestade-range { width: 100%; accent-color: var(--canone); cursor: pointer; }
 .tempestade-figura figcaption { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px 12px; color: var(--tinta-3); font: 400 12px/1.5 var(--f-disp); }
 .tempestade-figura figcaption span:last-child { max-width: 76ch; }
+.tempestade-retrato {
+  position: relative;
+  margin: 46px 0 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--fio-forte);
+  background: #3a291d;
+}
+.tempestade-retrato::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 56%, rgba(25, 16, 10, .77));
+  pointer-events: none;
+}
+.tempestade-retrato img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+}
+.tempestade-retrato figcaption {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  bottom: 21px;
+  display: grid;
+  gap: 5px;
+  color: #f6efdf;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, .72);
+}
+.tempestade-retrato figcaption span {
+  color: #e0c7a5;
+  font: 500 10px/1.3 var(--f-mono);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.tempestade-retrato figcaption strong { font: 300 clamp(25px, 3vw, 39px)/1.05 var(--f-text); }
 @media (max-width: 760px) {
   .tempestade-ensaio { max-width: 100%; margin: 42px 0 52px; }
   .tempestade-controles { grid-template-columns: 1fr 1fr; gap: 10px; }
   .tempestade-range { grid-column: 1 / -1; grid-row: 1; }
   .tempestade-extremo:first-child { text-align: left; }
   .tempestade-extremo:last-child { text-align: right; }
+  .tempestade-retrato { margin-top: 34px; }
+  .tempestade-retrato figcaption { left: 16px; bottom: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tempestade-imperio { transition: none; }

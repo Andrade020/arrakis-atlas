@@ -41,6 +41,13 @@ export function ligaTempestade(alvo: HTMLElement): void {
       <figcaption>${selo("ILUSTRACAO_IA", t("Ilustração interpretativa", "Interpretive illustration"))}
         <span>${t("Duas cenas imaginadas, sem escala ou localização exata. A diferença de custo vem dos mapas acima e do modelo de fricção do terreno; estas imagens não foram usadas para medi-la.",
                     "Two imagined scenes, without scale or exact location. The cost difference comes from the maps above and the terrain-friction model; these images were not used to measure it.")}</span></figcaption>
+    </figure>
+    <figure class="tempestade-retrato">
+      <img src="${B}ilustracoes/luciani_fremen_travessia.webp" width="1448" height="1086"
+        alt="${t("Uma fremen sentada numa elevação rochosa diante do deserto ao pôr do sol",
+                 "A Fremen woman seated on a rocky rise before the desert at sunset")}" loading="lazy" />
+      <figcaption><span>${t("O segundo Arrakis", "The second Arrakis")}</span>
+        <strong>${t("A areia como caminho", "Sand as a road")}</strong></figcaption>
     </figure>`;
   mapa.insertAdjacentElement("afterend", secao);
 
