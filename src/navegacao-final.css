@@ -1,0 +1,126 @@
+.navegacao-final {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(30px, 7vw, 100px);
+  margin: 92px 60px 0;
+  padding: 22px 0 25px;
+  border-top: 1px solid var(--fio-forte);
+  border-bottom: 1px solid var(--fio);
+}
+
+.navegacao-final__link {
+  position: relative;
+  min-width: 0;
+  padding: 5px 0 5px 34px;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.navegacao-final__link--proxima {
+  padding-right: 34px;
+  padding-left: 0;
+  text-align: right;
+}
+
+.navegacao-final__direcao {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--tinta-3);
+  font: 500 10px/1.25 var(--f-mono);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.navegacao-final__destino {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.navegacao-final__link--proxima .navegacao-final__destino {
+  justify-content: flex-end;
+}
+
+.navegacao-final__numero {
+  flex: none;
+  color: var(--tinta-3);
+  font: 400 12px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.navegacao-final__titulo {
+  font: 300 clamp(21px, 2.2vw, 29px)/1.12 var(--f-text);
+  letter-spacing: -.018em;
+  text-wrap: balance;
+  transition: color 160ms ease;
+}
+
+.navegacao-final__seta {
+  position: absolute;
+  top: 39px;
+  color: var(--tinta-3);
+  font: 300 20px/1 var(--f-text);
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.navegacao-final__link--anterior .navegacao-final__seta { left: 0; }
+.navegacao-final__link--proxima .navegacao-final__seta { right: 0; }
+
+.navegacao-final__link:hover .navegacao-final__titulo,
+.navegacao-final__link:hover .navegacao-final__seta {
+  color: var(--canone);
+}
+
+.navegacao-final__link--anterior:hover .navegacao-final__seta { transform: translateX(-4px); }
+.navegacao-final__link--proxima:hover .navegacao-final__seta { transform: translateX(4px); }
+
+.navegacao-final__link:focus-visible {
+  outline: 2px solid var(--canone);
+  outline-offset: 7px;
+}
+
+/* O crédito curto passa a fechar a mesma faixa, sem um segundo grande vazio. */
+.navegacao-final + .rodape-fino {
+  margin-top: 0;
+  padding-top: 18px;
+  border-top: 0;
+}
+
+@media (max-width: 1080px) {
+  .navegacao-final { margin-right: 22px; margin-left: 22px; }
+}
+
+@media (max-width: 680px) {
+  .navegacao-final {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 68px;
+    padding: 5px 0;
+  }
+
+  .navegacao-final__link,
+  .navegacao-final__link--proxima {
+    min-height: 74px;
+    padding: 17px 34px 16px;
+    text-align: left;
+  }
+
+  .navegacao-final__link + .navegacao-final__link {
+    border-top: 1px solid var(--fio);
+  }
+
+  .navegacao-final__link--proxima .navegacao-final__destino {
+    justify-content: flex-start;
+  }
+
+  .navegacao-final__direcao { margin-bottom: 7px; }
+  .navegacao-final__titulo { font-size: 22px; }
+  .navegacao-final__seta { top: 42px; }
+  .navegacao-final__link--anterior .navegacao-final__seta { right: auto; left: 0; }
+  .navegacao-final__link--proxima .navegacao-final__seta { right: 0; left: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navegacao-final__titulo,
+  .navegacao-final__seta { transition: none; }
+}

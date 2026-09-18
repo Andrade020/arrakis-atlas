@@ -19,6 +19,9 @@ import { metodo } from "./paginas/metodo";
 import { economia } from "./paginas/economia";
 import { sociedade } from "./paginas/sociedade";
 import { fontes } from "./paginas/fontes";
+import { adicionaNavegacaoFinal } from "./navegacao-final";
+import { ligaAtalhosInternos } from "./atalhos-internos";
+import { ligaLeituraVisual } from "./leitura-visual";
 
 export interface Rota {
   id: string;
@@ -193,6 +196,7 @@ function marcaAtual(id: string) {
 
 let atualId: string | null = null;
 let atualLingua: string | null = null;
+let limpaLeituraVisual: (() => void) | null = null;
 
 async function navega() {
   // "#/en/mapa#=AR-20" -> inglês, "mapa"; o sufixo #= e' o distrito a abrir na prancha
@@ -203,7 +207,8 @@ async function navega() {
   const rota = lista.find((r) => r.id === id) ?? lista[0];
   // a casca (cabeçalho e índice) é refeita quando muda a língua, e o link de
   // troca de língua precisa apontar para a página atual
-  const recarregaCasca = atualId === null || atualLingua !== lg;
+  const primeiraNavegacao = atualId === null;
+  const recarregaCasca = primeiraNavegacao || atualLingua !== lg;
   atualId = rota.id;
   atualLingua = lg;
 
@@ -215,20 +220,39 @@ async function navega() {
   if (troca) troca.href = lg === "en" ? `#/${resto}` : `#/en/${resto}`;
   marcaAtual(rota.id);
 
-  // Na prancha o cabeçalho sai de cena: a folha tem UMA margem, e nela cabem
-  // título, controles e legenda.
-  app.className = rota.cheia ? "casca cheia" : rota.id === "" ? "casca na-orbita" : "casca";
-
   const main = app.querySelector("main") as HTMLElement;
-  main.innerHTML = "";
-  main.dataset.pagina = rota.id || "abertura";
   document.title = rota.id
     ? `${rota.titulo} — ${t("Atlas de Arrakis", "Atlas of Arrakis")}`
     : t("Atlas de Arrakis — geografia econômica de um planeta inventado", "Atlas of Arrakis — the economic geography of an invented planet");
-  await rota.monta(main);
-  // termos do glossário: não na prancha do mapa, nem na abertura, nem no próprio glossário
-  if (!rota.cheia && rota.id !== "" && rota.id !== "glossario") ligaGlossario(main);
-  if (!location.hash.includes("#=")) window.scrollTo(0, 0);
+
+  const montaPagina = async () => {
+    // Na prancha o cabeçalho sai de cena: a folha tem UMA margem, e nela cabem
+    // título, controles e legenda.
+    limpaLeituraVisual?.();
+    limpaLeituraVisual = null;
+    main.getAnimations().forEach((animacao) => animacao.cancel());
+    app.className = rota.cheia ? "casca cheia" : rota.id === "" ? "casca na-orbita" : "casca";
+    main.innerHTML = "";
+    main.dataset.pagina = rota.id || "abertura";
+    await rota.monta(main);
+    ligaAtalhosInternos(main, rota.id);
+    adicionaNavegacaoFinal(main, rota.id);
+    // termos do glossário: não na prancha do mapa, nem na abertura, nem no próprio glossário
+    if (!rota.cheia && rota.id !== "" && rota.id !== "glossario") ligaGlossario(main);
+    if (!rota.cheia && rota.id !== "") limpaLeituraVisual = ligaLeituraVisual(main);
+    if (!location.hash.includes("#=")) window.scrollTo(0, 0);
+  };
+
+  const podeAnimar = !primeiraNavegacao && !recarregaCasca
+    && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  await montaPagina();
+  if (podeAnimar) {
+    const animacao = main.animate([
+      { opacity: 0, transform: "translateY(7px)" },
+      { opacity: 1, transform: "translateY(0)" },
+    ], { duration: 220, easing: "cubic-bezier(.2, .75, .25, 1)" });
+    void animacao.finished.catch(() => {});
+  }
 }
 
 /* O índice lateral antigo, por existir na tela, fazia o navegador baixar estas
@@ -261,5 +285,23 @@ document.addEventListener("click", (e) => {
   location.hash = "#/en/" + href.slice(2);
 });
 
-window.addEventListener("hashchange", navega);
-fontesProntas.then(navega);
+/* Uma montagem pode esperar dados ou fontes. Se o leitor trocar de página
+   nesse intervalo, conclui a montagem em curso e então usa somente o hash
+   mais recente; assim dois módulos nunca disputam o mesmo <main>. */
+let navegando = false;
+let navegacaoPendente = false;
+async function agendaNavegacao() {
+  if (navegando) { navegacaoPendente = true; return; }
+  navegando = true;
+  try {
+    do {
+      navegacaoPendente = false;
+      await navega();
+    } while (navegacaoPendente);
+  } finally {
+    navegando = false;
+  }
+}
+
+window.addEventListener("hashchange", () => { void agendaNavegacao(); });
+fontesProntas.then(() => { void agendaNavegacao(); });

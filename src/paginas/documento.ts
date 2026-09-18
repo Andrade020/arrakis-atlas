@@ -14,6 +14,16 @@ export interface OpcDoc {
   spoiler?: { desde: string; ate?: string; aviso: string };
 }
 
+/* As figuras exportadas têm dimensões conhecidas. Informá-las no HTML reserva
+   o espaço antes do lazy-load e evita que o texto salte quando a imagem entra
+   na tela, sobretudo em conexões móveis. */
+const dimensoesFiguras: Record<string, [number, number]> = {
+  "arrakis_padroes.webp": [1600, 1165],
+  "arrakis_dois_arrakis.webp": [1600, 743],
+  "arrakis_soberania_x_controle.webp": [1600, 751],
+  "arrakis_regua_real.webp": [1600, 775],
+};
+
 /** Pagina montada a partir de um ou mais documentos do projeto. O texto vem de
     docs/*.md pelo exportador: o site nao guarda uma segunda copia da prosa, e
     por isso nao existe a chance de o site e o repositorio contarem historias
@@ -42,11 +52,13 @@ export async function paginaDoc(alvo: HTMLElement, quais: string[], o: OpcDoc) {
     })
     .join("\n");
 
+  const dim = o.figura ? dimensoesFiguras[o.figura[0]] : undefined;
   alvo.innerHTML = `<article class="folha">
     ${cabecalho(o.indice, o.titulo, o.linha)}
     <div class="corpo">
       ${o.figura ? `<figure class="figura">
-        <img src="${import.meta.env.BASE_URL}figuras/${esc(o.figura[0])}" alt="${esc(o.figura[1])}" loading="lazy" />
+        <img src="${import.meta.env.BASE_URL}figuras/${esc(o.figura[0])}" alt="${esc(o.figura[1])}"
+          ${dim ? `width="${dim[0]}" height="${dim[1]}"` : ""} loading="lazy" decoding="async" />
       </figure>` : ""}
       ${corpo}
     </div>
