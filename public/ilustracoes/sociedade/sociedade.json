@@ -1,0 +1,46 @@
+{
+  "origem": "Conjunto arrakis_people fornecido pelo autor do projeto",
+  "tratamento": "Conversão não destrutiva de PNG para WebP, qualidade 84; imagens acima de 1280 px de largura foram reduzidas proporcionalmente; os recortes são feitos apenas por CSS.",
+  "arquivos": [
+    {
+      "original": "ChatGPT Image 15 de set. de 2026, 18_29_50.png",
+      "web": "fremen_guardiao.webp",
+      "papel": "Memória e liderança fremen"
+    },
+    {
+      "original": "ChatGPT Image 17 de set. de 2026, 11_41_05.png",
+      "web": "fremen_comunidade.webp",
+      "papel": "Vida de sietch"
+    },
+    {
+      "original": "ChatGPT Image 17 de set. de 2026, 12_06_17.png",
+      "web": "nobreza_palacio.webp",
+      "papel": "Nobreza planetária"
+    },
+    {
+      "original": "ChatGPT Image 18 de set. de 2026, 00_52_26.png",
+      "web": "ordem_imperial.webp",
+      "papel": "Ordens do poder"
+    },
+    {
+      "original": "ChatGPT Image 18 de set. de 2026, 00_53_11.png",
+      "web": "trabalhador_especiaria.webp",
+      "papel": "Trabalho da especiaria"
+    },
+    {
+      "original": "ChatGPT Image 18 de set. de 2026, 00_53_18.png",
+      "web": "intermediario_urbano.webp",
+      "papel": "Cidade intermediária"
+    },
+    {
+      "original": "ChatGPT Image 18 de set. de 2026, 00_53_21.png",
+      "web": "soldado_casa.webp",
+      "papel": "Guarnição da Casa"
+    },
+    {
+      "original": "ChatGPT Image 18 de set. de 2026, 01_04_23.png",
+      "web": "fremen_batedor.webp",
+      "papel": "Mobilidade no deserto"
+    }
+  ]
+}

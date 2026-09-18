@@ -40,6 +40,7 @@ const outras = (): { grupo: string; itens: [IdPrancha, string][] }[] => [
   { grupo: t("Recursos e disputas", "Resources and disputes"), itens: [
     ["economia", t("A economia da especiaria", "The spice economy")],
     ["agua", t("A economia da água", "The water economy")],
+    ["sociedade", t("A sociedade da água", "The society of water")],
     ["comparacao", t("Na régua do mundo real", "Against the real world")],
     ["contradicoes", t("Contradições do cânone", "Contradictions in the books")],
   ] },

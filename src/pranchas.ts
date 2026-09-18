@@ -7,7 +7,7 @@ import { t } from "./i18n";
  * as páginas poderem importar sem importar o roteador de volta. */
 export const ORDEM = [
   "", "mapa", "regioes", "distritos", "verme", "subsolo", "vida", "fuga",
-  "padroes", "acessibilidade", "poder", "economia", "agua", "comparacao",
+  "padroes", "acessibilidade", "poder", "economia", "agua", "sociedade", "comparacao",
   "contradicoes", "metodo", "glossario", "fontes",
 ] as const;
 

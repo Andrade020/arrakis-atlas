@@ -153,6 +153,8 @@ export async function fontes(alvo: HTMLElement) {
       <h2><span class="g">${secao("fontes", 5)}</span><span>${tr("As ilustrações", "The illustrations")}</span></h2>
       <p class="nota">${tr("Nos retratos fremen da seção ‘Continue a leitura’, da Página 09 e da imagem de compartilhamento, a personagem é interpretada pela modelo Luciani A. Ayrosa.",
         "In the Fremen portraits in the ‘Keep reading’ section, on Page 09 and in the sharing image, the character is portrayed by model Luciani A. Ayrosa.")}</p>
+      <p class="nota">${tr("Os oito retratos da página ‘A sociedade da água’ foram fornecidos pelo autor do projeto. As posições sociais atribuídas a cada pessoa são arquétipos editoriais, não personagens canônicos.",
+        "The eight portraits on ‘The society of water’ page were provided by the project author. The social positions assigned to each person are editorial archetypes, not canonical characters.")}</p>
       <p>${tr(`Os panoramas originais da página das regiões e as imagens dos cartões da abertura foram
       <strong>geradas por modelos de imagem</strong> e depois tingidas em sépia para
       combinar com o papel. Não são dados nem vêm do livro, e não entram em nenhuma

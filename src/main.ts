@@ -17,6 +17,7 @@ import { paginaDoc } from "./paginas/documento";
 import { ligaTempestade } from "./paginas/tempestade";
 import { metodo } from "./paginas/metodo";
 import { economia } from "./paginas/economia";
+import { sociedade } from "./paginas/sociedade";
 import { fontes } from "./paginas/fontes";
 
 export interface Rota {
@@ -76,6 +77,7 @@ export function rotas(): Rota[] {
   },
   { id: "economia", plac: plac("economia"), titulo: t("A economia da especiaria", "The spice economy"), monta: economia },
   { id: "agua", plac: plac("agua"), titulo: t("A economia da água", "The water economy"), monta: agua },
+  { id: "sociedade", plac: plac("sociedade"), titulo: t("A sociedade da água", "The society of water"), monta: sociedade },
   {
     id: "comparacao", plac: plac("comparacao"), titulo: t("Na régua do mundo real", "Against the real world"),
     monta: (a) => paginaDoc(a, ["COMPARACAO"], {
@@ -111,7 +113,7 @@ const app = document.getElementById("app")!;
  * regiões, o verme, a vida no deserto) e guarda o sumário inteiro atrás de "Índice".
  *
  * A faixa do cabeçalho é uma crista de duna ao entardecer (ilustração gerada,
- * creditada na prancha 13). Na abertura ele fica transparente, por cima do
+ * creditada na página de Fontes e créditos). Na abertura ele fica transparente, por cima do
  * espaço escuro onde o planeta gira. */
 const atalhos = (): [string, string][] => [["mapa", t("Mapa", "Map")], ["regioes", t("Regiões", "Regions")],
   ["verme", t("O verme", "The worm")], ["vida", t("Vida", "Life")]];

@@ -121,7 +121,7 @@ export function cabecalho(indice: string, titulo: string, linhaFina: string): st
 }
 
 /* Uma linha, em todas as páginas. O rodapé de quatro colunas repetia crédito,
- * fonte, método e aviso — tudo isso tem página inteira na prancha 13. */
+ * fonte, método e aviso — tudo isso tem página própria em Fontes e créditos. */
 export function rodape(): string {
   return `<footer class="rodape-fino">${t(
     `Base cartográfica: <strong>NiptonIceTea</strong>, segundo de Fontaine (1965).
