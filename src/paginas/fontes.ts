@@ -151,8 +151,8 @@ export async function fontes(alvo: HTMLElement) {
       sense in a district, and at what scale. No number from a game went into the data.`)}</p>
 
       <h2><span class="g">${secao("fontes", 5)}</span><span>${tr("As ilustrações", "The illustrations")}</span></h2>
-      <p class="nota">${tr("Nos retratos fremen da seção ‘Continue a leitura’ e da Página 09, a personagem é interpretada pela modelo Luciani A. Ayrosa.",
-        "In the Fremen portraits in the ‘Keep reading’ section and on Page 09, the character is portrayed by model Luciani A. Ayrosa.")}</p>
+      <p class="nota">${tr("Nos retratos fremen da seção ‘Continue a leitura’, da Página 09 e da imagem de compartilhamento, a personagem é interpretada pela modelo Luciani A. Ayrosa.",
+        "In the Fremen portraits in the ‘Keep reading’ section, on Page 09 and in the sharing image, the character is portrayed by model Luciani A. Ayrosa.")}</p>
       <p>${tr(`Os panoramas originais da página das regiões e as imagens dos cartões da abertura foram
       <strong>geradas por modelos de imagem</strong> e depois tingidas em sépia para
       combinar com o papel. Não são dados nem vêm do livro, e não entram em nenhuma
